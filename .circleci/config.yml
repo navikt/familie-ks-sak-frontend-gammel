@@ -57,11 +57,10 @@ jobs:
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
-      - attach_workspace:
-          at: /tmp/workspace
       - run:
           name: Creating Github Apps Installation Token
           command: |
+            mkdir /tmp/workspace
             git clone https://github.com/navikt/github-apps-support.git
             export PATH=`pwd`/github-apps-support/bin:$PATH
             echo $GITHUB_PRIVATE_KEY | base64 --decode > ./github.key.pem
