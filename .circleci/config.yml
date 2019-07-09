@@ -5,7 +5,7 @@ orbs:
 executors:
   nais-deployer:
     environment:
-      TEAM: teamffamilie
+      TEAM: teamfamilie
     docker:
       - image: navikt/deployment-cli:latest
 
