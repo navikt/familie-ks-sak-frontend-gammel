@@ -69,7 +69,7 @@ jobs:
           paths:
             - ./github.key.pem
 
-  deploy_test:
+  deploy_dev:
       executor: nais-deployer
       steps:
         - attach_workspace:
@@ -125,7 +125,7 @@ workflows:
           filters:
             tags:
               only: /^v[0-9]+\.[0-9]+$/
-      - deploy_test:
+      - deploy_dev:
           context: familie-ci
           requires:
             - build_n_test
@@ -134,7 +134,7 @@ workflows:
             tags:
               only: /^.*/
             branches:
-              only: master
+              ignore: master
       - deploy_prod:
           context: familie-ci
           requires:
