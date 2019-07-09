@@ -25,10 +25,12 @@ jobs:
             echo "export VERSION="$(node -p "require('./package').version")-$CIRCLE_SHA1"" >> /tmp/workspace/properties.env
             echo "export DOCKER_TAG=\"$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/$CIRCLE_PROJECT_REPONAME:$VERSION\"" >> /tmp/workspace/properties.env
             git clone https://github.com/navikt/github-apps-support.git
+            cd github-apps-support
             echo $GITHUB_PRIVATE_KEY | base64 --decode > ./github.key.pem
             GITHUB_TOKEN=$(generate-installation-token.sh `generate-jwt.sh ./github.key.pem $GITHUB_APP_ID`)
             echo "export GITHUB_TOKEN=$GITHUB_TOKEN" >> /tmp/workspace/properties.env
             cat /tmp/workspace/properties.env >> $BASH_ENV
+            cd ..
       - restore_cache:
           key: yarn-{{ checksum "yarn.lock" }}
       - run: yarn install
