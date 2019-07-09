@@ -4,12 +4,12 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common');
 
 const config = merge.strategy({
-    'entry.familie-ks-mottak': 'prepend',
+    'entry.familie-ks-sak': 'prepend',
     'module.rules': 'append',
 })(common, {
     mode: 'development',
     entry: {
-        'familie-ks-mottak': [
+        'familie-ks-sak': [
             'babel-polyfill',
             'react-hot-loader/patch',
             'webpack-hot-middleware/client?reload=true',

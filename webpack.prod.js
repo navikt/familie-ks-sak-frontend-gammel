@@ -6,12 +6,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const config = merge.strategy({
-    'entry.familie-ks-mottak': 'prepend',
+    'entry.familie-ks-sak': 'prepend',
     'module.rules': 'append',
 })(common, {
     mode: 'production',
     entry: {
-        'familie-ks-mottak': ['babel-polyfill'],
+        'familie-ks-sak': ['babel-polyfill'],
     },
     output: {
         path: path.join(__dirname, 'production'),
@@ -52,7 +52,7 @@ const config = merge.strategy({
         new webpack.optimize.OccurrenceOrderPlugin(false),
         new webpack.NoEmitOnErrorsPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'familie-ks-mottak-frontend.css',
+            filename: 'familie-ks-sak-frontend.css',
         }),
     ],
     optimization: {

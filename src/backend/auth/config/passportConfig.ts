@@ -17,7 +17,7 @@ const hentPassportConfig = () => {
         tenant: '',
     };
 
-    const host = 'familie-ks-mottak';
+    const host = 'familie-ks-sak-frontend';
     switch (process.env.ENV) {
         case 'local':
             config = {
@@ -25,15 +25,6 @@ const hentPassportConfig = () => {
                 cookieDomain: 'localhost',
                 logoutUri: `https://login.microsoftonline.com/navq.onmicrosoft.com/oauth2/logout?post_logout_redirect_uri=http:\\\\localhost:8000`,
                 redirectUrl: 'http://localhost:8000/auth/openid/callback',
-                tenant: 'navq.onmicrosoft.com',
-            };
-            break;
-        case 'q1':
-            config = {
-                allowHttpForRedirectUrl: false,
-                cookieDomain: `${host}-dev.nais.preprod.local`,
-                logoutUri: `https://login.microsoftonline.com/navq.onmicrosoft.com/oauth2/logout?post_logout_redirect_uri=https:\\\\${host}-dev.nais.preprod.local`,
-                redirectUrl: `https://${host}-dev.nais.preprod.local/auth/openid/callback`,
                 tenant: 'navq.onmicrosoft.com',
             };
             break;
