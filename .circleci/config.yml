@@ -88,7 +88,7 @@ jobs:
               --team=${TEAM} \
               --version=${VERSION} \
               --key=/tmp/workspace/github.key.pem \
-              --resource=./naiserator_preprod.yaml
+              --resource=./naiserator_dev.yaml
 
   deploy_prod:
       executor: nais-deployer
@@ -109,7 +109,7 @@ jobs:
               --team=${TEAM} \
               --version=${VERSION} \
               --key=/tmp/workspace/github.key.pem \
-              --resource=./naiserator_preprod.yaml
+              --resource=./naiserator_prod.yaml
 
 workflows:
   version: 2
