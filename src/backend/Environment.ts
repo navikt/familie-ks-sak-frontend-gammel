@@ -7,14 +7,6 @@ const Enviornment = () => {
             redisUrl: '',
             unleashUrl: 'https://unleash.herokuapp.com/api/',
         };
-    } else if (process.env.ENV === 'q1') {
-        return {
-            buildPath: '../production',
-            proxyUrl: 'http://familie-ks-mottak',
-            namespace: 'q1',
-            redisUrl: 'familie-ks-sak-frontend-redis.q1.svc.nais.local',
-            unleashUrl: 'http://unleashproxy-fss.default.svc.nais.local/api/',
-        };
     } else if (process.env.ENV === 'preprod') {
         return {
             buildPath: '../production',
