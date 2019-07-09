@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teamfamilie
 spec:
-  image: repo.adeo.no:5443/familie-ks-sak-frontend:{{version}}
+  image: navikt/familie-ks-sak-frontend:{{version}}
   team: teamfamilie
   replicas:
     min: 1
