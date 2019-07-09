@@ -10,6 +10,23 @@ executors:
       - image: navikt/deployment-cli:latest
 
 jobs:
+  github_app:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - run:
+          name: Creating Github Apps Installation Token
+          command: |
+            mkdir /tmp/workspace
+            git clone https://github.com/navikt/github-apps-support.git
+            export PATH=`pwd`/github-apps-support/bin:$PATH
+            echo $GITHUB_PRIVATE_KEY | base64 --decode > ./github.key.pem
+            GITHUB_TOKEN=$(generate-installation-token.sh `generate-jwt.sh ./github.key.pem $GITHUB_APP_ID`)
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - ./github.key.pem
+
   build_n_test:
     docker:
       - image: circleci/node:10
@@ -20,15 +37,9 @@ jobs:
       - run:
           name: Generate version number, github token and docker image tags
           command: |
-            mkdir /tmp/workspace
             export VERSION="$(node -p "require('./package').version")-$CIRCLE_SHA1"
             echo "export VERSION="$(node -p "require('./package').version")-$CIRCLE_SHA1"" >> /tmp/workspace/properties.env
             echo "export DOCKER_TAG=\"$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/$CIRCLE_PROJECT_REPONAME:$VERSION\"" >> /tmp/workspace/properties.env
-            git clone https://github.com/navikt/github-apps-support.git
-            export PATH=`pwd`/github-apps-support/bin:$PATH
-            echo $GITHUB_PRIVATE_KEY | base64 --decode > ./github.key.pem
-            GITHUB_TOKEN=$(generate-installation-token.sh `generate-jwt.sh ./github.key.pem $GITHUB_APP_ID`)
-            echo "export GITHUB_TOKEN=$GITHUB_TOKEN" >> /tmp/workspace/properties.env
             cat /tmp/workspace/properties.env >> $BASH_ENV
       - restore_cache:
           key: yarn-{{ checksum "yarn.lock" }}
@@ -57,7 +68,6 @@ jobs:
           root: /tmp/workspace
           paths:
             - properties.env
-            - ./github.key.pem
 
   deploy_test:
       executor: nais-deployer
@@ -105,8 +115,13 @@ workflows:
   version: 2
   build_n_deploy:
     jobs:
-      - build_n_test:
+      - github_app:
           context: familie-ci
+          filters:
+            tags:
+              only: /^v[0-9]+\.[0-9]+$/
+      - build_n_test:
+          context: NAIS deployment
           filters:
             tags:
               only: /^v[0-9]+\.[0-9]+$/
