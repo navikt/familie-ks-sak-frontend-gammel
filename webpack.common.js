@@ -6,7 +6,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
     entry: {
-        'familie-ks-mottak': ['./src/frontend/index.tsx'],
+        'familie-ks-sak': ['./src/frontend/index.tsx'],
     },
     devtool: 'source-map',
     resolve: {
