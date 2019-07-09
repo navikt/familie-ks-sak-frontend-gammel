@@ -21,7 +21,7 @@ export default (middleware: any, prometheus: any) => {
     });
     router.get('/error', (req, res) => {
         prometheus.getSingleMetric('error_route').inc();
-        res.sendFile('error.html', { root: path.join(__dirname, './') });
+        res.sendFile('error.html', { root: path.join(`assets/`) });
     });
 
     // AUTHENTICATION
