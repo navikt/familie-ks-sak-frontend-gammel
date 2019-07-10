@@ -55,6 +55,8 @@ jobs:
       - run:
           name: Kjører ci tester
           command: |
+            ls
+            pwd
             ls -la /tmp/workspace/ci-tests
             ls -la /tmp/workspace/ci-tests/tests
             ./tmp/workspace/ci-tests/scripts.sh test
