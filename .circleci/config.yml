@@ -45,7 +45,7 @@ jobs:
           root: /tmp/workspace
           paths:
             - properties.env
-            - ./
+            - .
  
   test:
     machine: true
@@ -57,6 +57,7 @@ jobs:
           command: |
             ls
             pwd
+            ls -la /tmp/workspace
             ls -la /tmp/workspace/ci-tests
             ls -la /tmp/workspace/ci-tests/tests
             ./tmp/workspace/ci-tests/scripts.sh test
