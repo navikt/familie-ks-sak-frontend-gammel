@@ -38,8 +38,6 @@ jobs:
       - run:
           name: Bygger produksjon
           command: |
-            ls -la 
-            pwd
             cp ./.circleci/oauth2.js ./node_modules/oauth/lib/oauth2.js
             yarn build
       - persist_to_workspace:
@@ -66,11 +64,14 @@ jobs:
     steps:
       - attach_workspace:
           at: /home/circleci/project
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           name: Set up environment variables
           command: cat /home/circleci/project/properties.env >> $BASH_ENV
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - run:
+          name: Slett test resources
+          command: rm -rf development
       - run:
           name: Bygger Docker image
           command: |
