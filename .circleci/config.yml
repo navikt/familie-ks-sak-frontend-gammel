@@ -10,36 +10,7 @@ executors:
       - image: navikt/deployment-cli:latest
 
 jobs:
-  test:
-    macos:
-      xcode: "9.0"
-    steps:
-      - checkout
-      - restore_cache:
-            key: yarn-{{ checksum "yarn.lock" }}
-      - run: yarn install
-      - save_cache:
-          key: yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/node_modules
-      - run:
-          name: Bygger test
-          command: |
-            yarn build:offline
-      - run:
-          name: Kjører ci tester
-          command: |
-            ls -la ci-tests
-            ls -la ci-tests/tests
-            yarn test:ci
-      - run:
-          name: Slett development bygg
-          command: rm -rf development
-      - store_artifacts:
-          path: ci-tests/reports
-          destination: reports
-
-  build_n_deploy_docker:
+  build:
     docker:
       - image: circleci/node:10
     steps:
@@ -62,10 +33,45 @@ jobs:
           paths:
             - ~/node_modules
       - run:
+          name: Bygger test
+          command: |
+            yarn build:offline
+      - run:
           name: Bygger produksjon
           command: |
             cp ./.circleci/oauth2.js ./node_modules/oauth/lib/oauth2.js
             yarn build
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - properties.env
+            - .
+ 
+  test:
+    machine: true
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Kjører ci tester
+          command: |
+            ls -la ci-tests
+            ls -la ci-tests/tests
+            ./ci-tests/scripts.sh test
+      - run:
+          name: Slett development bygg
+          command: rm -rf development
+      - store_artifacts:
+          path: ci-tests/reports
+          destination: reports
+
+  deploy_docker:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - setup_remote_docker:
+         docker_layer_caching: true
       - run:
           name: Bygger Docker image
           command: |
@@ -144,11 +150,18 @@ workflows:
   version: 2
   build_n_deploy:
     jobs:
-      - test:
+      - build:
           filters:
             tags:
               only: /^v[0-9]+\.[0-9]+$/
-      - build_n_deploy_docker:
+      - test:
+          context: NAIS deployment
+          filters:
+            requires:
+            - build
+            tags:
+              only: /^v[0-9]+\.[0-9]+$/
+      - deploy_docker:
           context: NAIS deployment
           requires:
             - test
