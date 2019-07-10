@@ -176,7 +176,7 @@ workflows:
       - deploy_dev:
           context: familie-ci
           requires:
-            - build_n_deploy_docker
+            - deploy_docker
             - github_app
           filters:
             tags:
@@ -186,7 +186,7 @@ workflows:
       - deploy_prod:
           context: familie-ci
           requires:
-            - build_n_deploy_docker
+            - deploy_docker
             - github_app
           filters:
             branches:
