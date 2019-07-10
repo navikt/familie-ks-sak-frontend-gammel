@@ -11,8 +11,7 @@ executors:
 
 jobs:
   test:
-    build:
-      machine: true
+    machine: true
     steps:
       - checkout
       - setup_remote_docker:
