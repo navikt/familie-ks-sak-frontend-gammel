@@ -17,5 +17,5 @@ services:
       - ci-test-server
     volumes:
       - ./jest-image-snapshot/baseline:/app/baseline
-      - ./jest-image-snapshot/tests:/app/tests
+      - ./tests:/app/tests
       - ./reports:/app/reports
