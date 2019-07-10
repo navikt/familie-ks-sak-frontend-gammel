@@ -11,7 +11,8 @@ executors:
 
 jobs:
   test:
-    machine: true
+    macos:
+      xcode: "9.0"
     steps:
       - checkout
       - restore_cache:
