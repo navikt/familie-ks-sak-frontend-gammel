@@ -10,23 +10,15 @@ executors:
       - image: navikt/deployment-cli:latest
 
 jobs:
-  build_n_test:
-    docker:
-      - image: circleci/node:10
+  test:
+    machine:
+      docker_layer_caching: true
     steps:
       - checkout
       - setup_remote_docker:
          docker_layer_caching: true
-      - run:
-          name: Generate version number, github token and docker image tags
-          command: |
-            mkdir /tmp/workspace
-            export VERSION="$(node -p "require('./package').version")-$CIRCLE_SHA1"
-            echo "export VERSION="$(node -p "require('./package').version")-$CIRCLE_SHA1"" >> /tmp/workspace/properties.env
-            echo "export DOCKER_TAG=\"$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$VERSION\"" >> /tmp/workspace/properties.env
-            cat /tmp/workspace/properties.env >> $BASH_ENV
       - restore_cache:
-          key: yarn-{{ checksum "yarn.lock" }}
+            key: yarn-{{ checksum "yarn.lock" }}
       - run: yarn install
       - save_cache:
           key: yarn-{{ checksum "yarn.lock" }}
@@ -48,6 +40,29 @@ jobs:
       - store_artifacts:
           path: ci-tests/reports
           destination: reports
+
+  build_n_deploy_docker:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - setup_remote_docker:
+         docker_layer_caching: true
+      - run:
+          name: Generate version number, github token and docker image tags
+          command: |
+            mkdir /tmp/workspace
+            export VERSION="$(node -p "require('./package').version")-$CIRCLE_SHA1"
+            echo "export VERSION="$(node -p "require('./package').version")-$CIRCLE_SHA1"" >> /tmp/workspace/properties.env
+            echo "export DOCKER_TAG=\"$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$VERSION\"" >> /tmp/workspace/properties.env
+            cat /tmp/workspace/properties.env >> $BASH_ENV
+      - restore_cache:
+          key: yarn-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/node_modules
       - run:
           name: Bygger produksjon
           command: |
@@ -131,8 +146,14 @@ workflows:
   version: 2
   build_n_deploy:
     jobs:
-      - build_n_test:
+      - test:
+          filters:
+            tags:
+              only: /^v[0-9]+\.[0-9]+$/
+      - build_n_deploy_docker:
           context: NAIS deployment
+          requires:
+            - test
           filters:
             tags:
               only: /^v[0-9]+\.[0-9]+$/
@@ -144,7 +165,7 @@ workflows:
       - deploy_dev:
           context: familie-ci
           requires:
-            - build_n_test
+            - build_n_deploy_docker
             - github_app
           filters:
             tags:
@@ -154,7 +175,7 @@ workflows:
       - deploy_prod:
           context: familie-ci
           requires:
-            - build_n_test
+            - build_n_deploy_docker
             - github_app
           filters:
             branches:
