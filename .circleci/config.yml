@@ -46,7 +46,8 @@ jobs:
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
-            - ./
+            - properties.env
+            - /home/circleci/project
  
   test:
     machine: true
