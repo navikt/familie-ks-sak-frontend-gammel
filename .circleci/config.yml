@@ -182,7 +182,7 @@ workflows:
             tags:
               only: /^.*/
             branches:
-              ignore: /.*/
+              only: /.*/
       - deploy_prod:
           context: familie-ci
           requires:
