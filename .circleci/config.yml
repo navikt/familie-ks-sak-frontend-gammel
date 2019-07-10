@@ -55,10 +55,6 @@ jobs:
       - run:
           name: Kjører ci tester
           command: |
-            ls
-            pwd
-            ls -la ci-tests
-            ls -la ci-tests/tests
             ./ci-tests/scripts.sh test
       - store_artifacts:
           path: /ci-tests/reports
@@ -70,6 +66,9 @@ jobs:
     steps:
       - attach_workspace:
           at: /home/circleci/project
+      - run:
+          name: Set up environment variables
+          command: cat /home/circleci/project/properties.env >> $BASH_ENV
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
