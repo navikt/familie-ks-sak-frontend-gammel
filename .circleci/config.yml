@@ -53,10 +53,6 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run:
-          name: Sett path
-          command: |
-            export PATH=`pwd`/tmp/workspace/:$PATH
-      - run:
           name: Kjører ci tester
           command: |
             ls -la /tmp/workspace/ci-tests
