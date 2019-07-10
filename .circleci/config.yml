@@ -57,12 +57,11 @@ jobs:
           command: |
             ls
             pwd
-            ls -la /home/circleci/project
-            ls -la /home/circleci/project/ci-tests
-            ls -la /home/circleci/project/ci-tests/tests
-            ./home/circleci/project/ci-tests/scripts.sh test
+            ls -la /ci-tests
+            ls -la /ci-tests/tests
+            ./ci-tests/scripts.sh test
       - store_artifacts:
-          path: /home/circleci/project/ci-tests/reports
+          path: /ci-tests/reports
           destination: reports
 
   deploy_docker:
