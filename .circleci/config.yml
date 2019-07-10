@@ -44,8 +44,7 @@ jobs:
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
-            - properties.env
-            - .
+            - ./*
  
   test:
     machine: true
