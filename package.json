@@ -9,9 +9,12 @@
     "start": "NODE_ENV=production node dist/server.js",
     "start:dev": "tsc && NODE_ENV=development node dist/server.js",
     "build": "yarn build:prod",
+    "build:offline": "webpack --config ./webpack.dev.js",
     "build:dev": "tsc & webpack --config ./webpack.dev.js",
     "build:prod": "tsc & webpack --config ./webpack.prod.js",
-    "snyk-protect": "snyk protect"
+    "snyk-protect": "snyk protect",
+    "test:ci": "./ci-tests/scripts.sh test",
+    "test:ci-capture": "./ci-tests/scripts.sh capture"
   },
   "husky": {
     "hooks": {

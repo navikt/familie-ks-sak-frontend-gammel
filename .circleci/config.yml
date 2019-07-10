@@ -33,6 +33,20 @@ jobs:
           paths:
             - ~/node_modules
       - run:
+          name: Bygger test
+          command: |
+            yarn build:offline
+      - run:
+          name: Kjører ci tester
+          command: |
+            yarn test:ci
+      - run:
+          name: Slett development bygg
+          command: rm -rf development
+      - store_artifacts:
+          path: ci-tests/reports
+          destination: reports
+      - run:
           name: Bygger produksjon
           command: |
             cp ./.circleci/oauth2.js ./node_modules/oauth/lib/oauth2.js
