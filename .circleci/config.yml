@@ -39,6 +39,8 @@ jobs:
       - run:
           name: Kjører ci tester
           command: |
+            ls -la ci-tests
+            ls -la ci-tests/tests
             yarn test:ci
       - run:
           name: Slett development bygg
