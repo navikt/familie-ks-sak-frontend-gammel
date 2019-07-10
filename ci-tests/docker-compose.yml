@@ -18,4 +18,4 @@ services:
     volumes:
       - ./jest-image-snapshot/baseline:/app/baseline
       - ./jest-image-snapshot/tests:/app/tests
-      - ./reports:/app/reports  
+      - ./reports:/app/reports
