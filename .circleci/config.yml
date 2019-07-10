@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-         docker_layer_caching: true
+          docker_layer_caching: true
       - run:
           name: Generate version number, github token and docker image tags
           command: |
@@ -71,7 +71,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-         docker_layer_caching: true
+          docker_layer_caching: true
       - run:
           name: Bygger Docker image
           command: |
