@@ -16,6 +16,6 @@ services:
     depends_on:
       - ci-test-server
     volumes:
-      - ./jest-image-snapshot/baseline:/app/baseline
-      - ./tests:/app/tests
-      - ./reports:/app/reports
+      - ./jest-image-snapshot/baseline:/app/baseline/
+      - ./tests:/app/tests/
+      - ./reports:/app/reports/
