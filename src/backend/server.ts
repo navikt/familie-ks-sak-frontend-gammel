@@ -23,7 +23,7 @@ import setupSession from './auth/utils/session';
 import { getLogTimestamp } from './customLoglevel';
 import setupRouter from './router';
 
-const config = require('../webpack.dev');
+const config = require('../build_n_deploy/webpack/webpack.dev');
 
 setupPassportConfig(passport);
 loglevel.setDefaultLevel(loglevel.levels.INFO);
