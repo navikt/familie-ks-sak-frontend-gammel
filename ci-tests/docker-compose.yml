@@ -5,7 +5,7 @@ services:
     image: navikt/node-express:1.0.0
     volumes:
       - ../dev-server:/var/server/
-      - ../development:/var/development/
+      - ../frontend_development:/var/frontend_development/
     ports:
       - 8000
     entrypoint:

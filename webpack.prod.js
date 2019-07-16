@@ -14,7 +14,7 @@ const config = merge.strategy({
         'familie-ks-sak': ['babel-polyfill'],
     },
     output: {
-        path: path.join(__dirname, 'production'),
+        path: path.join(__dirname, 'frontend_production'),
         filename: '[name].[contenthash].js',
         publicPath: '/assets/',
     },

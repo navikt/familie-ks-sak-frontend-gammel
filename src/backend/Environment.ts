@@ -1,7 +1,7 @@
 const Enviornment = () => {
     if (process.env.ENV === 'local') {
         return {
-            buildPath: '../development',
+            buildPath: '../frontend_development',
             proxyUrl: 'http://localhost:8080',
             namespace: 'local',
             redisUrl: '',
@@ -9,7 +9,7 @@ const Enviornment = () => {
         };
     } else if (process.env.ENV === 'preprod') {
         return {
-            buildPath: '../production',
+            buildPath: '../frontend_production',
             proxyUrl: 'http://familie-ks-mottak',
             namespace: 'preprod',
             redisUrl: 'familie-ks-sak-frontend-redis.default.svc.nais.local',
@@ -18,7 +18,7 @@ const Enviornment = () => {
     }
 
     return {
-        buildPath: '../production',
+        buildPath: '../frontend_production',
         proxyUrl: 'http://familie-ks-mottak',
         namespace: 'production',
         redisUrl: 'familie-ks-sak-frontend-redis.default.svc.nais.local',

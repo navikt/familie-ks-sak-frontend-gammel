@@ -3,7 +3,6 @@ const path = require('path');
 const fs = require('fs');
 
 const port = 8000;
-const delayMs = 20;
 const app = express();
 
 function lesMockFil(filnavn) {
@@ -14,11 +13,11 @@ function lesMockFil(filnavn) {
     }
 }
 
-app.use('/assets', express.static(path.join(__dirname, '..', 'development')));
+app.use('/assets', express.static(path.join(__dirname, '..', 'frontend_development')));
 
 app.get('*', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write(fs.readFileSync(path.join(__dirname, '/../development/index.html')));
+    res.write(fs.readFileSync(path.join(__dirname, '/../frontend_development/index.html')));
     res.end();
 });
 
