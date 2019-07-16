@@ -18,7 +18,7 @@ export default (app: any, passport: PassportStatic) => {
     app.use(cookieParser(process.env.SESSION_SECRET));
     app.set('trust proxy', 1);
 
-    if (process.env.NODE_ENV !== 'development') {
+    if (process.env.NODE_ENV === 'production') {
         app.use(
             session({
                 cookie: { maxAge: SESSION_MAX_AGE, secure: true },

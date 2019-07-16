@@ -84,7 +84,7 @@ if (process.env.NODE_ENV === 'development') {
     app.use(middleware);
     app.use(webpackHotMiddleware(compiler));
 } else {
-    app.use('/assets', express.static(path.join(__dirname, '..', 'production')));
+    app.use('/assets', express.static(path.join(__dirname, '..', 'frontend_production')));
 }
 
 setupSession(app, passport);
