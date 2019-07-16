@@ -4,7 +4,7 @@ services:
   ci-test-server:
     image: navikt/node-express:1.0.0
     volumes:
-      - ../dev-server:/var/server/
+      - ../ci-tests:/var/server/
       - ../frontend_development:/var/frontend_development/
     ports:
       - 8000
