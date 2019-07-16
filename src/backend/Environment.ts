@@ -2,16 +2,16 @@ const Enviornment = () => {
     if (process.env.ENV === 'local') {
         return {
             buildPath: '../frontend_development',
-            proxyUrl: 'http://localhost:8080',
             namespace: 'local',
+            proxyUrl: 'http://localhost:8080',
             redisUrl: '',
             unleashUrl: 'https://unleash.herokuapp.com/api/',
         };
     } else if (process.env.ENV === 'preprod') {
         return {
             buildPath: '../frontend_production',
-            proxyUrl: 'http://familie-ks-mottak',
             namespace: 'preprod',
+            proxyUrl: 'http://familie-ks-mottak',
             redisUrl: 'familie-ks-sak-frontend-redis.default.svc.nais.local',
             unleashUrl: 'http://unleashproxy-fss.default.svc.nais.local/api/',
         };
@@ -19,8 +19,8 @@ const Enviornment = () => {
 
     return {
         buildPath: '../frontend_production',
-        proxyUrl: 'http://familie-ks-mottak',
         namespace: 'production',
+        proxyUrl: 'http://familie-ks-mottak',
         redisUrl: 'familie-ks-sak-frontend-redis.default.svc.nais.local',
         unleashUrl: 'http://unleash.default.svc.nais.local/api/',
     };

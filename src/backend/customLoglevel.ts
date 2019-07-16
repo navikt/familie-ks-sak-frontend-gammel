@@ -14,10 +14,10 @@ const prefix = (req: SessionRequest, level: string) => {
     } ${req.method}: ${req.originalUrl}]`;
 };
 
-export const log_info = (req: SessionRequest, message: string) => {
+export const logInfo = (req: SessionRequest, message: string) => {
     loglevel.info(`${prefix(req, 'INFO')}: ${message}`);
 };
 
-export const log_error = (req: SessionRequest, message: string) => {
+export const logError = (req: SessionRequest, message: string) => {
     loglevel.error(`${prefix(req, 'ERROR')}: ${message}`);
 };

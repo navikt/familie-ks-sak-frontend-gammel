@@ -4,7 +4,9 @@ import session from 'express-session';
 import { PassportStatic } from 'passport';
 import { redisUrl } from '../../Environment';
 
+/* tslint:disable */
 const RedisStore = require('connect-redis')(session);
+/* tslint:enable */
 
 export type SessionRequest = Request & {
     session: Express.Session;
@@ -23,6 +25,7 @@ export default (app: any, passport: PassportStatic) => {
             session({
                 cookie: { maxAge: SESSION_MAX_AGE, secure: true },
                 name: 'familie-ks-sak',
+                resave: false,
                 saveUninitialized: true,
                 secret: [`${process.env.COOKIE_KEY1}`, `${process.env.COOKIE_KEY2}`],
                 store: new RedisStore({
@@ -32,16 +35,15 @@ export default (app: any, passport: PassportStatic) => {
                     port: 6379,
                     ttl: SESSION_MAX_AGE,
                 }),
-                resave: false,
             })
         );
     } else {
         app.use(
             session({
                 name: 'familie-ks-sak',
+                resave: false,
                 saveUninitialized: true,
                 secret: 'local_secret',
-                resave: false,
             })
         );
     }

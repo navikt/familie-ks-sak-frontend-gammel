@@ -11,7 +11,10 @@ import { getUserProfile } from './auth/utils/user';
 import { buildPath } from './Environment';
 
 const router = express.Router();
+
+/* tslint:disable */
 const packageJson = require('../package.json');
+/* tslint:enable */
 
 export default (middleware: any, prometheus: any) => {
     router.get('/version', (req, res) => {

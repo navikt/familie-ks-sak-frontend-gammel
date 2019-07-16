@@ -4,11 +4,11 @@ import { passportConfig } from './passportConfig';
 
 export default (passport: any) => {
     passport.serializeUser((user: any, done: any) => {
-        done(null, user.oid);
+        done(undefined, user.oid);
     });
 
     passport.deserializeUser((oid: string, done: any) => {
-        done(null, oid);
+        done(undefined, oid);
     });
 
     // AZURE AD LOGIN STRATEGY
@@ -26,7 +26,7 @@ export default (passport: any) => {
                 done: VerifyCallback
             ) => {
                 if (!profile.oid) {
-                    return done(new Error('No oid found'), null);
+                    return done(new Error('No oid found'), undefined);
                 }
                 process.nextTick(() => {
                     req.session.oid = profile.oid;
@@ -37,7 +37,7 @@ export default (passport: any) => {
                     req.session.groups = JSON.parse(profile._json.groups);
                     req.session.refreshToken = refresh_token;
 
-                    return done(null, profile);
+                    return done(undefined, profile);
                 });
             }
         )

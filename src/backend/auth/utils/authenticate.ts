@@ -1,6 +1,6 @@
 import { NextFunction, Response } from 'express';
 import passport from 'passport';
-import { log_error } from '../../customLoglevel';
+import { logError } from '../../customLoglevel';
 import { nodeConfig } from '../config/passportConfig';
 import { SessionRequest } from './session';
 
@@ -15,14 +15,14 @@ export const authenticateAzure = (req: SessionRequest, res: Response, next: Next
 
     const successRedirect = regex && validRedirectRoute ? redirectUrl : '/';
     if (!validRedirectRoute) {
-        log_error(req, `Ugyldig redirect path [${redirectUrl}], fallback '/'`);
+        logError(req, `Ugyldig redirect path [${redirectUrl}], fallback '/'`);
     }
 
     req.session.redirectUrl = successRedirect;
     try {
         passport.authenticate('azuread-openidconnect', {
-            successRedirect,
             failureRedirect: '/error',
+            successRedirect,
         })(req, res, next);
     } catch (err) {
         throw new Error(`Error during authentication: ${err}`);
@@ -33,8 +33,8 @@ export const authenticateAzureCallback = () => {
     return (req: SessionRequest, res: Response, next: NextFunction) => {
         try {
             passport.authenticate('azuread-openidconnect', {
-                successRedirect: req.session.redirectUrl || '/',
                 failureRedirect: '/error',
+                successRedirect: req.session.redirectUrl || '/',
             })(req, res, next);
         } catch (err) {
             throw new Error(`Error during authentication: ${err}`);
@@ -58,11 +58,11 @@ export const ensureAuthenticated = (sendUnauthorized: boolean) => {
 };
 
 export const logout = (req: SessionRequest, res: Response) => {
-    return async (req: SessionRequest, res: Response) => {
-        req.session.destroy(error => {
-            log_error(req, `error during logout: ${error}`);
-            res.status(500).send(error);
+    return async (asyncReq: SessionRequest, asyncRes: Response) => {
+        asyncReq.session.destroy(error => {
+            logError(asyncReq, `error during logout: ${error}`);
+            asyncRes.status(500).send(error);
         });
-        res.redirect(nodeConfig.logoutUri);
+        asyncRes.redirect(nodeConfig.logoutUri);
     };
 };

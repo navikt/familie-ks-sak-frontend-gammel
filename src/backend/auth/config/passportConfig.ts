@@ -46,6 +46,8 @@ const hentPassportConfig = () => {
                 tenant: 'navno.onmicrosoft.com',
             };
             break;
+        default:
+            break;
     }
 
     const key1 = process.env.PASSPORTCOOKIE_KEY1 ? process.env.PASSPORTCOOKIE_KEY1 : '';

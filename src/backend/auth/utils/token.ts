@@ -1,13 +1,13 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import request from 'request-promise';
-import { log_error, log_info } from '../../customLoglevel';
+import { logError, logInfo } from '../../customLoglevel';
 import { nodeConfig } from '../config/passportConfig';
 import { SessionRequest } from './session';
 
 // GET AND REFRESH ACCESSTOKENS
 export const validateRefreshAndGetToken = async (req: SessionRequest) => {
     if (!req.session) {
-        log_error(
+        logError(
             req,
             'No session found in validateRefreshAndGetToken. Returning invalid accessToken.'
         );
@@ -15,13 +15,13 @@ export const validateRefreshAndGetToken = async (req: SessionRequest) => {
     }
 
     if (!req.session.accessToken) {
-        log_info(req, 'not authenticated - no accessToken. Fetching new accessToken.');
+        logInfo(req, 'not authenticated - no accessToken. Fetching new accessToken.');
 
         const newAccessToken = await getAccessTokenUser(req);
 
         req.session.accessToken = newAccessToken;
     } else if (moment().isAfter(moment(req.session.expiryDate))) {
-        log_info(req, 'not authenticated - expired token. Fetching new accessToken.');
+        logInfo(req, 'not authenticated - expired token. Fetching new accessToken.');
 
         const newAccessToken = await getAccessTokenUser(req);
 
@@ -29,7 +29,7 @@ export const validateRefreshAndGetToken = async (req: SessionRequest) => {
             req.session.accessToken = newAccessToken;
         }
     } else {
-        log_info(req, 'authenticated.');
+        logInfo(req, 'authenticated.');
     }
     req.session.expiryDate = JSON.parse(decodeToken(req.session.accessToken)).exp * 1000;
 
@@ -40,11 +40,11 @@ export const validateRefreshAndGetToken = async (req: SessionRequest) => {
 const getAccessTokenUser = async (req: SessionRequest) => {
     const parameters = {
         client_id: nodeConfig.clientID,
-        resource: nodeConfig.clientID,
-        redirect_uri: nodeConfig.redirectUrl,
-        grant_type: 'refresh_token',
-        refresh_token: req.session.refreshToken,
         client_secret: nodeConfig.clientSecret,
+        grant_type: 'refresh_token',
+        redirect_uri: nodeConfig.redirectUrl,
+        refresh_token: req.session.refreshToken,
+        resource: nodeConfig.clientID,
     };
 
     return request
@@ -55,9 +55,9 @@ const getAccessTokenUser = async (req: SessionRequest) => {
             return JSON.parse(result).access_token;
         })
         .catch(err => {
-            log_error(req, `Error during getAccessTokenUser: ${err}`);
+            logError(req, `Error during getAccessTokenUser: ${err}`);
             req.session.destroy((error: Error) => {
-                log_error(req, `Failed to destroy session: ${error}`);
+                logError(req, `Failed to destroy session: ${error}`);
             });
             return '';
         });

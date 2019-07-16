@@ -42,21 +42,21 @@ const setupMetrics = () => {
 
     const Counter = prom_client.Counter;
     const appLoad = new Counter({
-        name: 'app_load',
         help: 'Counter for times app has been loaded',
         labelNames: ['code'],
+        name: 'app_load',
     });
 
     const errorPageLoad = new Counter({
-        name: 'error_route',
         help: 'Counter for times error page is loaded',
         labelNames: ['code'],
+        name: 'error_route',
     });
 
     const loginPageRequest = new Counter({
-        name: 'login_route',
         help: 'Counter for times login route is requested',
         labelNames: ['code'],
+        name: 'login_route',
     });
 
     register.registerMetric(appLoad);
