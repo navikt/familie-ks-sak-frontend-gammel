@@ -1,0 +1,40 @@
+.dekoratør {
+    background-color: @navMorkGra;
+    display: flex;
+    height: 4rem;
+    justify-content: space-between;
+    padding: 1rem 1rem 1rem 1rem;
+    width: 100%;
+
+    &__skille {
+        width: 1px;
+        height: 2,0625rem;
+        margin: 0 2rem;
+        background-color: #78706a;
+    }
+
+    &__tittel {
+        display: flex;
+        height: 2rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &--tekst {
+            color: white;
+        }
+    }
+
+    &__innloggetsaksbehandler {
+        color: white;
+        display: flex;
+        justify-content: flex-end;
+
+        &--lenke {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
