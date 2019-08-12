@@ -21,7 +21,7 @@ export type Ressurs<T> =
           status: RessursStatus.FAILURE;
       };
 
-export const byggTomData = <T>(): Ressurs<T> => {
+export const byggTomRessurs = <T>(): Ressurs<T> => {
     return {
         status: RessursStatus.UNFETCHED,
     };
