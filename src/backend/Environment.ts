@@ -1,4 +1,4 @@
-const Enviornment = () => {
+const Environment = () => {
     if (process.env.ENV === 'local') {
         return {
             buildPath: '../frontend_development',
@@ -25,7 +25,7 @@ const Enviornment = () => {
         unleashUrl: 'http://unleash.default.svc.nais.local/api/',
     };
 };
-const env = Enviornment();
+const env = Environment();
 
 export const buildPath = env.buildPath;
 export const proxyUrl = env.proxyUrl;
