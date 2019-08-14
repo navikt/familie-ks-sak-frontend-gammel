@@ -6,8 +6,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 import bodyParser from 'body-parser';
-import express from 'express';
-import { Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import helmet from 'helmet';
 import loglevel from 'loglevel';
 import passport from 'passport';
@@ -23,7 +22,9 @@ import setupSession from './auth/utils/session';
 import { getLogTimestamp } from './customLoglevel';
 import setupRouter from './router';
 
+/* tslint:disable */
 const config = require('../build_n_deploy/webpack/webpack.dev');
+/* tslint:enable */
 
 setupPassportConfig(passport);
 loglevel.setDefaultLevel(loglevel.levels.INFO);

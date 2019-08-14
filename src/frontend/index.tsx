@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import App from './components/App';
+import App from './komponenter/App';
+
+import './index.less';
 
 const rootElement = document.getElementById('app');
 const renderApp = (Component: React.ComponentType<{}>): void => {
@@ -16,8 +18,8 @@ const renderApp = (Component: React.ComponentType<{}>): void => {
 renderApp(App);
 
 if (module.hot) {
-    module.hot.accept('./components/App', () => {
-        const NewApp = require('./components/App').default;
+    module.hot.accept('./komponenter/App', () => {
+        const NewApp = require('./komponenter/App').default;
         renderApp(NewApp);
     });
 }

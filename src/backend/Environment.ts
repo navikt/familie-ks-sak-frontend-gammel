@@ -3,7 +3,7 @@ const Environment = () => {
         return {
             buildPath: '../frontend_development',
             namespace: 'local',
-            proxyUrl: 'http://localhost:8080',
+            proxyUrl: 'http://localhost:8083',
             redisUrl: '',
             unleashUrl: 'https://unleash.herokuapp.com/api/',
         };
@@ -11,7 +11,7 @@ const Environment = () => {
         return {
             buildPath: '../frontend_production',
             namespace: 'preprod',
-            proxyUrl: 'http://familie-ks-mottak',
+            proxyUrl: 'http://familie-ks-sak',
             redisUrl: 'familie-ks-sak-frontend-redis.default.svc.nais.local',
             unleashUrl: 'http://unleashproxy-fss.default.svc.nais.local/api/',
         };
@@ -20,7 +20,7 @@ const Environment = () => {
     return {
         buildPath: '../frontend_production',
         namespace: 'production',
-        proxyUrl: 'http://familie-ks-mottak',
+        proxyUrl: 'http://familie-ks-sak',
         redisUrl: 'familie-ks-sak-frontend-redis.default.svc.nais.local',
         unleashUrl: 'http://unleash.default.svc.nais.local/api/',
     };

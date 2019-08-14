@@ -58,11 +58,9 @@ export const ensureAuthenticated = (sendUnauthorized: boolean) => {
 };
 
 export const logout = (req: SessionRequest, res: Response) => {
-    return async (asyncReq: SessionRequest, asyncRes: Response) => {
-        asyncReq.session.destroy(error => {
-            logError(asyncReq, `error during logout: ${error}`);
-            asyncRes.status(500).send(error);
-        });
-        asyncRes.redirect(nodeConfig.logoutUri);
-    };
+    req.session.destroy(error => {
+        logError(req, `error during logout: ${error}`);
+        res.status(500).send(error);
+    });
+    res.redirect(nodeConfig.logoutUri);
 };

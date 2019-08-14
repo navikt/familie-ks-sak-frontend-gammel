@@ -34,7 +34,7 @@ jobs:
       - run:
           name: Bygger test
           command: |
-            yarn build:offline
+            yarn build:ci
       - run:
           name: Bygger produksjon
           command: |
