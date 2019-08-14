@@ -4,7 +4,7 @@ import * as React from 'react';
 import { ISaksbehandler } from '../../typer/saksbehandler';
 
 interface IProps {
-    innloggetSaksbehandler: ISaksbehandler;
+    innloggetSaksbehandler?: ISaksbehandler;
     onClick: () => void;
     tittel: string;
 }
