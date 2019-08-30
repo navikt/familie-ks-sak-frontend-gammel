@@ -90,7 +90,7 @@ if (process.env.NODE_ENV === 'development') {
 
 setupSession(app, passport);
 
-app.use('/familie-ks-mottak/api', ensureAuthenticated(true), attachToken(), doProxy());
+app.use('/familie-ks-sak/api', ensureAuthenticated(true), attachToken(), doProxy());
 
 // Sett opp bodyParser og router etter proxy. Spesielt viktig med tanke på større payloads som blir parset av bodyParser
 app.use(bodyParser.json({ limit: '200mb' }));
