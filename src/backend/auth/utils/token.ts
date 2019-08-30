@@ -47,22 +47,20 @@ const getAccessTokenUser = async (req: SessionRequest) => {
         resource: nodeConfig.clientID,
     };
 
-    if (process.env.ENV === 'local') {
-        return request
-            .post({ url: nodeConfig.tokenURI, formData: parameters }, (err, httpResponse, body) => {
-                return body;
-            })
-            .then(result => {
-                return JSON.parse(result).access_token;
-            })
-            .catch(err => {
-                logError(req, `Error during getAccessTokenUser: ${err}`);
-                req.session.destroy((error: Error) => {
-                    logError(req, `Failed to destroy session: ${error}`);
-                });
-                return '';
+    return request
+        .post({ url: nodeConfig.tokenURI, formData: parameters }, (err, httpResponse, body) => {
+            return body;
+        })
+        .then(result => {
+            return JSON.parse(result).access_token;
+        })
+        .catch(err => {
+            logError(req, `Error during getAccessTokenUser: ${err}`);
+            req.session.destroy((error: Error) => {
+                logError(req, `Failed to destroy session: ${error}`);
             });
-    }
+            return '';
+        });
 };
 
 // DECODE TOKEN
