@@ -32,7 +32,7 @@ export const doProxy = () => {
 export const attachToken = () => {
     return async (req: SessionRequest, res: Response, next: NextFunction) => {
         const accessToken = await validateRefreshAndGetToken(req);
-        req.headers['Nav-Callid'] = uuid.v1();
+        req.headers['Nav-Call-Id'] = uuid.v1();
         req.headers.Authorization = `Bearer ${accessToken}`;
         return next();
     };
