@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ClientRequest } from 'http';
 import proxy from 'http-proxy-middleware';
+import uuid from 'uuid';
 import { proxyUrl } from '../../Environment';
 import { SessionRequest } from './session';
 import { validateRefreshAndGetToken } from './token';
@@ -15,12 +16,12 @@ const restream = (proxyReq: ClientRequest, req: Request, res: Response) => {
 };
 
 export const doProxy = () => {
-    return proxy('/familie-ks-mottak/api', {
+    return proxy('/familie-ks-sak/api', {
         changeOrigin: true,
         logLevel: 'info',
         onProxyReq: restream,
         pathRewrite: (path, req) => {
-            const newPath = path.replace('/familie-ks-mottak/api', '');
+            const newPath = path.replace('/familie-ks-sak/api', '');
             return `/api${newPath}`;
         },
         secure: true,
@@ -31,6 +32,7 @@ export const doProxy = () => {
 export const attachToken = () => {
     return async (req: SessionRequest, res: Response, next: NextFunction) => {
         const accessToken = await validateRefreshAndGetToken(req);
+        req.headers['Nav-Call-Id'] = uuid.v1();
         req.headers.Authorization = `Bearer ${accessToken}`;
         return next();
     };
