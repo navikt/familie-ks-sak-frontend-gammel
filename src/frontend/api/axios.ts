@@ -1,6 +1,6 @@
 import { captureException, configureScope, withScope } from '@sentry/core';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Ressurs, RessursStatus } from '../typer/ressurs';
+import { byggFeiletRessurs, Ressurs, RessursStatus } from '../typer/ressurs';
 import { ISaksbehandler } from '../typer/saksbehandler';
 
 axios.defaults.baseURL = window.location.origin;
@@ -16,23 +16,29 @@ export const axiosRequest = async <T>(
             const responsRessurs: Ressurs<T> = response.data;
 
             let typetRessurs: Ressurs<T> = {
-                status: RessursStatus.UNFETCHED,
+                status: RessursStatus.IKKE_HENTET,
             };
-            if (responsRessurs.status === RessursStatus.SUCCESS) {
-                typetRessurs = {
-                    data: responsRessurs.data,
-                    status: RessursStatus.SUCCESS,
-                };
-            } else if (responsRessurs.status === RessursStatus.FAILURE) {
-                typetRessurs = {
-                    melding: responsRessurs.melding,
-                    status: RessursStatus.FAILURE,
-                };
-            } else {
-                typetRessurs = {
-                    melding: 'Ukjent api feil',
-                    status: RessursStatus.FAILURE,
-                };
+
+            switch (responsRessurs.status) {
+                case RessursStatus.SUKSESS:
+                    typetRessurs = {
+                        data: responsRessurs.data,
+                        status: RessursStatus.SUKSESS,
+                    };
+                    break;
+                case RessursStatus.FEILET:
+                    typetRessurs = {
+                        errorMelding: responsRessurs.errorMelding,
+                        melding: responsRessurs.melding,
+                        status: RessursStatus.FEILET,
+                    };
+                    break;
+                default:
+                    typetRessurs = {
+                        melding: 'Ukjent api feil',
+                        status: RessursStatus.FEILET,
+                    };
+                    break;
             }
 
             return typetRessurs;
@@ -59,9 +65,6 @@ export const axiosRequest = async <T>(
                 }
             }
 
-            return {
-                melding: 'test',
-                status: RessursStatus.FAILURE,
-            };
+            return byggFeiletRessurs<T>('Ukjent api feil', error);
         });
 };

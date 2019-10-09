@@ -1,7 +1,9 @@
 import cookieParser from 'cookie-parser';
 import { Request } from 'express';
 import session from 'express-session';
+import loglevel from 'loglevel';
 import { PassportStatic } from 'passport';
+import redis from 'redis';
 import { redisUrl } from '../../Environment';
 
 /* tslint:disable */
@@ -21,6 +23,14 @@ export default (app: any, passport: PassportStatic) => {
     app.set('trust proxy', 1);
 
     if (process.env.NODE_ENV === 'production') {
+        const client = redis.createClient({
+            db: 1,
+            host: redisUrl,
+            password: process.env.REDIS_PASSWORD,
+            port: 6379,
+        });
+        client.unref();
+
         app.use(
             session({
                 cookie: { maxAge: SESSION_MAX_AGE, secure: true },
@@ -28,13 +38,7 @@ export default (app: any, passport: PassportStatic) => {
                 resave: false,
                 saveUninitialized: true,
                 secret: [`${process.env.COOKIE_KEY1}`, `${process.env.COOKIE_KEY2}`],
-                store: new RedisStore({
-                    host: redisUrl,
-                    logErrors: true,
-                    pass: process.env.REDIS_PASSWORD,
-                    port: 6379,
-                    ttl: SESSION_MAX_AGE,
-                }),
+                store: new RedisStore(client),
             })
         );
     } else {
