@@ -8,7 +8,7 @@ export enum actions {
     HENT_FAGSAK = 'HENT_FAGSAK',
     HENT_FAGSAK_FEILET = 'HENT_FAGSAK_FEILET',
     HENT_FAGSAK_SUKSESS = 'HENT_FAGSAK_SUKSESS',
-    SETT_FAGSAK_ID = 'SETT_FAGSAK_ID',
+    SETT_SAKSNUMMER = 'SETT_SAKSNUMMER',
 }
 
 interface IAction {
@@ -19,7 +19,7 @@ interface IAction {
 type Dispatch = (action: IAction) => void;
 
 interface IState {
-    fagsakId?: string;
+    saksnummer?: string;
     fagsak: Ressurs<IFagsak>;
 }
 
@@ -48,10 +48,10 @@ const fagsakReducer = (state: IState, action: IAction): IState => {
                 fagsak: action.payload,
             };
         }
-        case actions.SETT_FAGSAK_ID: {
+        case actions.SETT_SAKSNUMMER: {
             return {
                 ...state,
-                fagsakId: action.payload,
+                saksnummer: action.payload,
             };
         }
         default: {
@@ -63,13 +63,13 @@ const fagsakReducer = (state: IState, action: IAction): IState => {
 const FagsakProvider: React.StatelessComponent = ({ children }) => {
     const [state, dispatch] = React.useReducer(fagsakReducer, {
         fagsak: byggTomRessurs<IFagsak>(),
-        fagsakId: undefined,
+        saksnummer: undefined,
     });
 
     React.useEffect(() => {
-        if (state.fagsakId) {
+        if (state.saksnummer) {
             dispatch({ type: actions.HENT_FAGSAK });
-            hentFagsak(state.fagsakId)
+            hentFagsak(state.saksnummer)
                 .then((fagsak: Ressurs<IFagsak>) => {
                     dispatch({ type: actions.HENT_FAGSAK_SUKSESS, payload: fagsak });
                 })
@@ -80,7 +80,7 @@ const FagsakProvider: React.StatelessComponent = ({ children }) => {
                     });
                 });
         }
-    }, [state.fagsakId]);
+    }, [state.saksnummer]);
 
     return (
         <FagsakStateContext.Provider value={state}>

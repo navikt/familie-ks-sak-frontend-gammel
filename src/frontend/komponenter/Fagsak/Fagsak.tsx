@@ -3,24 +3,29 @@ import { RessursStatus } from '../../typer/ressurs';
 import { actions, useFagsakContext, useFagsakDispatch } from '../FagsakProvider';
 
 interface IProps {
-    fagsakId: string;
+    saksnummer: string;
 }
 
-const Fagsak: React.FunctionComponent<IProps> = ({ fagsakId }) => {
+const Fagsak: React.FunctionComponent<IProps> = ({ saksnummer }) => {
     const fagsakDispatcher = useFagsakDispatch();
     const fagsak = useFagsakContext().fagsak;
 
     React.useEffect(() => {
         fagsakDispatcher({
-            payload: fagsakId,
-            type: actions.SETT_FAGSAK_ID,
+            payload: saksnummer,
+            type: actions.SETT_SAKSNUMMER,
         });
-    }, [fagsakId]);
-
-    return (
-        <div>{`Fødselsnummer: ${fagsak.status === RessursStatus.SUKSESS &&
-            fagsak.data.søkerFødselsnummer}`}</div>
-    );
+    }, [saksnummer]);
+    switch (fagsak.status) {
+        case RessursStatus.SUKSESS:
+            return <div>{`Fødselsnummer: ${fagsak.data.søkerFødselsnummer}`}</div>;
+        case RessursStatus.HENTER:
+            return <div>Henter fagsak...</div>;
+        case RessursStatus.FEILET:
+            return <div>{`Innhenting av fagsak feilet med melding: ${fagsak.melding}`}</div>;
+        default:
+            return <div />;
+    }
 };
 
 export default Fagsak;

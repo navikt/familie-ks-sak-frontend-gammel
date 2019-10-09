@@ -58,9 +58,9 @@ class App extends React.Component<{}, IState> {
                     <Switch>
                         <Route
                             exact={true}
-                            path="/:fagsakId"
+                            path="/:saksnummer"
                             render={({ match }) => {
-                                return <Fagsak fagsakId={match.params.fagsakId} />;
+                                return <Fagsak saksnummer={match.params.saksnummer} />;
                             }}
                         />
                     </Switch>
