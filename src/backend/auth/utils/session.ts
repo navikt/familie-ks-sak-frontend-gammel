@@ -1,7 +1,6 @@
 import cookieParser from 'cookie-parser';
 import { Request } from 'express';
 import session from 'express-session';
-import loglevel from 'loglevel';
 import { PassportStatic } from 'passport';
 import redis from 'redis';
 import { redisUrl } from '../../Environment';
@@ -38,7 +37,7 @@ export default (app: any, passport: PassportStatic) => {
                 resave: false,
                 saveUninitialized: true,
                 secret: [`${process.env.COOKIE_KEY1}`, `${process.env.COOKIE_KEY2}`],
-                store: new RedisStore(client),
+                store: new RedisStore({ client }),
             })
         );
     } else {

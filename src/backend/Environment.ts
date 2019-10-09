@@ -4,7 +4,7 @@ const Environment = () => {
             buildPath: '../frontend_development',
             namespace: 'local',
             proxyUrl: 'http://localhost:8083',
-            redisUrl: '',
+            redisUrl: 'localhost',
             unleashUrl: 'https://unleash.herokuapp.com/api/',
         };
     } else if (process.env.ENV === 'preprod') {
