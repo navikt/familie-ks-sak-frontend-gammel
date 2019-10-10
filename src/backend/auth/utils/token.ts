@@ -1,3 +1,4 @@
+import axios from 'axios';
 import moment from 'moment-timezone';
 import request from 'request-promise';
 import { logError, logInfo } from '../../customLoglevel';
@@ -38,7 +39,7 @@ export const validateRefreshAndGetToken = async (req: SessionRequest) => {
 
 // GET USER SPESIFIC ACCESSTOKEN
 const getAccessTokenUser = async (req: SessionRequest) => {
-    const parameters = {
+    const data = {
         client_id: nodeConfig.clientID,
         client_secret: nodeConfig.clientSecret,
         grant_type: 'refresh_token',
@@ -47,26 +48,39 @@ const getAccessTokenUser = async (req: SessionRequest) => {
         resource: nodeConfig.clientID,
     };
 
-    return request
-        .post({ url: nodeConfig.tokenURI, formData: parameters }, (err, httpResponse, body) => {
-            return body;
-        })
-        .then(result => {
-            return JSON.parse(result).access_token;
-        })
-        .catch(err => {
-            logError(req, `Error during getAccessTokenUser: ${err}`);
-            req.session.destroy((error: Error) => {
-                logError(req, `Failed to destroy session: ${error}`);
+    if (process.env.NODE_ENV === 'production') {
+        return axios
+            .post(nodeConfig.tokenURI, data)
+            .then(result => {
+                return result.data.access_token;
+            })
+            .catch(err => {
+                logError(req, `Error during getAccessTokenUser: ${err}`);
+                req.session.destroy((error: Error) => {
+                    logError(req, `Failed to destroy session: ${error}`);
+                });
+                return '';
             });
-            return '';
-        });
+    } else {
+        return axios
+            .get('http://localhost:8083/local/cookie')
+            .then(result => {
+                return result.data.value;
+            })
+            .catch(err => {
+                logError(req, `Error during getAccessTokenUser: ${err}`);
+                req.session.destroy((error: Error) => {
+                    logError(req, `Failed to destroy session: ${error}`);
+                });
+                return '';
+            });
+    }
 };
 
 // DECODE TOKEN
 const decodeToken = (encodedToken: string): string => {
     if (encodedToken) {
-        if (encodedToken.startsWith('eyJ0')) {
+        if (encodedToken.startsWith('eyJ0') || process.env.NODE_ENV === 'development') {
             const tokenSplit = encodedToken.split('.');
             const tokenDecoded = Buffer.from(tokenSplit[1], 'base64').toString();
             return tokenDecoded;
