@@ -49,10 +49,12 @@ const getAccessTokenUser = async (req: SessionRequest) => {
     };
 
     if (process.env.NODE_ENV === 'production') {
-        return axios
-            .post(nodeConfig.tokenURI, data)
+        return request
+            .post({ url: nodeConfig.tokenURI, formData: data }, (err, httpResponse, body) => {
+                return body;
+            })
             .then(result => {
-                return result.data.access_token;
+                return JSON.parse(result).access_token;
             })
             .catch(err => {
                 logError(req, `Error during getAccessTokenUser: ${err}`);
