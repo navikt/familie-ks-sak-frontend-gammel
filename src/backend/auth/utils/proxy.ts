@@ -34,6 +34,7 @@ export const attachToken = () => {
         const accessToken = await validateRefreshAndGetToken(req);
         req.headers['Nav-Call-Id'] = uuid.v1();
         req.headers.Authorization = `Bearer ${accessToken}`;
+        console.log(req.headers);
         return next();
     };
 };
