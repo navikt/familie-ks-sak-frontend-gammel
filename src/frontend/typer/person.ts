@@ -22,6 +22,7 @@ export enum RelasjonsRolleType {
 export interface IPerson {
     fødselsdato: string;
     fødselsnummer: string;
+    kjønn: string;
     navn: string;
     personhistorikk: IPersonhistorikk;
     relasjoner: IPersonRelasjon[];

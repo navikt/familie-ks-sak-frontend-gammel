@@ -3,9 +3,9 @@ import * as classNames from 'classnames';
 import KnappBase from 'nav-frontend-knapper';
 import { Systemtittel } from 'nav-frontend-typografi';
 import * as React from 'react';
-import { axiosRequest } from '../../api/axios';
-import { Ressurs } from '../../typer/ressurs';
-import { ISaksbehandler } from '../../typer/saksbehandler';
+import { axiosRequest } from '../../../api/axios';
+import { Ressurs } from '../../../typer/ressurs';
+import { ISaksbehandler } from '../../../typer/saksbehandler';
 
 interface IProps {
     innloggetSaksbehandler?: ISaksbehandler;

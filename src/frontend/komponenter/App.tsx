@@ -3,9 +3,9 @@ import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { hentInnloggetBruker } from '../api/saksbehandler';
 import { ISaksbehandler } from '../typer/saksbehandler';
-import Dekoratør from './Dekoratør/Dekoratør';
 import Fagsak from './Fagsak/Fagsak';
 import { FagsakProvider } from './FagsakProvider';
+import Dekoratør from './Felleskomponenter/Dekoratør/Dekoratør';
 
 interface IState {
     innloggetSaksbehandler?: ISaksbehandler;
@@ -54,17 +54,19 @@ class App extends React.Component<{}, IState> {
                         window.location.href = `${window.origin}/auth/logout`;
                     }}
                 />
-                <Router>
-                    <Switch>
-                        <Route
-                            exact={true}
-                            path="/:saksnummer"
-                            render={({ match }) => {
-                                return <Fagsak saksnummer={match.params.saksnummer} />;
-                            }}
-                        />
-                    </Switch>
-                </Router>
+                <div className={'container'}>
+                    <Router>
+                        <Switch>
+                            <Route
+                                exact={true}
+                                path="/:saksnummer"
+                                render={({ match }) => {
+                                    return <Fagsak saksnummer={match.params.saksnummer} />;
+                                }}
+                            />
+                        </Switch>
+                    </Router>
+                </div>
             </FagsakProvider>
         );
     }
