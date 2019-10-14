@@ -13,7 +13,7 @@ const VilkårContainer: React.StatelessComponent<IProps> = ({ behandling }) => {
         <Panel className={'vilkårcontainer'} border={true}>
             <SøkersVilkår behandling={behandling} />
 
-            <hr className={'vilkårcontainer__hr'} />
+            <hr />
             {behandling.personopplysninger.annenPart && (
                 <AnnenPartsVilkår behandling={behandling} />
             )}
