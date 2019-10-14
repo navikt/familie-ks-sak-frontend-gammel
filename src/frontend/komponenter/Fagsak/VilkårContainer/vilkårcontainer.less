@@ -2,8 +2,21 @@
     margin-top: 1rem;
     padding: 3rem;
 
+    &__split {
+        display: flex;
+        justify-content: space-between;
+
+        &--skille {
+            background-color: @navGra40;
+            align-items: stretch;
+            margin: 0 2rem;
+            width: 1px;
+        }
+    }
+
     & hr {
-        border: 1px solid @navGra20;
+        border: unset;
+        border-top: 1px solid @navGra20;
         margin: 3rem 0 2rem 0;
     }
 }

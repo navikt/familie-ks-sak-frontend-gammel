@@ -18,3 +18,17 @@ export const hentStatsborgerskapForForeldre = (behandlingsresultat: IBehandlings
     );
     return vilkårsresultat ? vilkårsresultat.utfall === UtfallType.OPPFYLT : false;
 };
+
+export const hentBarnehageVilkår = (behandlingsresultat: IBehandlingsresultat) => {
+    const vilkårsresultat = behandlingsresultat.vilkårsResultat.find(
+        vilkårresultat => vilkårresultat.vilkårType === VilkårType.BARNEHAGE
+    );
+    return vilkårsresultat ? vilkårsresultat.utfall === UtfallType.OPPFYLT : false;
+};
+
+export const hentAlderPåBarnVilkår = (behandlingsresultat: IBehandlingsresultat) => {
+    const vilkårsresultat = behandlingsresultat.vilkårsResultat.find(
+        vilkårresultat => vilkårresultat.vilkårType === VilkårType.BARN_MELLOM_10_OG_14_MÅNEDER
+    );
+    return vilkårsresultat ? vilkårsresultat.utfall === UtfallType.OPPFYLT : false;
+};
