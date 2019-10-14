@@ -2,7 +2,7 @@
 
 const puppeteer = require('puppeteer');
 
-const large = { width: 1800, height: 1400 };
+const large = { width: 1920, height: 1080 };
 
 const config = [['large', large]];
 
