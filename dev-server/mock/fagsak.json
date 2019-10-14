@@ -1,154 +1,104 @@
 {
-	"data": {
-		"id": 1,
-		"søkerFødselsnummer": "00000000001",
-		"saksnummer": "1",
-		"behandlinger": [
-			{
-				"behandlingId": 1,
-				"søknad": {
-					"innsendtTidspunkt": "2019-10-02T10:17:41.797",
-					"familieforhold": {
-						"barna": [
-							{
-								"fødselsnummer": "00000000003",
-								"barnehageStatus": "HAR_IKKE",
-								"barnehageAntallTimer": 0.0,
-								"barnehageDato": null,
-								"barnehageKommune": ""
-							}
-						],
-						"borBeggeForeldreSammen": false
-					},
-					"utlandsTilknytning": {
-						"aktørerArbeidYtelseIUtlandet": [
-							{
-								"fødselsnummer": "00000000001",
-								"arbeidIUtlandet": "NEI",
-								"arbeidIUtlandetForklaring": "",
-								"ytelseIUtlandet": "NEI",
-								"ytelseIUtlandetForklaring": "",
-								"kontantstøtteIUtlandet": "NEI",
-								"kontantstøtteIUtlandetForklaring": ""
-							},
-							{
-								"fødselsnummer": "00000000002",
-								"arbeidIUtlandet": "NEI",
-								"arbeidIUtlandetForklaring": "",
-								"ytelseIUtlandet": "NEI",
-								"ytelseIUtlandetForklaring": "",
-								"kontantstøtteIUtlandet": "NEI",
-								"kontantstøtteIUtlandetForklaring": ""
-							}
-						],
-						"aktørerTilknytningTilUtlandet": [
-							{
-								"fødselsnummer": "00000000001",
-								"tilknytningTilUtland": "jaINorge",
-								"tilknytningTilUtlandForklaring": ""
-							},
-							{
-								"fødselsnummer": "00000000002",
-								"tilknytningTilUtland": "jaINorge",
-								"tilknytningTilUtlandForklaring": ""
-							}
-						]
-					},
-					"erklæring": {
-						"barnetHjemmeværendeOgIkkeAdoptert": true,
-						"borSammenMedBarnet": true,
-						"ikkeAvtaltDeltBosted": true,
-						"barnINorgeNeste12Måneder": true
-					}
-				},
-				"behandlingsresultat": {
-					"vilkårsResultat": [
-						{
-							"vilkårType": "KUN_ET_BARN",
-							"utfall": "OPPFYLT"
-						},
-						{
-							"vilkårType": "BOSTED",
-							"utfall": "OPPFYLT"
-						},
-						{
-							"vilkårType": "BARN_MELLOM_10_OG_14_MÅNEDER",
-							"utfall": "OPPFYLT"
-						},
-						{
-							"vilkårType": "UTLAND",
-							"utfall": "OPPFYLT"
-						},
-						{
-							"vilkårType": "MEDLEMSKAP",
-							"utfall": "OPPFYLT"
-						},
-						{
-							"vilkårType": "BARNEHAGE",
-							"utfall": "OPPFYLT"
-						},
-						{
-							"vilkårType": "BARN",
-							"utfall": "OPPFYLT"
-						}
-					],
-					"aktiv": true
-				},
-				"personopplysninger": {
-					"søker": {
-						"fødselsnummer": "00000000001",
-						"navn": "TEST TESTESEN",
-						"kjønn": "MANN",
-						"fødselsdato": "1990-01-01",
-						"statsborgerskap": "NOR",
-						"relasjoner": [
-
-						],
-						"personhistorikk": {
-							"adresser": [
+	"data": [
+		{
+			"id": 1,
+			"opprettetTidspunkt": "2019-01-01T14:35:08.426697",
+			"søkerFødselsnummer": "00000000001",
+			"saksnummer": "1",
+			"behandlinger": [
+				{
+					"behandlingId": 1,
+					"søknad": {
+						"innsendtTidspunkt": "2019-10-02T10:17:41.797",
+						"familieforhold": {
+							"barna": [
 								{
-									"adresseType": "BOSTEDSADRESSE",
-									"adresselinje1": "Sannergata 2",
-									"adresselinje2": null,
-									"adresselinje3": null,
-									"adresselinje4": null,
-									"postnummer": "0560",
-									"poststed": "UDEFINERT",
-									"land": "NOR",
-									"periode": {
-										"fomDato": "2014-10-11",
-										"tomDato": "2019-10-11"
-									}
-								},
-								{
-									"adresseType": "MIDLERTIDIG_POSTADRESSE_UTLAND",
-									"adresselinje1": "TEST 1",
-									"adresselinje2": "TEST 2",
-									"adresselinje3": "TEST 3",
-									"adresselinje4": null,
-									"postnummer": null,
-									"poststed": null,
-									"land": "SWE",
-									"periode": {
-										"fomDato": "2014-10-11",
-										"tomDato": "2019-10-11"
-									}
+									"fødselsnummer": "00000000003",
+									"barnehageStatus": "HAR_IKKE",
+									"barnehageAntallTimer": 0.0,
+									"barnehageDato": null,
+									"barnehageKommune": ""
 								}
 							],
-							"statsborgerskap": [
+							"borBeggeForeldreSammen": false
+						},
+						"utlandsTilknytning": {
+							"aktørerArbeidYtelseIUtlandet": [
 								{
-									"periode": {
-										"fomDato": "2014-10-11",
-										"tomDato": "2019-10-11"
-									},
-									"statsborgerskap": "NOR"
+									"fødselsnummer": "00000000001",
+									"arbeidIUtlandet": "NEI",
+									"arbeidIUtlandetForklaring": "",
+									"ytelseIUtlandet": "NEI",
+									"ytelseIUtlandetForklaring": "",
+									"kontantstøtteIUtlandet": "NEI",
+									"kontantstøtteIUtlandetForklaring": ""
+								},
+								{
+									"fødselsnummer": "00000000002",
+									"arbeidIUtlandet": "NEI",
+									"arbeidIUtlandetForklaring": "",
+									"ytelseIUtlandet": "NEI",
+									"ytelseIUtlandetForklaring": "",
+									"kontantstøtteIUtlandet": "NEI",
+									"kontantstøtteIUtlandetForklaring": ""
+								}
+							],
+							"aktørerTilknytningTilUtlandet": [
+								{
+									"fødselsnummer": "00000000001",
+									"tilknytningTilUtland": "jaINorge",
+									"tilknytningTilUtlandForklaring": ""
+								},
+								{
+									"fødselsnummer": "00000000002",
+									"tilknytningTilUtland": "jaINorge",
+									"tilknytningTilUtlandForklaring": ""
 								}
 							]
+						},
+						"erklæring": {
+							"barnetHjemmeværendeOgIkkeAdoptert": true,
+							"borSammenMedBarnet": true,
+							"ikkeAvtaltDeltBosted": true,
+							"barnINorgeNeste12Måneder": true
 						}
 					},
-					"barna": [
-						{
-							"fødselsnummer": "00000000003",
+					"behandlingsresultat": {
+						"vilkårsResultat": [
+							{
+								"vilkårType": "KUN_ET_BARN",
+								"utfall": "OPPFYLT"
+							},
+							{
+								"vilkårType": "BOSTED",
+								"utfall": "OPPFYLT"
+							},
+							{
+								"vilkårType": "BARN_MELLOM_10_OG_14_MÅNEDER",
+								"utfall": "OPPFYLT"
+							},
+							{
+								"vilkårType": "UTLAND",
+								"utfall": "OPPFYLT"
+							},
+							{
+								"vilkårType": "MEDLEMSKAP",
+								"utfall": "OPPFYLT"
+							},
+							{
+								"vilkårType": "BARNEHAGE",
+								"utfall": "OPPFYLT"
+							},
+							{
+								"vilkårType": "BARN",
+								"utfall": "OPPFYLT"
+							}
+						],
+						"aktiv": true
+					},
+					"personopplysninger": {
+						"søker": {
+							"fødselsnummer": "00000000001",
 							"navn": "TEST TESTESEN",
 							"kjønn": "MANN",
 							"fødselsdato": "1990-01-01",
@@ -197,63 +147,116 @@
 									}
 								]
 							}
-						}
-					],
-					"annenPart": {
-						"fødselsnummer": "00000000002",
-						"navn": "TEST TESTESEN",
-						"kjønn": "KVINNE",
-						"fødselsdato": "1990-01-01",
-						"statsborgerskap": "NOR",
-						"relasjoner": [
+						},
+						"barna": [
+							{
+								"fødselsnummer": "00000000003",
+								"navn": "TEST TESTESEN",
+								"kjønn": "MANN",
+								"fødselsdato": "1990-01-01",
+								"statsborgerskap": "NOR",
+								"relasjoner": [
 
+								],
+								"personhistorikk": {
+									"adresser": [
+										{
+											"adresseType": "BOSTEDSADRESSE",
+											"adresselinje1": "Sannergata 2",
+											"adresselinje2": null,
+											"adresselinje3": null,
+											"adresselinje4": null,
+											"postnummer": "0560",
+											"poststed": "UDEFINERT",
+											"land": "NOR",
+											"periode": {
+												"fomDato": "2014-10-11",
+												"tomDato": "2019-10-11"
+											}
+										},
+										{
+											"adresseType": "MIDLERTIDIG_POSTADRESSE_UTLAND",
+											"adresselinje1": "TEST 1",
+											"adresselinje2": "TEST 2",
+											"adresselinje3": "TEST 3",
+											"adresselinje4": null,
+											"postnummer": null,
+											"poststed": null,
+											"land": "SWE",
+											"periode": {
+												"fomDato": "2014-10-11",
+												"tomDato": "2019-10-11"
+											}
+										}
+									],
+									"statsborgerskap": [
+										{
+											"periode": {
+												"fomDato": "2014-10-11",
+												"tomDato": "2019-10-11"
+											},
+											"statsborgerskap": "NOR"
+										}
+									]
+								}
+							}
 						],
-						"personhistorikk": {
-							"adresser": [
-								{
-									"adresseType": "BOSTEDSADRESSE",
-									"adresselinje1": "Sannergata 2",
-									"adresselinje2": null,
-									"adresselinje3": null,
-									"adresselinje4": null,
-									"postnummer": "0560",
-									"poststed": "UDEFINERT",
-									"land": "NOR",
-									"periode": {
-										"fomDato": "2014-10-11",
-										"tomDato": "2019-10-11"
-									}
-								},
-								{
-									"adresseType": "MIDLERTIDIG_POSTADRESSE_UTLAND",
-									"adresselinje1": "TEST 1",
-									"adresselinje2": "TEST 2",
-									"adresselinje3": "TEST 3",
-									"adresselinje4": null,
-									"postnummer": null,
-									"poststed": null,
-									"land": "SWE",
-									"periode": {
-										"fomDato": "2014-10-11",
-										"tomDato": "2019-10-11"
-									}
-								}
+						"annenPart": {
+							"fødselsnummer": "00000000002",
+							"navn": "TEST TESTESEN",
+							"kjønn": "KVINNE",
+							"fødselsdato": "1990-01-01",
+							"statsborgerskap": "NOR",
+							"relasjoner": [
+
 							],
-							"statsborgerskap": [
-								{
-									"periode": {
-										"fomDato": "2014-10-11",
-										"tomDato": "2019-10-11"
+							"personhistorikk": {
+								"adresser": [
+									{
+										"adresseType": "BOSTEDSADRESSE",
+										"adresselinje1": "Sannergata 2",
+										"adresselinje2": null,
+										"adresselinje3": null,
+										"adresselinje4": null,
+										"postnummer": "0560",
+										"poststed": "UDEFINERT",
+										"land": "NOR",
+										"periode": {
+											"fomDato": "2014-10-11",
+											"tomDato": "2019-10-11"
+										}
 									},
-									"statsborgerskap": "NOR"
-								}
-							]
+									{
+										"adresseType": "MIDLERTIDIG_POSTADRESSE_UTLAND",
+										"adresselinje1": "TEST 1",
+										"adresselinje2": "TEST 2",
+										"adresselinje3": "TEST 3",
+										"adresselinje4": null,
+										"postnummer": null,
+										"poststed": null,
+										"land": "SWE",
+										"periode": {
+											"fomDato": "2014-10-11",
+											"tomDato": "2019-10-11"
+										}
+									}
+								],
+								"statsborgerskap": [
+									{
+										"periode": {
+											"fomDato": "2014-10-11",
+											"tomDato": "2019-10-11"
+										},
+										"statsborgerskap": "NOR"
+									}
+								]
+							}
 						}
 					}
 				}
-			}
-		]
-	},
+			]
+		}
+	],
 	"status": "SUKSESS",
 	"melding": "Innhenting av data var vellykket",
 	"errorMelding": null
