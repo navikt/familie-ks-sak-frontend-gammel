@@ -1,17 +1,9 @@
+const app = require('./mock-routes');
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
 
 const port = 8000;
-const app = express();
-
-function lesMockFil(filnavn) {
-    try {
-        return fs.readFileSync(path.join(__dirname, '/mock/' + filnavn), 'UTF-8');
-    } catch (err) {
-        throw err;
-    }
-}
 
 app.use('/assets', express.static(path.join(__dirname, '..', 'frontend_development')));
 

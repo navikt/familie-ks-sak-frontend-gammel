@@ -3969,7 +3969,7 @@ moment-timezone@^0.5.26:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@>=2.14.0, moment@^2.10.6:
+"moment@>= 2.9.0", moment@>=2.14.0, moment@^2.10.6, moment@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
@@ -4066,6 +4066,16 @@ nav-frontend-knapper@^1.0.36:
   version "1.0.36"
   resolved "https://registry.yarnpkg.com/nav-frontend-knapper/-/nav-frontend-knapper-1.0.36.tgz#56f73e581262af87e9f347ac4b04e86e46af55c1"
   integrity sha512-TExIWfx0lUh6Md9+a9rPoeF6r43FtNcrIrSygTNguUleORnvBqC16WJjJa//botU+97PrMlgwyeqLpkovmWFCA==
+
+nav-frontend-paneler-style@^0.3.16:
+  version "0.3.16"
+  resolved "https://registry.yarnpkg.com/nav-frontend-paneler-style/-/nav-frontend-paneler-style-0.3.16.tgz#11f8e39f0cc1dd6be0a26176fe8d800c99870743"
+  integrity sha512-ZsCiee36bQHkVLSQ9iKhkn53nd3nf/K3ko4k2m3eDxBD/XH12Bz4kqaxtOqfz0L//ota4Nae/yAkPnlNNaFUUw==
+
+nav-frontend-paneler@^1.0.20:
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/nav-frontend-paneler/-/nav-frontend-paneler-1.0.20.tgz#c556bc8bb11e8715215fa97ac0b870bf4362b862"
+  integrity sha512-aAV2mrF6yXDugldIgxsMDdWd2mI0WJxeODqmOks2NxpHQcnXYtSDirUpFAoMRjbkzSzhXPIklkGwmiv7PGSnqg==
 
 nav-frontend-typografi-style@^1.0.16:
   version "1.0.16"
