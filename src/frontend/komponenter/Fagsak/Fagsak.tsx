@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RessursStatus } from '../../typer/ressurs';
 import { actions, useFagsakContext, useFagsakDispatch } from '../FagsakProvider';
+import Personkort from './Personkort/Personkort';
 import VilkårContainer from './VilkårContainer/VilkårContainer';
 
 interface IProps {
@@ -22,7 +23,7 @@ const Fagsak: React.FunctionComponent<IProps> = ({ saksnummer }) => {
         case RessursStatus.SUKSESS:
             return (
                 <div>
-                    {`Fødselsnummer: ${fagsak.data.søkerFødselsnummer}`}
+                    <Personkort person={fagsak.data.behandlinger[0].personopplysninger.søker} />
                     <VilkårContainer behandling={fagsak.data.behandlinger[0]} />
                 </div>
             );
