@@ -96,7 +96,7 @@
 				},
 				"personopplysninger": {
 					"søker": {
-						"fødselsnummer": "1000011111111",
+						"fødselsnummer": "00000000001",
 						"navn": "TEST TESTESEN",
 						"kjønn": "MANN",
 						"fødselsdato": "1990-01-01",
@@ -148,7 +148,7 @@
 					},
 					"barna": [
 						{
-							"fødselsnummer": "1000011111111",
+							"fødselsnummer": "00000000003",
 							"navn": "TEST TESTESEN",
 							"kjønn": "MANN",
 							"fødselsdato": "1990-01-01",
@@ -200,7 +200,7 @@
 						}
 					],
 					"annenPart": {
-						"fødselsnummer": "2000011111111",
+						"fødselsnummer": "00000000002",
 						"navn": "TEST TESTESEN",
 						"kjønn": "KVINNE",
 						"fødselsdato": "1990-01-01",
