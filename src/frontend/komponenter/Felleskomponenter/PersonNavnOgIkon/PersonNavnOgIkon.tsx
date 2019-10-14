@@ -2,6 +2,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import FamilieIkonVelger from '../../../ikoner/Familie/FamilieIkonVelger';
 import { IPerson } from '../../../typer/person';
+import { formaterNavn } from '../../../utils/hjelpere';
 
 interface IProps {
     person: IPerson;
@@ -18,7 +19,7 @@ const PersonNavnOgIkon: React.StatelessComponent<IProps> = ({ person, type }) =>
             />
             <Undertittel
                 className={'personnavnogikon__tekst'}
-                children={`${person.navn} ${type ? `/ ${type}` : ''}`}
+                children={`${formaterNavn(person.navn)} ${type ? `/ ${type}` : ''}`}
             />
         </div>
     );
