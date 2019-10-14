@@ -5,19 +5,26 @@ import { datakilder } from '../../../typer/vilkår';
 
 interface IProps {
     datakilde: datakilder;
-    kortInfo: string;
+    kortInfo?: string;
+    kortInfoKomponent?: () => React.ReactNode;
     navn: string;
     oppfylt?: boolean;
 }
 
-const Vilkår: React.StatelessComponent<IProps> = ({ datakilde, kortInfo, navn, oppfylt }) => {
+const Vilkår: React.StatelessComponent<IProps> = ({
+    datakilde,
+    kortInfo,
+    kortInfoKomponent,
+    navn,
+    oppfylt,
+}) => {
     return (
         <tr className={'vilkår'}>
             <td className={'vilkår__navn'}>
                 <Normaltekst children={navn} />
             </td>
             <td className={'vilkår__kortinfo'}>
-                <Element children={kortInfo} />
+                {kortInfoKomponent ? kortInfoKomponent() : <Element children={kortInfo} />}
             </td>
             <td className={'vilkår__ikon'}>
                 {oppfylt !== undefined && <Oppfylt heigth={24} width={24} />}
