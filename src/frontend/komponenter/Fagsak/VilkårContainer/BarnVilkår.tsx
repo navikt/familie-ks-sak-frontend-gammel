@@ -53,7 +53,7 @@ const BarnVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                 />
                 <Vilkår
                     datakilde={datakilder.FOLKEREGISTERET}
-                    kortInfo={'Norsk'}
+                    kortInfo={barn.statsborgerskap}
                     navn={'Statsborgerskap'}
                 />
                 <Vilkår

@@ -45,6 +45,11 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
                     }}
                     navn={'Bosted'}
                 />
+                <Vilkår
+                    datakilde={datakilder.FOLKEREGISTERET}
+                    kortInfo={behandling.personopplysninger.søker.statsborgerskap}
+                    navn={'Statsborgerskap'}
+                />
 
                 <Vilkår
                     datakilde={datakilder.SØKNAD}
