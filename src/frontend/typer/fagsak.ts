@@ -24,6 +24,7 @@ export enum UtfallType {
 export interface IFagsak {
     behandlinger: IBehandling[];
     id: number;
+    opprettetTidspunkt: string;
     saksnummer: string;
     søkerFødselsnummer: string;
 }

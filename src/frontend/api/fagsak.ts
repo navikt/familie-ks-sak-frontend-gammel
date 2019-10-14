@@ -6,10 +6,10 @@ import { axiosRequest } from './axios';
 export const hentFagsak = (
     id: string,
     innloggetSaksbehandler?: ISaksbehandler
-): Promise<Ressurs<IFagsak>> => {
+): Promise<Ressurs<IFagsak[]>> => {
     axiosRequest({ method: 'GET', url: '/familie-ks-sak/api/fagsak' });
 
-    return axiosRequest<IFagsak>(
+    return axiosRequest<IFagsak[]>(
         {
             method: 'GET',
             url: `/familie-ks-sak/api/fagsak/${id}`,

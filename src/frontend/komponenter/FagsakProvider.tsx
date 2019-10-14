@@ -70,8 +70,17 @@ const FagsakProvider: React.StatelessComponent = ({ children }) => {
         if (state.saksnummer) {
             dispatch({ type: actions.HENT_FAGSAK });
             hentFagsak(state.saksnummer)
-                .then((fagsak: Ressurs<IFagsak>) => {
-                    dispatch({ type: actions.HENT_FAGSAK_SUKSESS, payload: fagsak });
+                .then((fagsak: Ressurs<IFagsak[]>) => {
+                    dispatch({
+                        payload: {
+                            ...fagsak,
+                            data:
+                                fagsak.status === RessursStatus.SUKSESS
+                                    ? fagsak.data[0]
+                                    : undefined,
+                        },
+                        type: actions.HENT_FAGSAK_SUKSESS,
+                    });
                 })
                 .catch((error: AxiosError) => {
                     dispatch({
