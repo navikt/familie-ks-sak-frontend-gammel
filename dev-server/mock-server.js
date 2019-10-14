@@ -30,7 +30,7 @@ const server = app.listen(port, 'localhost', function onStart(err) {
     if (err) {
         console.log(err);
     }
-    console.info('=== ci-server startet på http://localhost:%s/', port);
+    console.info('=== mock-server startet på http://localhost:%s/', port);
 });
 
 process.on('SIGTERM', function() {

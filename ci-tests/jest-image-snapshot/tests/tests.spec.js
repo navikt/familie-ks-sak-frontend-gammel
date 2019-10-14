@@ -27,7 +27,7 @@ describe('dsop-kontroll', () => {
         });
 
         test('fagsak', async () => {
-            await page.goto('http://ci-test-server:8000/1570798056351');
+            await page.goto('http://ci-test-server:8000/1');
             await page.waitFor('.dekoratør');
             await takeSnapshot(`fagsak-${name}`, page);
         });
