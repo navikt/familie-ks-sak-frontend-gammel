@@ -8,19 +8,19 @@ import Sakskort from './Sakskort/Sakskort';
 import VilkårContainer from './VilkårContainer/VilkårContainer';
 
 interface IProps {
-    saksnummer: string;
+    fagsakId: string;
 }
 
-const Fagsak: React.FunctionComponent<IProps> = ({ saksnummer }) => {
+const Fagsak: React.FunctionComponent<IProps> = ({ fagsakId }) => {
     const fagsakDispatcher = useFagsakDispatch();
     const fagsak = useFagsakContext().fagsak;
 
     React.useEffect(() => {
         fagsakDispatcher({
-            payload: saksnummer,
-            type: actions.SETT_SAKSNUMMER,
+            payload: fagsakId,
+            type: actions.SETT_FAGSAK_ID,
         });
-    }, [saksnummer]);
+    }, [fagsakId]);
 
     switch (fagsak.status) {
         case RessursStatus.SUKSESS:

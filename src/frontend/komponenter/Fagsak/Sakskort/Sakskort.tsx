@@ -12,7 +12,7 @@ const Sakskort: React.StatelessComponent<IProps> = ({ fagsak }) => {
     return (
         <Panel className={'sakskort'} border={true}>
             <Normaltekst children={'Saksnummer'} />
-            <Element className={'sakskort__saksnummer'} children={fagsak.saksnummer} />
+            <Element className={'sakskort__saksnummer'} children={fagsak.id} />
 
             <div className={'vr'} />
             <Normaltekst children={'Førstegangsbehandling'} />
