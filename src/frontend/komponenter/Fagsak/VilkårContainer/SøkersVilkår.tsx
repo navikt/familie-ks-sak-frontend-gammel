@@ -5,14 +5,23 @@ import { hentBosattINorgeVilkår, hentOppholdINorge } from '../../../utils/vilk�
 import PersonNavnOgIkon from '../../Felleskomponenter/PersonNavnOgIkon/PersonNavnOgIkon';
 import Vilkår from '../../Felleskomponenter/Vilkår/Vilkår';
 import VilkårBolk from '../../Felleskomponenter/VilkårBolk/VilkårBolk';
+import AdressehistorikkModal from '../AdressehistorikkModal/AdressehistorikkModal';
 
 interface IProps {
     behandling: IBehandling;
 }
 
 const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
+    const [adressehistorikkModalÅpen, settAdressehistorikkModalÅpen] = React.useState(false);
+
     return (
         <div className={'vilkårperson'}>
+            <AdressehistorikkModal
+                person={behandling.personopplysninger.søker}
+                settÅpen={settAdressehistorikkModalÅpen}
+                åpen={adressehistorikkModalÅpen}
+            />
+
             <PersonNavnOgIkon person={behandling.personopplysninger.søker} type={'søker'} />
 
             <VilkårBolk>
@@ -47,6 +56,7 @@ const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                     kortInfo={'Botid i Norge'}
                     navn={'5 år'}
                     oppfylt={hentBosattINorgeVilkår(behandling.behandlingsresultat)}
+                    settAdressehistorikkModal={settAdressehistorikkModalÅpen}
                 />
                 <Vilkår
                     datakilde={datakilder.MEDLEMSSKAPSREGISTERET}
