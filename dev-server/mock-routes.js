@@ -17,4 +17,10 @@ app.get('/familie-ks-sak/api/fagsak/1', (req, res) => {
     setTimeout(() => res.send(lesMockFil(`fagsak.json`)), delayMs);
 });
 
+app.get('/user/profile', (req, res) => {
+    res.send({
+        displayName: 'Test Testersen',
+    });
+});
+
 module.exports = app;

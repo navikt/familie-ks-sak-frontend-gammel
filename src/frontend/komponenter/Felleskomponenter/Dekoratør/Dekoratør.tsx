@@ -20,15 +20,15 @@ const Dekoratør: React.StatelessComponent<IProps> = ({
 }) => {
     return (
         <div className={'dekoratør'}>
-            <a className={'dekoratør__tittel'}>
+            <div className={'dekoratør__tittel'}>
                 <Systemtittel className={'dekoratør__tittel--tekst'} children={tittel} />
                 <div className={'dekoratør__skille'} />
-            </a>
+            </div>
             <div className={'dekoratør__innloggetsaksbehandler'}>
                 {innloggetSaksbehandler && innloggetSaksbehandler.displayName}
                 <div className={'dekoratør__skille'} />
-                <a
-                    className={classNames('lenke', 'dekoratør__innloggetsaksbehandler--lenke')}
+                <button
+                    className={classNames('dekoratør__innloggetsaksbehandler--lenke')}
                     onClick={onClick}
                     children={'Logg ut'}
                 />
