@@ -1,6 +1,8 @@
+import AlertStripe from 'nav-frontend-alertstriper';
 import * as React from 'react';
 import { RessursStatus } from '../../typer/ressurs';
 import { actions, useFagsakContext, useFagsakDispatch } from '../FagsakProvider';
+import LasterModal from '../Felleskomponenter/LasterModal/LasterModal';
 import Personkort from './Personkort/Personkort';
 import Sakskort from './Sakskort/Sakskort';
 import VilkårContainer from './VilkårContainer/VilkårContainer';
@@ -30,9 +32,14 @@ const Fagsak: React.FunctionComponent<IProps> = ({ saksnummer }) => {
                 </React.Fragment>
             );
         case RessursStatus.HENTER:
-            return <div>Henter fagsak...</div>;
+            return <LasterModal />;
         case RessursStatus.FEILET:
-            return <div>{`Innhenting av fagsak feilet med melding: ${fagsak.melding}`}</div>;
+            return (
+                <AlertStripe
+                    children={`Innhenting av fagsak feilet med melding: ${fagsak.melding}`}
+                    type={'feil'}
+                />
+            );
         default:
             return <div />;
     }

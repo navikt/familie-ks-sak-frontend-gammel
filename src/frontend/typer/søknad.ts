@@ -1,11 +1,10 @@
 // Enum
-export enum BarnehageplassStatus {
-    HAR,
-    HAR_IKKE,
-    HAR_SLUTTET,
-    SKAL_BEGYNNE,
-    SKAL_SLUTTE,
-}
+export type BarnehageplassStatus =
+    | 'HAR'
+    | 'HAR_IKKE'
+    | 'HAR_SLUTTET'
+    | 'SKAL_BEGYNNE'
+    | 'SKAL_SLUTTE';
 
 export enum Standpunkt {
     JA,
@@ -21,6 +20,20 @@ export enum TilknytningTilUtlandVerdier {
     nei,
 }
 
+// Tekster
+type IBarnehageplassStatusTekster = {
+    [key in BarnehageplassStatus]: string;
+};
+
+export const barnehageplassStatusTekster: IBarnehageplassStatusTekster = {
+    HAR: 'Går i barnehage',
+    HAR_IKKE: 'Går ikke i barnehage',
+    HAR_SLUTTET: 'Har sluttet i barnehage',
+    SKAL_BEGYNNE: 'Skal begynne i barnehage',
+    SKAL_SLUTTE: 'Skal slutte i barnehage',
+};
+
+// Interface
 export interface ISøknad {
     erklæring: IOppgittErklæring;
     familieforhold: IOppgittFamilieforhold;
