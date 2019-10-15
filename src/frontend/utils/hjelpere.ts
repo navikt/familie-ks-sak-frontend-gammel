@@ -29,7 +29,11 @@ export const formaterDato = (isoString: string): string => {
 };
 
 export const hentDurationFraPeriode = (periode: IPeriode) => {
-    return moment.duration(moment(periode.tomDato).diff(moment(periode.fomDato)));
+    let tomDato = moment(periode.tomDato);
+    if (tomDato.isSame(TIDENES_ENDE)) {
+        tomDato = moment();
+    }
+    return moment.duration(tomDato.diff(moment(periode.fomDato)));
 };
 
 export const hentBotid = (periode: IPeriode) => {
