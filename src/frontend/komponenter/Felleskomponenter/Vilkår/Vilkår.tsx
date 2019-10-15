@@ -36,10 +36,10 @@ const Vilkår: React.StatelessComponent<IProps> = ({
                 <td className={'vilkår__datakilde'}>
                     <Normaltekst children={datakilde} />
                 </td>
-                <td>
+                <td className={'vilkår__adressehistorikk'}>
                     {settAdressehistorikkModal && (
                         <a
-                            id={'visadressehistorikk'}
+                            id={`visadressehistorikk`}
                             className={'lenke'}
                             onClick={() => settAdressehistorikkModal(true)}
                         >
