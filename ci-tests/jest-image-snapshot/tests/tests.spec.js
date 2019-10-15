@@ -31,6 +31,14 @@ describe('dsop-kontroll', () => {
             await page.waitFor('.personkort');
             await takeSnapshot(`fagsak-${name}`, page);
         });
+
+        test('fagsak-adressehistorikk', async () => {
+            await page.goto('http://ci-test-server:8000/1');
+            await page.waitFor('.personkort');
+            await page.click('#visadressehistorikk');
+            await page.waitFor('.adressehistorikkmodal');
+            await takeSnapshot(`fagsak-adressehistorikk-${name}`, page);
+        });
     });
 
     afterAll(async () => {

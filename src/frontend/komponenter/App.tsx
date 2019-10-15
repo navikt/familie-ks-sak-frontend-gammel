@@ -1,4 +1,5 @@
 import { captureException, configureScope, showReportDialog, withScope } from '@sentry/browser';
+import Modal from 'nav-frontend-modal';
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { hentInnloggetBruker } from '../api/saksbehandler';
@@ -6,6 +7,8 @@ import { ISaksbehandler } from '../typer/saksbehandler';
 import Fagsak from './Fagsak/Fagsak';
 import { FagsakProvider } from './FagsakProvider';
 import Dekoratør from './Felleskomponenter/Dekoratør/Dekoratør';
+
+Modal.setAppElement(document.getElementById('modal-a11y-wrapper'));
 
 interface IState {
     innloggetSaksbehandler?: ISaksbehandler;
