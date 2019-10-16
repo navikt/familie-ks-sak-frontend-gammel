@@ -14,7 +14,11 @@ const lesMockFil = filnavn => {
 };
 
 app.get('/familie-ks-sak/api/fagsak/1', (req, res) => {
-    setTimeout(() => res.send(lesMockFil(`fagsak.json`)), delayMs);
+    setTimeout(() => res.send(lesMockFil(`fagsak-innvilget.json`)), delayMs);
+});
+
+app.get('/familie-ks-sak/api/fagsak/2', (req, res) => {
+    setTimeout(() => res.send(lesMockFil(`fagsak-avslått.json`)), delayMs);
 });
 
 app.get('/user/profile', (req, res) => {

@@ -1,14 +1,9 @@
 import * as React from 'react';
-import { IBehandling } from '../../../typer/fagsak';
+import { IBehandling, VilkårType } from '../../../typer/fagsak';
 import { barnehageplassStatusTekster } from '../../../typer/søknad';
 import { datakilder } from '../../../typer/vilkår';
 import { hentAlderFraFnr } from '../../../utils/hjelpere';
-import {
-    hentAlderPåBarnVilkår,
-    hentBarnehageVilkår,
-    hentBosattINorgeVilkår,
-    hentOppholdINorge,
-} from '../../../utils/vilkårHenting';
+import { hentOppholdINorge, hentVilkår } from '../../../utils/vilkårHenting';
 import PersonNavnOgIkon from '../../Felleskomponenter/PersonNavnOgIkon/PersonNavnOgIkon';
 import Vilkår from '../../Felleskomponenter/Vilkår/Vilkår';
 import VilkårBolk from '../../Felleskomponenter/VilkårBolk/VilkårBolk';
@@ -37,13 +32,16 @@ const BarnVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                         barn.fødselsdato
                     })`}
                     navn={'Alder'}
-                    oppfylt={hentAlderPåBarnVilkår(behandling.behandlingsresultat)}
+                    oppfylt={hentVilkår(
+                        behandling.behandlingsresultat,
+                        VilkårType.BARN_MELLOM_10_OG_14_MÅNEDER
+                    )}
                 />
                 <Vilkår
                     datakilde={datakilder.FOLKEREGISTERET}
                     kortInfo={'Bor med søker'}
                     navn={'Bosted'}
-                    oppfylt={hentBosattINorgeVilkår(behandling.behandlingsresultat)}
+                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.MEDLEMSKAP)}
                 />
                 <Vilkår
                     datakilde={datakilder.SØKNAD}
@@ -64,7 +62,7 @@ const BarnVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                             : 'Ukjent barnehagestatus'
                     }
                     navn={'Barnehage'}
-                    oppfylt={hentBarnehageVilkår(behandling.behandlingsresultat)}
+                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.BARNEHAGE)}
                 />
             </VilkårBolk>
         </div>

@@ -3,21 +3,21 @@ import { ISøknad } from './søknad';
 
 // Enum
 export enum VilkårType {
-    BARN,
-    BARNEHAGE,
-    BARN_MELLOM_10_OG_14_MÅNEDER,
-    BOSTED,
-    KUN_ET_BARN,
-    MEDLEMSKAP,
-    UTLAND,
+    BARN = 'BARN',
+    BARNEHAGE = 'BARNEHAGE',
+    BARN_MELLOM_10_OG_14_MÅNEDER = 'BARN_MELLOM_10_OG_14_MÅNEDER',
+    BOSTED = 'BOSTED',
+    KUN_ET_BARN = 'KUN_ET_BARN',
+    MEDLEMSKAP = 'MEDLEMSKAP',
+    UTLAND = 'UTLAND',
 }
 
 export enum UtfallType {
-    IKKE_OPPFYLT,
-    IKKE_VURDERT,
-    MANUELL_BEHANDLING,
-    OPPFYLT,
-    UAVKLART,
+    IKKE_OPPFYLT = 'IKKE_OPPFYLT',
+    IKKE_VURDERT = 'IKKE_VURDERT',
+    MANUELL_BEHANDLING = 'MANUELL_BEHANDLING',
+    OPPFYLT = 'OPPFYLT',
+    UAVKLART = 'UAVKLART',
 }
 
 // Interface

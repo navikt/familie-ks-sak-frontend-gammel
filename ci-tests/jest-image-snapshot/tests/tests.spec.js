@@ -26,10 +26,10 @@ describe('dsop-kontroll', () => {
             await takeSnapshot(`startside-${name}`, page);
         });
 
-        test('fagsak', async () => {
+        test('fagsak-innvilget', async () => {
             await page.goto('http://ci-test-server:8000/1');
             await page.waitFor('.personkort');
-            await takeSnapshot(`fagsak-${name}`, page);
+            await takeSnapshot(`fagsak-innvilget-${name}`, page);
         });
 
         test('fagsak-adressehistorikk', async () => {
@@ -38,6 +38,12 @@ describe('dsop-kontroll', () => {
             await page.click('#visadressehistorikk');
             await page.waitFor('.adressehistorikkmodal');
             await takeSnapshot(`fagsak-adressehistorikk-${name}`, page);
+        });
+
+        test('fagsak-avslått', async () => {
+            await page.goto('http://ci-test-server:8000/2');
+            await page.waitFor('.personkort');
+            await takeSnapshot(`fagsak-avslått-${name}`, page);
         });
     });
 
