@@ -1,34 +1,25 @@
 import { IBehandlingsresultat, UtfallType, VilkårType } from '../typer/fagsak';
 import { ISøknad } from '../typer/søknad';
 
-export const hentBosattINorgeVilkår = (behandlingsresultat: IBehandlingsresultat): boolean => {
+export const hentVilkår = (behandlingsresultat: IBehandlingsresultat, vilkårType: VilkårType) => {
     const vilkårsresultat = behandlingsresultat.vilkårsResultat.find(
-        vilkårresultat => vilkårresultat.vilkårType === VilkårType.MEDLEMSKAP
+        vilkårresultat => vilkårresultat.vilkårType === vilkårType
     );
     return vilkårsresultat ? vilkårsresultat.utfall === UtfallType.OPPFYLT : false;
 };
 
+// Fra søknad
 export const hentOppholdINorge = (søknad: ISøknad) => {
     return søknad.erklæring.barnINorgeNeste12Måneder;
 };
 
-export const hentStatsborgerskapForForeldre = (behandlingsresultat: IBehandlingsresultat) => {
-    const vilkårsresultat = behandlingsresultat.vilkårsResultat.find(
-        vilkårresultat => vilkårresultat.vilkårType === VilkårType.MEDLEMSKAP
-    );
-    return vilkårsresultat ? vilkårsresultat.utfall === UtfallType.OPPFYLT : false;
+// Vilkår til tekst
+export const hentMedlResultatTekst = (behandlingsresultat: IBehandlingsresultat) => {
+    const vilkårsresultat = hentVilkår(behandlingsresultat, VilkårType.MEDLEMSKAP);
+    return vilkårsresultat ? 'Nei' : 'Ja';
 };
 
-export const hentBarnehageVilkår = (behandlingsresultat: IBehandlingsresultat) => {
-    const vilkårsresultat = behandlingsresultat.vilkårsResultat.find(
-        vilkårresultat => vilkårresultat.vilkårType === VilkårType.BARNEHAGE
-    );
-    return vilkårsresultat ? vilkårsresultat.utfall === UtfallType.OPPFYLT : false;
-};
-
-export const hentAlderPåBarnVilkår = (behandlingsresultat: IBehandlingsresultat) => {
-    const vilkårsresultat = behandlingsresultat.vilkårsResultat.find(
-        vilkårresultat => vilkårresultat.vilkårType === VilkårType.BARN_MELLOM_10_OG_14_MÅNEDER
-    );
-    return vilkårsresultat ? vilkårsresultat.utfall === UtfallType.OPPFYLT : false;
+export const hentTilknytningTilUtlandTekst = (behandlingsresultat: IBehandlingsresultat) => {
+    const vilkårsresultat = hentVilkår(behandlingsresultat, VilkårType.UTLAND);
+    return vilkårsresultat ? 'Nei' : 'Ja';
 };

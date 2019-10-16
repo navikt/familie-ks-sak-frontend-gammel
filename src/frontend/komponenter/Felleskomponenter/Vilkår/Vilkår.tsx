@@ -1,6 +1,8 @@
+import * as classNames from 'classnames';
 import 'nav-frontend-lenker-style';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import * as React from 'react';
+import IkkeOppfylt from '../../../ikoner/IkkeOppfylt';
 import Oppfylt from '../../../ikoner/Oppfylt';
 import { datakilder } from '../../../typer/vilkår';
 
@@ -31,20 +33,25 @@ const Vilkår: React.StatelessComponent<IProps> = ({
                     {kortInfoKomponent ? kortInfoKomponent() : <Element children={kortInfo} />}
                 </td>
                 <td className={'vilkår__ikon'}>
-                    {oppfylt !== undefined && <Oppfylt heigth={24} width={24} />}
+                    {oppfylt !== undefined &&
+                        (oppfylt ? (
+                            <Oppfylt heigth={24} width={24} />
+                        ) : (
+                            <IkkeOppfylt heigth={24} width={24} />
+                        ))}
                 </td>
                 <td className={'vilkår__datakilde'}>
                     <Normaltekst children={datakilde} />
                 </td>
                 <td className={'vilkår__adressehistorikk'}>
                     {settAdressehistorikkModal && (
-                        <a
+                        <button
                             id={`visadressehistorikk`}
-                            className={'lenke'}
+                            className={classNames('lenke', 'vilkår__adressehistorikk--lenke')}
                             onClick={() => settAdressehistorikkModal(true)}
                         >
                             <Normaltekst children={'Vis adressehistorikk'} />
-                        </a>
+                        </button>
                     )}
                 </td>
             </tr>

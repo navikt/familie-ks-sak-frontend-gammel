@@ -1,9 +1,14 @@
 import { Element } from 'nav-frontend-typografi';
 import * as React from 'react';
-import { IBehandling } from '../../../typer/fagsak';
-import { IPersonAdresse } from '../../../typer/person';
+import { IBehandling, VilkårType } from '../../../typer/fagsak';
+import { IPersonAdresse, IPersonRelasjon } from '../../../typer/person';
 import { datakilder } from '../../../typer/vilkår';
-import { hentBosattINorgeVilkår, hentOppholdINorge } from '../../../utils/vilkårHenting';
+import {
+    hentMedlResultatTekst,
+    hentOppholdINorge,
+    hentTilknytningTilUtlandTekst,
+    hentVilkår,
+} from '../../../utils/vilkårHenting';
 import PersonNavnOgIkon from '../../Felleskomponenter/PersonNavnOgIkon/PersonNavnOgIkon';
 import Vilkår from '../../Felleskomponenter/Vilkår/Vilkår';
 import VilkårBolk from '../../Felleskomponenter/VilkårBolk/VilkårBolk';
@@ -18,6 +23,13 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
 
     const annenPartsAdresse: IPersonAdresse =
         behandling.personopplysninger.annenPart.personhistorikk.adresser[0];
+
+    const søkerFødselsnummer = behandling.personopplysninger.søker.fødselsnummer;
+    const borMedSøker =
+        behandling.personopplysninger.annenPart.relasjoner.find(
+            (relasjon: IPersonRelasjon) =>
+                relasjon.tilFødselsnummer === søkerFødselsnummer && relasjon.harSammeBosted
+        ) !== undefined;
 
     return (
         <div className={'vilkårperson'}>
@@ -44,7 +56,7 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
                     kortInfoKomponent={() => {
                         return (
                             <React.Fragment>
-                                <Element children={'Bor med søker'} />
+                                <Element children={`Bor ${!borMedSøker ? 'ikke' : ''} med søker`} />
                                 <Element children={annenPartsAdresse.adresselinje1} />
                                 <Element
                                     children={`${annenPartsAdresse.postnummer} ${annenPartsAdresse.poststed}`}
@@ -53,6 +65,7 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
                         );
                     }}
                     navn={'Bosted'}
+                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.BOSTED)}
                 />
                 <Vilkår
                     datakilde={datakilder.FOLKEREGISTERET}
@@ -62,14 +75,15 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
 
                 <Vilkår
                     datakilde={datakilder.SØKNAD}
-                    kortInfo={'Ja'}
+                    kortInfo={hentOppholdINorge(behandling.søknad) ? 'Ja' : 'Nei'}
                     navn={'Opphold i Norge i de neste 12 mnd'}
                     oppfylt={hentOppholdINorge(behandling.søknad)}
                 />
                 <Vilkår
                     datakilde={datakilder.SØKNAD}
-                    kortInfo={'Nei'}
+                    kortInfo={hentTilknytningTilUtlandTekst(behandling.behandlingsresultat)}
                     navn={'Arbeid eller ytelser fra utlandet'}
+                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.UTLAND)}
                 />
             </VilkårBolk>
 
@@ -79,13 +93,14 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
                     datakilde={datakilder.FOLKEREGISTERET}
                     kortInfo={'Botid i Norge'}
                     navn={'5 år'}
-                    oppfylt={hentBosattINorgeVilkår(behandling.behandlingsresultat)}
+                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.MEDLEMSKAP)}
                     settAdressehistorikkModal={settAdressehistorikkModalÅpen}
                 />
                 <Vilkår
                     datakilde={datakilder.MEDLEMSSKAPSREGISTERET}
-                    kortInfo={'Nei'}
+                    kortInfo={hentMedlResultatTekst(behandling.behandlingsresultat)}
                     navn={'Funn i Medlemsskapsregisteret'}
+                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.MEDLEMSKAP)}
                 />
             </VilkårBolk>
         </div>

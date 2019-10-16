@@ -3,23 +3,20 @@
     display: flex;
     height: 4rem;
     justify-content: space-between;
-    padding: 1rem 1rem 1rem 1rem;
+    padding: 1rem;
     width: 100%;
 
     &__skille {
         width: 1px;
-        height: 2,0625rem;
+        height: 2rem;
         margin: 0 2rem;
-        background-color: @navGra60;
+        background-color: @navGra40;
     }
 
     &__tittel {
         display: flex;
         height: 2rem;
-
-        &:hover {
-            cursor: pointer;
-        }
+        align-items: center;
 
         &--tekst {
             color: white;
@@ -30,11 +27,14 @@
         color: white;
         display: flex;
         justify-content: flex-end;
+        align-items: center;
 
-        &--lenke {
-            &:hover {
-                cursor: pointer;
-            }
+        &--lenke:focus {
+            color: @orangeFocus;
+        }
+
+        &--lenke:hover {
+            color: @orangeFocus;
         }
     }
 }
