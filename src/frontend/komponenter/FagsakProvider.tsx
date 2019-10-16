@@ -8,7 +8,7 @@ export enum actions {
     HENT_FAGSAK = 'HENT_FAGSAK',
     HENT_FAGSAK_FEILET = 'HENT_FAGSAK_FEILET',
     HENT_FAGSAK_SUKSESS = 'HENT_FAGSAK_SUKSESS',
-    SETT_SAKSNUMMER = 'SETT_SAKSNUMMER',
+    SETT_FAGSAK_ID = 'SETT_FAGSAK_ID',
 }
 
 interface IAction {
@@ -19,7 +19,7 @@ interface IAction {
 type Dispatch = (action: IAction) => void;
 
 interface IState {
-    saksnummer?: string;
+    fagsakId?: string;
     fagsak: Ressurs<IFagsak>;
 }
 
@@ -48,10 +48,10 @@ const fagsakReducer = (state: IState, action: IAction): IState => {
                 fagsak: action.payload,
             };
         }
-        case actions.SETT_SAKSNUMMER: {
+        case actions.SETT_FAGSAK_ID: {
             return {
                 ...state,
-                saksnummer: action.payload,
+                fagsakId: action.payload,
             };
         }
         default: {
@@ -63,15 +63,18 @@ const fagsakReducer = (state: IState, action: IAction): IState => {
 const FagsakProvider: React.StatelessComponent = ({ children }) => {
     const [state, dispatch] = React.useReducer(fagsakReducer, {
         fagsak: byggTomRessurs<IFagsak>(),
-        saksnummer: undefined,
+        fagsakId: undefined,
     });
 
     React.useEffect(() => {
-        if (state.saksnummer) {
+        if (state.fagsakId) {
             dispatch({ type: actions.HENT_FAGSAK });
-            hentFagsak(state.saksnummer)
+            hentFagsak(state.fagsakId)
                 .then((fagsak: Ressurs<IFagsak>) => {
-                    dispatch({ type: actions.HENT_FAGSAK_SUKSESS, payload: fagsak });
+                    dispatch({
+                        payload: fagsak,
+                        type: actions.HENT_FAGSAK_SUKSESS,
+                    });
                 })
                 .catch((error: AxiosError) => {
                     dispatch({
@@ -80,7 +83,7 @@ const FagsakProvider: React.StatelessComponent = ({ children }) => {
                     });
                 });
         }
-    }, [state.saksnummer]);
+    }, [state.fagsakId]);
 
     return (
         <FagsakStateContext.Provider value={state}>

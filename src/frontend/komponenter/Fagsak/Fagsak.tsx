@@ -1,36 +1,45 @@
+import AlertStripe from 'nav-frontend-alertstriper';
 import * as React from 'react';
 import { RessursStatus } from '../../typer/ressurs';
 import { actions, useFagsakContext, useFagsakDispatch } from '../FagsakProvider';
+import LasterModal from '../Felleskomponenter/LasterModal/LasterModal';
 import Personkort from './Personkort/Personkort';
+import Sakskort from './Sakskort/Sakskort';
 import VilkårContainer from './VilkårContainer/VilkårContainer';
 
 interface IProps {
-    saksnummer: string;
+    fagsakId: string;
 }
 
-const Fagsak: React.FunctionComponent<IProps> = ({ saksnummer }) => {
+const Fagsak: React.FunctionComponent<IProps> = ({ fagsakId }) => {
     const fagsakDispatcher = useFagsakDispatch();
     const fagsak = useFagsakContext().fagsak;
 
     React.useEffect(() => {
         fagsakDispatcher({
-            payload: saksnummer,
-            type: actions.SETT_SAKSNUMMER,
+            payload: fagsakId,
+            type: actions.SETT_FAGSAK_ID,
         });
-    }, [saksnummer]);
+    }, [fagsakId]);
 
     switch (fagsak.status) {
         case RessursStatus.SUKSESS:
             return (
-                <div>
+                <React.Fragment>
                     <Personkort person={fagsak.data.behandlinger[0].personopplysninger.søker} />
+                    <Sakskort fagsak={fagsak.data} />
                     <VilkårContainer behandling={fagsak.data.behandlinger[0]} />
-                </div>
+                </React.Fragment>
             );
         case RessursStatus.HENTER:
-            return <div>Henter fagsak...</div>;
+            return <LasterModal />;
         case RessursStatus.FEILET:
-            return <div>{`Innhenting av fagsak feilet med melding: ${fagsak.melding}`}</div>;
+            return (
+                <AlertStripe
+                    children={`Innhenting av fagsak feilet med melding: ${fagsak.melding}`}
+                    type={'feil'}
+                />
+            );
         default:
             return <div />;
     }

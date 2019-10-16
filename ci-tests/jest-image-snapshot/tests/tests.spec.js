@@ -2,7 +2,7 @@
 
 const puppeteer = require('puppeteer');
 
-const large = { width: 1800, height: 1400 };
+const large = { width: 1920, height: 1080 };
 
 const config = [['large', large]];
 
@@ -30,6 +30,14 @@ describe('dsop-kontroll', () => {
             await page.goto('http://ci-test-server:8000/1');
             await page.waitFor('.personkort');
             await takeSnapshot(`fagsak-${name}`, page);
+        });
+
+        test('fagsak-adressehistorikk', async () => {
+            await page.goto('http://ci-test-server:8000/1');
+            await page.waitFor('.personkort');
+            await page.click('#visadressehistorikk');
+            await page.waitFor('.adressehistorikkmodal');
+            await takeSnapshot(`fagsak-adressehistorikk-${name}`, page);
         });
     });
 

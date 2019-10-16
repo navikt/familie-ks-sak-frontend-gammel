@@ -1,5 +1,7 @@
+import { Element } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { IBehandling } from '../../../typer/fagsak';
+import { IPersonAdresse } from '../../../typer/person';
 import { datakilder } from '../../../typer/vilkår';
 import { hentBosattINorgeVilkår, hentOppholdINorge } from '../../../utils/vilkårHenting';
 import PersonNavnOgIkon from '../../Felleskomponenter/PersonNavnOgIkon/PersonNavnOgIkon';
@@ -11,36 +13,58 @@ interface IProps {
     behandling: IBehandling;
 }
 
-const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
+const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
     const [adressehistorikkModalÅpen, settAdressehistorikkModalÅpen] = React.useState(false);
+
+    const annenPartsAdresse: IPersonAdresse =
+        behandling.personopplysninger.annenPart.personhistorikk.adresser[0];
 
     return (
         <div className={'vilkårperson'}>
             <AdressehistorikkModal
-                person={behandling.personopplysninger.søker}
+                person={behandling.personopplysninger.annenPart}
                 settÅpen={settAdressehistorikkModalÅpen}
                 åpen={adressehistorikkModalÅpen}
             />
 
-            <PersonNavnOgIkon person={behandling.personopplysninger.søker} type={'søker'} />
+            <PersonNavnOgIkon
+                person={behandling.personopplysninger.annenPart}
+                type={'annen forelder'}
+            />
 
             <VilkårBolk>
                 <Vilkår
                     datakilde={datakilder.FOLKEREGISTERET}
-                    kortInfo={'Bosatt i Norge'}
-                    navn={'Bosted'}
-                    oppfylt={hentBosattINorgeVilkår(behandling.behandlingsresultat)}
+                    kortInfo={behandling.personopplysninger.annenPart.fødselsnummer}
+                    navn={'Fødsel- og personnummer'}
                 />
+
                 <Vilkår
-                    datakilde={datakilder.SØKNAD}
-                    kortInfo={'Ja'}
-                    navn={'Opphold i Norge i de neste 12 mnd'}
-                    oppfylt={hentOppholdINorge(behandling.søknad)}
+                    datakilde={datakilder.FOLKEREGISTERET}
+                    kortInfoKomponent={() => {
+                        return (
+                            <React.Fragment>
+                                <Element children={'Bor med søker'} />
+                                <Element children={annenPartsAdresse.adresselinje1} />
+                                <Element
+                                    children={`${annenPartsAdresse.postnummer} ${annenPartsAdresse.poststed}`}
+                                />
+                            </React.Fragment>
+                        );
+                    }}
+                    navn={'Bosted'}
                 />
                 <Vilkår
                     datakilde={datakilder.FOLKEREGISTERET}
                     kortInfo={behandling.personopplysninger.søker.statsborgerskap}
                     navn={'Statsborgerskap'}
+                />
+
+                <Vilkår
+                    datakilde={datakilder.SØKNAD}
+                    kortInfo={'Ja'}
+                    navn={'Opphold i Norge i de neste 12 mnd'}
+                    oppfylt={hentOppholdINorge(behandling.søknad)}
                 />
                 <Vilkår
                     datakilde={datakilder.SØKNAD}
@@ -68,4 +92,4 @@ const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
     );
 };
 
-export default SøkersVilkår;
+export default AnnenPartsVilkår;
