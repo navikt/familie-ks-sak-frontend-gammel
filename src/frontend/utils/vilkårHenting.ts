@@ -15,7 +15,7 @@ export const hentOppholdINorge = (søknad: ISøknad) => {
 
 // Vilkår til tekst
 export const hentMedlResultatTekst = (behandlingsresultat: IBehandlingsresultat) => {
-    const vilkårsresultat = hentVilkår(behandlingsresultat, VilkårType.MEDLEMSKAP);
+    const vilkårsresultat = hentVilkår(behandlingsresultat, VilkårType.MEDLEMSKAP_MEDL);
     return vilkårsresultat ? 'Nei' : 'Ja';
 };
 

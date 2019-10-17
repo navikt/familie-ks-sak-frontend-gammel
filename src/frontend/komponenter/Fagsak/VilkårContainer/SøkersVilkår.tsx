@@ -34,7 +34,10 @@ const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                     datakilde={datakilder.FOLKEREGISTERET}
                     kortInfo={'Bosatt i Norge'}
                     navn={'Bosted'}
-                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.MEDLEMSKAP)}
+                    oppfylt={hentVilkår(
+                        behandling.behandlingsresultat,
+                        VilkårType.MEDLEMSKAP_BOSTED
+                    )}
                 />
                 <Vilkår
                     datakilde={datakilder.SØKNAD}
@@ -61,14 +64,17 @@ const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                     datakilde={datakilder.FOLKEREGISTERET}
                     kortInfo={'Botid i Norge'}
                     navn={'5 år'}
-                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.MEDLEMSKAP)}
+                    oppfylt={hentVilkår(
+                        behandling.behandlingsresultat,
+                        VilkårType.MEDLEMSKAP_BOSTED
+                    )}
                     settAdressehistorikkModal={settAdressehistorikkModalÅpen}
                 />
                 <Vilkår
                     datakilde={datakilder.MEDLEMSSKAPSREGISTERET}
                     kortInfo={hentMedlResultatTekst(behandling.behandlingsresultat)}
                     navn={'Funn i Medlemsskapsregisteret'}
-                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.MEDLEMSKAP)}
+                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.MEDLEMSKAP_MEDL)}
                 />
             </VilkårBolk>
         </div>

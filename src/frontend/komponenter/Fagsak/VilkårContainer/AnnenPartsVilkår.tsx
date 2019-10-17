@@ -24,7 +24,7 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
     const annenPartsAdresse: IPersonAdresse =
         behandling.personopplysninger.annenPart.personhistorikk.adresser[0];
 
-    const søkerFødselsnummer = behandling.personopplysninger.søker.fødselsnummer;
+    const søkerFødselsnummer = behandling.personopplysninger.søker.personIdent;
     const borMedSøker =
         behandling.personopplysninger.annenPart.relasjoner.find(
             (relasjon: IPersonRelasjon) =>
@@ -47,7 +47,7 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
             <VilkårBolk>
                 <Vilkår
                     datakilde={datakilder.FOLKEREGISTERET}
-                    kortInfo={behandling.personopplysninger.annenPart.fødselsnummer}
+                    kortInfo={behandling.personopplysninger.annenPart.personIdent}
                     navn={'Fødsel- og personnummer'}
                 />
 
@@ -93,14 +93,17 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
                     datakilde={datakilder.FOLKEREGISTERET}
                     kortInfo={'Botid i Norge'}
                     navn={'5 år'}
-                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.MEDLEMSKAP)}
+                    oppfylt={hentVilkår(
+                        behandling.behandlingsresultat,
+                        VilkårType.MEDLEMSKAP_BOSTED
+                    )}
                     settAdressehistorikkModal={settAdressehistorikkModalÅpen}
                 />
                 <Vilkår
                     datakilde={datakilder.MEDLEMSSKAPSREGISTERET}
                     kortInfo={hentMedlResultatTekst(behandling.behandlingsresultat)}
                     navn={'Funn i Medlemsskapsregisteret'}
-                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.MEDLEMSKAP)}
+                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.MEDLEMSKAP_MEDL)}
                 />
             </VilkårBolk>
         </div>

@@ -21,7 +21,7 @@ export enum RelasjonsRolleType {
 // Interface
 export interface IPerson {
     fødselsdato: string;
-    fødselsnummer: string;
+    personIdent: string;
     kjønn: string;
     navn: string;
     personhistorikk: IPersonhistorikk;
@@ -52,10 +52,10 @@ export interface IPersonStatsborgerskap {
 }
 
 export interface IPersonRelasjon {
-    fraFødselsnummer: string;
+    fraPersonIdent: string;
     harSammeBosted: boolean;
     relasjonsrolle: RelasjonsRolleType;
-    tilFødselsnummer: string;
+    tilPersonIdent: string;
 }
 
 export interface IPeriode {

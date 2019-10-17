@@ -18,7 +18,7 @@ const BarnVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
         behandling.søknad.familieforhold.barna.length === 1
             ? behandling.søknad.familieforhold.barna[0]
             : behandling.søknad.familieforhold.barna.find(
-                  findBarn => findBarn.fødselsnummer === barn.fødselsnummer
+                  findBarn => findBarn.fødselsnummer === barn.personIdent
               );
 
     return (
@@ -28,7 +28,7 @@ const BarnVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
             <VilkårBolk>
                 <Vilkår
                     datakilde={datakilder.FOLKEREGISTERET}
-                    kortInfo={`${hentAlderFraFnr(barn.fødselsnummer, 'months')} mnd (${
+                    kortInfo={`${hentAlderFraFnr(barn.personIdent, 'months')} mnd (${
                         barn.fødselsdato
                     })`}
                     navn={'Alder'}
@@ -41,7 +41,7 @@ const BarnVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                     datakilde={datakilder.FOLKEREGISTERET}
                     kortInfo={'Bor med søker'}
                     navn={'Bosted'}
-                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.MEDLEMSKAP)}
+                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.BOSTED)}
                 />
                 <Vilkår
                     datakilde={datakilder.SØKNAD}
