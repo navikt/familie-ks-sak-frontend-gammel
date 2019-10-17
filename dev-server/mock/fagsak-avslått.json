@@ -81,7 +81,15 @@
 							"utfall": "OPPFYLT"
 						},
 						{
-							"vilkårType": "MEDLEMSKAP",
+							"vilkårType": "MEDLEMSKAP_BOSTED",
+							"utfall": "OPPFYLT"
+						},
+						{
+							"vilkårType": "MEDLEMSKAP_MEDL",
+							"utfall": "OPPFYLT"
+						},
+						{
+							"vilkårType": "MEDLEMSKAP_STATSBORGERSKAP",
 							"utfall": "OPPFYLT"
 						},
 						{
@@ -97,7 +105,7 @@
 				},
 				"personopplysninger": {
 					"søker": {
-						"fødselsnummer": "00000000001",
+						"personIdent": "00000000001",
 						"navn": "TEST TESTESEN",
 						"kjønn": "MANN",
 						"fødselsdato": "1990-01-01",
@@ -149,7 +157,7 @@
 					},
 					"barna": [
 						{
-							"fødselsnummer": "00000000003",
+							"personIdent": "00000000003",
 							"navn": "TEST TESTESEN",
 							"kjønn": "MANN",
 							"fødselsdato": "1990-01-01",
@@ -201,7 +209,7 @@
 						}
 					],
 					"annenPart": {
-						"fødselsnummer": "00000000002",
+						"personIdent": "00000000002",
 						"navn": "TEST TESTESEN",
 						"kjønn": "KVINNE",
 						"fødselsdato": "1990-01-01",

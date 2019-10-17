@@ -12,11 +12,11 @@ const Personkort: React.StatelessComponent<IProps> = ({ person }) => {
     const adresse: IPersonAdresse = person.personhistorikk.adresser[0];
     return (
         <div className={'personkort'}>
-            <FamilieIkonVelger kjønn={person.kjønn} fødselsnummer={person.fødselsnummer} />
+            <FamilieIkonVelger kjønn={person.kjønn} fødselsnummer={person.personIdent} />
             <Element className={'personkort__navn'} children={formaterNavn(person.navn)} />
 
             <div className={'vr'} />
-            <Normaltekst children={`Fødsel- og personnummer: ${person.fødselsnummer}`} />
+            <Normaltekst children={`Fødsel- og personnummer: ${person.personIdent}`} />
             <div className={'vr'} />
             <Normaltekst
                 children={`Adresse: ${adresse.adresselinje1}, ${adresse.postnummer} ${adresse.poststed}`}

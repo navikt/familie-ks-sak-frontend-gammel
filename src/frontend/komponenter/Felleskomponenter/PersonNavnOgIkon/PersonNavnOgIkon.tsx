@@ -15,7 +15,7 @@ const PersonNavnOgIkon: React.StatelessComponent<IProps> = ({ person, type }) =>
             <FamilieIkonVelger
                 className={'personnavnogikon__ikon'}
                 kjønn={person.kjønn}
-                fødselsnummer={person.fødselsnummer}
+                fødselsnummer={person.personIdent}
             />
             <Undertittel
                 className={'personnavnogikon__tekst'}
