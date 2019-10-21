@@ -28,7 +28,7 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
     const borMedSøker =
         behandling.personopplysninger.annenPart.relasjoner.find(
             (relasjon: IPersonRelasjon) =>
-                relasjon.tilFødselsnummer === søkerFødselsnummer && relasjon.harSammeBosted
+                relasjon.tilPersonIdent === søkerFødselsnummer && relasjon.harSammeBosted
         ) !== undefined;
 
     return (
@@ -65,7 +65,6 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
                         );
                     }}
                     navn={'Bosted'}
-                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.BOSTED)}
                 />
                 <Vilkår
                     datakilde={datakilder.FOLKEREGISTERET}
