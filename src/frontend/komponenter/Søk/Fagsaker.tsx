@@ -14,7 +14,7 @@ const renderFagsaker = (fagsaker: Ressurs<any[]>) => {
     switch (fagsaker.status) {
         case RessursStatus.SUKSESS:
             return (
-                <React.Fragment>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
                     {fagsaker.data.length > 0 ? (
                         fagsaker.data.map((fagsak: any) => {
                             return (
@@ -28,7 +28,7 @@ const renderFagsaker = (fagsaker: Ressurs<any[]>) => {
                     ) : (
                         <AlertStripe children={'Fant ingen saker'} type={'info'} />
                     )}
-                </React.Fragment>
+                </div>
             );
         default:
             return <React.Fragment />;
