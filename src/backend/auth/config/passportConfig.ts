@@ -40,7 +40,7 @@ const hentPassportConfig = () => {
         case 'production':
             config = {
                 allowHttpForRedirectUrl: false,
-                cookieDomain: `${host}.adeo.no`,
+                cookieDomain: `${host}.nais.adeo.no`,
                 logoutUri: `https://login.microsoftonline.com/navno.onmicrosoft.com/oauth2/logout?post_logout_redirect_uri=https:\\\\${host}.nais.adeo.no`,
                 redirectUrl: `https://${host}.nais.adeo.no/auth/openid/callback`,
                 tenant: 'navno.onmicrosoft.com',
