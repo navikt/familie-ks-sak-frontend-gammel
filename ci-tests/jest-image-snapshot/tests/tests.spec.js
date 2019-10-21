@@ -27,13 +27,13 @@ describe('dsop-kontroll', () => {
         });
 
         test('fagsak-innvilget', async () => {
-            await page.goto('http://ci-test-server:8000/1');
+            await page.goto('http://ci-test-server:8000/fagsak/1');
             await page.waitFor('.personkort');
             await takeSnapshot(`fagsak-innvilget-${name}`, page);
         });
 
         test('fagsak-adressehistorikk', async () => {
-            await page.goto('http://ci-test-server:8000/1');
+            await page.goto('http://ci-test-server:8000/fagsak/1');
             await page.waitFor('.personkort');
             await page.click('#visadressehistorikk');
             await page.waitFor('.adressehistorikkmodal');
@@ -41,19 +41,19 @@ describe('dsop-kontroll', () => {
         });
 
         test('fagsak-avslått', async () => {
-            await page.goto('http://ci-test-server:8000/2');
+            await page.goto('http://ci-test-server:8000/fagsak/2');
             await page.waitFor('.personkort');
             await takeSnapshot(`fagsak-avslått-${name}`, page);
         });
 
         test('fagsak-ikketilgang', async () => {
-            await page.goto('http://ci-test-server:8000/3');
+            await page.goto('http://ci-test-server:8000/fagsak/3');
             await page.waitFor('.alertstripe');
             await takeSnapshot(`fagsak-ikketilgang-${name}`, page);
         });
 
         test('fagsak-feilet', async () => {
-            await page.goto('http://ci-test-server:8000/4');
+            await page.goto('http://ci-test-server:8000/fagsak/4');
             await page.waitFor('.alertstripe');
             await takeSnapshot(`fagsak-feilet-${name}`, page);
         });
