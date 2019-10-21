@@ -23,8 +23,9 @@ const renderFagsaker = (fagsaker: Ressurs<any[]>) => {
                                     className={'lenke'}
                                     href={`/fagsak/${fagsak.id}`}
                                     key={fagsak.id}
+                                    style={{ marginBottom: '.5rem' }}
                                 >{`${moment(fagsak.opprettetTidspunkt).format(
-                                    'DD.MM.YYYY'
+                                    'DD.MM.YYYY HH:mm'
                                 )}: Fagsak id: ${fagsak.id}, saksnummer: ${
                                     fagsak.saksnummer
                                 }, person ident: ${fagsak.personIdent.id}`}</a>
