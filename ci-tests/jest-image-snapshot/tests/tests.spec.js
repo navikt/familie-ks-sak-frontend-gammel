@@ -45,6 +45,18 @@ describe('dsop-kontroll', () => {
             await page.waitFor('.personkort');
             await takeSnapshot(`fagsak-avslått-${name}`, page);
         });
+
+        test('fagsak-ikketilgang', async () => {
+            await page.goto('http://ci-test-server:8000/3');
+            await page.waitFor('.alertstripe');
+            await takeSnapshot(`fagsak-ikketilgang-${name}`, page);
+        });
+
+        test('fagsak-feilet', async () => {
+            await page.goto('http://ci-test-server:8000/4');
+            await page.waitFor('.alertstripe');
+            await takeSnapshot(`fagsak-feilet-${name}`, page);
+        });
     });
 
     afterAll(async () => {
