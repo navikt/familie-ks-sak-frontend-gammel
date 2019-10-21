@@ -17,7 +17,7 @@ const hentPassportConfig = () => {
         tenant: '',
     };
 
-    const host = 'familie-ks-sak-frontend';
+    const host = 'kontantstotte';
     switch (process.env.ENV) {
         case 'local':
             config = {
@@ -40,9 +40,9 @@ const hentPassportConfig = () => {
         case 'production':
             config = {
                 allowHttpForRedirectUrl: false,
-                cookieDomain: `${host}.nais.adeo.no`,
-                logoutUri: `https://login.microsoftonline.com/navno.onmicrosoft.com/oauth2/logout?post_logout_redirect_uri=https:\\\\${host}.nais.adeo.no`,
-                redirectUrl: `https://${host}.nais.adeo.no/auth/openid/callback`,
+                cookieDomain: `${host}.adeo.no`,
+                logoutUri: `https://login.microsoftonline.com/navno.onmicrosoft.com/oauth2/logout?post_logout_redirect_uri=https:\\\\${host}.adeo.no`,
+                redirectUrl: `https://${host}.adeo.no/auth/openid/callback`,
                 tenant: 'navno.onmicrosoft.com',
             };
             break;
