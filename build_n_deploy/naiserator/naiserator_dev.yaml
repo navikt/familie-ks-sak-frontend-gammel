@@ -27,7 +27,6 @@ spec:
   ingresses:
     - https://familie-ks-sak-frontend.nais.preprod.local
     - https://kontantstotte.nais.preprod.local
-    - https://kontantstøtte.nais.preprod.local
   vault:
     enabled: true
   webproxy: true

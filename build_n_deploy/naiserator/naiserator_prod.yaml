@@ -27,7 +27,6 @@ spec:
   ingresses:
     - https://familie-ks-sak-frontend.nais.adeo.no
     - https://kontantstotte.nais.adeo.no
-    - https://kontantstøtte.nais.adeo.no
   vault:
     enabled: true
   webproxy: true
