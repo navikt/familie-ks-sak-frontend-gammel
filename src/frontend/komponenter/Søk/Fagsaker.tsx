@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import AlertStripe from 'nav-frontend-alertstriper';
 import * as React from 'react';
 import { Ressurs, RessursStatus } from '../../typer/ressurs';
@@ -22,7 +23,11 @@ const renderFagsaker = (fagsaker: Ressurs<any[]>) => {
                                     className={'lenke'}
                                     href={`/fagsak/${fagsak.id}`}
                                     key={fagsak.id}
-                                >{`Fagsak id: ${fagsak.id}, saksnummer: ${fagsak.saksnummer}, person ident: ${fagsak.personIdent.id}`}</a>
+                                >{`${moment(fagsak.opprettetTidspunkt).format(
+                                    'DD.MM.YYYY'
+                                )}: Fagsak id: ${fagsak.id}, saksnummer: ${
+                                    fagsak.saksnummer
+                                }, person ident: ${fagsak.personIdent.id}`}</a>
                             );
                         })
                     ) : (
