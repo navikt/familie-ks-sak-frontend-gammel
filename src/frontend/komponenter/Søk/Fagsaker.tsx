@@ -18,7 +18,9 @@ const renderFagsaker = (fagsaker: Ressurs<any[]>) => {
                     {fagsaker.data.length > 0 ? (
                         fagsaker.data.map((fagsak: any) => {
                             return (
-                                <div key={fagsak.id}>{`${fagsak.id}: ${fagsak.personIdent}`}</div>
+                                <div
+                                    key={fagsak.id}
+                                >{`${fagsak.id}: ${fagsak.personIdent.ident}`}</div>
                             );
                         })
                     ) : (

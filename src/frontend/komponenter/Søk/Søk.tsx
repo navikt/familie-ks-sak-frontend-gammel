@@ -3,14 +3,20 @@ import { Input } from 'nav-frontend-skjema';
 import * as React from 'react';
 import { hentFagsaker } from '../../api/fagsak';
 import { byggTomRessurs, Ressurs, RessursStatus } from '../../typer/ressurs';
-import SakListe from './Fagsaker';
+import Fagsaker from './Fagsaker';
 
 const Søk: React.FunctionComponent = () => {
     const [fagsaker, settFagsaker] = React.useState<Ressurs<any>>(byggTomRessurs());
     const [filter, settFilter] = React.useState('');
 
     React.useEffect(() => {
-        hentFagsaker(filter).then((hentetFagsaker: Ressurs<any>) => settFagsaker(hentetFagsaker));
+        if (filter !== '') {
+            hentFagsaker(filter).then((hentetFagsaker: Ressurs<any>) =>
+                settFagsaker(hentetFagsaker)
+            );
+        } else {
+            settFagsaker(byggTomRessurs());
+        }
     }, [filter]);
 
     return (
@@ -27,11 +33,8 @@ const Søk: React.FunctionComponent = () => {
                 }
                 value={filter}
             />
-            {fagsaker.status === RessursStatus.SUKSESS && (
-                <AlertStripe children={'Fant ingen saker'} type={'advarsel'} />
-            )}
 
-            <SakListe fagsaker={fagsaker} />
+            <Fagsaker fagsaker={fagsaker} />
         </React.Fragment>
     );
 };
