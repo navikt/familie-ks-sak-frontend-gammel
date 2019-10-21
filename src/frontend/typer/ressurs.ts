@@ -1,8 +1,9 @@
 export enum RessursStatus {
-    SUKSESS = 'SUKSESS',
     FEILET = 'FEILET',
-    IKKE_HENTET = 'IKKE_HENTET',
     HENTER = 'HENTER',
+    IKKE_HENTET = 'IKKE_HENTET',
+    IKKE_TILGANG = 'IKKE_TILGANG',
+    SUKSESS = 'SUKSESS',
 }
 
 export type Ressurs<T> =
@@ -15,6 +16,10 @@ export type Ressurs<T> =
     | {
           data: T;
           status: RessursStatus.SUKSESS;
+      }
+    | {
+          melding: string;
+          status: RessursStatus.IKKE_TILGANG;
       }
     | {
           errorMelding?: string;

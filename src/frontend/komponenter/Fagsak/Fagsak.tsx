@@ -33,10 +33,17 @@ const Fagsak: React.FunctionComponent<IProps> = ({ fagsakId }) => {
             );
         case RessursStatus.HENTER:
             return <LasterModal />;
+        case RessursStatus.IKKE_TILGANG:
+            return (
+                <AlertStripe
+                    children={`Du har ikke tilgang til å se denne saken.`}
+                    type={'advarsel'}
+                />
+            );
         case RessursStatus.FEILET:
             return (
                 <AlertStripe
-                    children={`Innhenting av fagsak feilet med melding: ${fagsak.melding}`}
+                    children={`Løsningen får ikke vist denne saken. Vennligst prøv igjen senere.`}
                     type={'feil'}
                 />
             );

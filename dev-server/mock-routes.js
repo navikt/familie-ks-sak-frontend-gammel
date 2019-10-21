@@ -21,6 +21,14 @@ app.get('/familie-ks-sak/api/fagsak/2', (req, res) => {
     setTimeout(() => res.send(lesMockFil(`fagsak-avslått.json`)), delayMs);
 });
 
+app.get('/familie-ks-sak/api/fagsak/3', (req, res) => {
+    setTimeout(() => res.send(lesMockFil(`fagsak-ikketilgang.json`)), delayMs);
+});
+
+app.get('/familie-ks-sak/api/fagsak/4', (req, res) => {
+    setTimeout(() => res.send(lesMockFil(`fagsak-feilet.json`)), delayMs);
+});
+
 app.get('/user/profile', (req, res) => {
     res.send({
         displayName: 'Test Testersen',
