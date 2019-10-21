@@ -7,7 +7,6 @@ export const hentFagsak = (
     id: string,
     innloggetSaksbehandler?: ISaksbehandler
 ): Promise<Ressurs<IFagsak>> => {
-    console.log(window);
     if (window.location.host.includes('preprod')) {
         axiosRequest({ method: 'GET', url: '/familie-ks-sak/api/fagsak' });
     }
