@@ -18,9 +18,11 @@ const renderFagsaker = (fagsaker: Ressurs<any[]>) => {
                     {fagsaker.data.length > 0 ? (
                         fagsaker.data.map((fagsak: any) => {
                             return (
-                                <div
+                                <a
+                                    className={'lenke'}
+                                    href={`/fagsak/${fagsak.id}`}
                                     key={fagsak.id}
-                                >{`Fagsak id: ${fagsak.id}, saksnummer: ${fagsak.saksnummer}, person ident: ${fagsak.personIdent.id}`}</div>
+                                >{`Fagsak id: ${fagsak.id}, saksnummer: ${fagsak.saksnummer}, person ident: ${fagsak.personIdent.id}`}</a>
                             );
                         })
                     ) : (
