@@ -7,6 +7,7 @@ import { ISaksbehandler } from '../typer/saksbehandler';
 import Fagsak from './Fagsak/Fagsak';
 import { FagsakProvider } from './FagsakProvider';
 import Dekoratør from './Felleskomponenter/Dekoratør/Dekoratør';
+import Søk from './Søk/Søk';
 
 Modal.setAppElement(document.getElementById('modal-a11y-wrapper'));
 
@@ -62,11 +63,12 @@ class App extends React.Component<{}, IState> {
                         <Switch>
                             <Route
                                 exact={true}
-                                path="/:fagsakId"
+                                path="/fagsak/:fagsakId"
                                 render={({ match }) => {
                                     return <Fagsak fagsakId={match.params.fagsakId} />;
                                 }}
                             />
+                            <Route exact={true} path="/søk" component={Søk} />
                         </Switch>
                     </Router>
                 </div>

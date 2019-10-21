@@ -19,3 +19,19 @@ export const hentFagsak = (
         innloggetSaksbehandler
     );
 };
+
+export const hentFagsaker = (
+    filter: string,
+    innloggetSaksbehandler?: ISaksbehandler
+): Promise<Ressurs<IFagsak[]>> => {
+    return axiosRequest(
+        {
+            headers: {
+                filter,
+            },
+            method: 'GET',
+            url: '/familie-ks-sak/api/fagsak',
+        },
+        innloggetSaksbehandler
+    );
+};
