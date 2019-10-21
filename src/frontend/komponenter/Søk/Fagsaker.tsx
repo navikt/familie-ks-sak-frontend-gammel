@@ -20,7 +20,7 @@ const renderFagsaker = (fagsaker: Ressurs<any[]>) => {
                             return (
                                 <div
                                     key={fagsak.id}
-                                >{`${fagsak.id}: ${fagsak.personIdent.ident}`}</div>
+                                >{`Fagsak id: ${fagsak.id}, saksnummer: ${fagsak.saksnummer}, person ident: ${fagsak.personIdent.id}`}</div>
                             );
                         })
                     ) : (
