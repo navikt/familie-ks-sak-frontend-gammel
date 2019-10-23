@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { kjønnType } from '../../typer/person';
 import { hentAlderFraFnr } from '../../utils/hjelpere';
 import GuttIkon from './GuttIkon';
 import JenteIkon from './JenteIkon';
@@ -9,7 +10,7 @@ import NøytralPersonIkon from './NøytralPersonIkon';
 interface IProps {
     className?: string;
     fødselsnummer: string;
-    kjønn: string;
+    kjønn: kjønnType;
 }
 
 const FamilieIkonVelger: React.StatelessComponent<IProps> = ({
@@ -18,13 +19,13 @@ const FamilieIkonVelger: React.StatelessComponent<IProps> = ({
     kjønn,
 }) => {
     switch (kjønn) {
-        case 'KVINNE':
+        case kjønnType.K:
             if (hentAlderFraFnr(fødselsnummer) < 18) {
                 return <JenteIkon className={className} heigth={32} width={32} />;
             } else {
                 return <KvinneIkon className={className} heigth={32} width={32} />;
             }
-        case 'MANN':
+        case kjønnType.M:
             if (hentAlderFraFnr(fødselsnummer) < 18) {
                 return <GuttIkon className={className} heigth={32} width={32} />;
             } else {
