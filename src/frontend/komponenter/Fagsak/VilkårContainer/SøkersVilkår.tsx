@@ -54,7 +54,10 @@ const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                     datakilde={datakilder.SØKNAD}
                     kortInfo={hentTilknytningTilUtlandTekst(behandling.behandlingsresultat)}
                     navn={'Arbeid eller ytelser fra utlandet'}
-                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.UTLAND)}
+                    oppfylt={hentVilkår(
+                        behandling.behandlingsresultat,
+                        VilkårType.OPPGITT_TILKNYTNING_TIL_UTLAND
+                    )}
                 />
             </VilkårBolk>
 
