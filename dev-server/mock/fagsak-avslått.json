@@ -107,7 +107,7 @@
 					"søker": {
 						"personIdent": "00000000001",
 						"navn": "TEST TESTESEN",
-						"kjønn": "MANN",
+						"kjønn": "M",
 						"fødselsdato": "1990-01-01",
 						"statsborgerskap": "NOR",
 						"relasjoner": [
@@ -159,7 +159,7 @@
 						{
 							"personIdent": "00000000003",
 							"navn": "TEST TESTESEN",
-							"kjønn": "MANN",
+							"kjønn": "M",
 							"fødselsdato": "1990-01-01",
 							"statsborgerskap": "NOR",
 							"relasjoner": [
@@ -211,7 +211,7 @@
 					"annenPart": {
 						"personIdent": "00000000002",
 						"navn": "TEST TESTESEN",
-						"kjønn": "KVINNE",
+						"kjønn": "K",
 						"fødselsdato": "1990-01-01",
 						"statsborgerskap": "NOR",
 						"relasjoner": [
