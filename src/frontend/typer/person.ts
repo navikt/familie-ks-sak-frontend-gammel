@@ -36,7 +36,7 @@ export interface IPersonhistorikk {
 
 export interface IPersonAdresse {
     adresseType: AdresseType;
-    adresselinje1: string;
+    adresselinje1?: string;
     adresselinje2?: string;
     adresselinje3?: string;
     adresselinje4?: string;

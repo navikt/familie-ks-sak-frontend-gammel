@@ -18,9 +18,13 @@ const Personkort: React.StatelessComponent<IProps> = ({ person }) => {
             <div className={'vr'} />
             <Normaltekst children={`Fødsel- og personnummer: ${person.personIdent}`} />
             <div className={'vr'} />
-            <Normaltekst
-                children={`Adresse: ${adresse.adresselinje1}, ${adresse.postnummer} ${adresse.poststed}`}
-            />
+            {adresse.adresselinje1 ? (
+                <Normaltekst
+                    children={`Adresse: ${adresse.adresselinje1}, ${adresse.postnummer} ${adresse.poststed}`}
+                />
+            ) : (
+                <Normaltekst children={'Ukjent adresse'} />
+            )}
         </div>
     );
 };
