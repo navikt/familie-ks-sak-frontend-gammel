@@ -45,31 +45,39 @@ const AdressehistorikkModal: React.StatelessComponent<IProps> = ({ person, settÃ
                     </tr>
                 </thead>
                 <tbody>
-                    {person.personhistorikk.adresser.map((adresse: IPersonAdresse) => {
-                        return (
-                            <tr key={adresse.adresselinje1}>
-                                <td>
-                                    <div>
-                                        <Normaltekst children={adresse.adresselinje1} />
+                    {person.personhistorikk.adresser.map(
+                        (adresse: IPersonAdresse, index: number) => {
+                            return (
+                                <tr key={index}>
+                                    <td>
+                                        <div>
+                                            {adresse.adresselinje1 ? (
+                                                <React.Fragment>
+                                                    <Normaltekst children={adresse.adresselinje1} />
+                                                    <Normaltekst
+                                                        children={`${adresse.postnummer} ${adresse.poststed}`}
+                                                    />
+                                                    <Normaltekst children={adresse.land} />
+                                                </React.Fragment>
+                                            ) : (
+                                                <Normaltekst children={'Ukjent adresse'} />
+                                            )}
+                                        </div>
+                                    </td>
+                                    <td>
                                         <Normaltekst
-                                            children={`${adresse.postnummer} ${adresse.poststed}`}
+                                            children={`${formaterDato(
+                                                adresse.periode.fomDato
+                                            )} - ${formaterDato(adresse.periode.tomDato)}`}
                                         />
-                                        <Normaltekst children={adresse.land} />
-                                    </div>
-                                </td>
-                                <td>
-                                    <Normaltekst
-                                        children={`${formaterDato(
-                                            adresse.periode.fomDato
-                                        )} - ${formaterDato(adresse.periode.tomDato)}`}
-                                    />
-                                </td>
-                                <td>
-                                    <Normaltekst children={hentBotid(adresse.periode)} />
-                                </td>
-                            </tr>
-                        );
-                    })}
+                                    </td>
+                                    <td>
+                                        <Normaltekst children={hentBotid(adresse.periode)} />
+                                    </td>
+                                </tr>
+                            );
+                        }
+                    )}
                 </tbody>
             </table>
         </Modal>
