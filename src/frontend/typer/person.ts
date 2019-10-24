@@ -9,7 +9,7 @@ export enum AdresseType {
 }
 
 export enum RelasjonsRolleType {
-    BARN_NORSK_STATSBORGER,
+    BARN,
     EKTE,
     FARA,
     MMOR,
