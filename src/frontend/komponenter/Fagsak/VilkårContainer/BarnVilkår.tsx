@@ -41,7 +41,10 @@ const BarnVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                     datakilde={datakilder.FOLKEREGISTERET}
                     kortInfo={'Bor med søker'}
                     navn={'Bosted'}
-                    oppfylt={hentVilkår(behandling.behandlingsresultat, VilkårType.BOSTED)}
+                    oppfylt={hentVilkår(
+                        behandling.behandlingsresultat,
+                        VilkårType.BARN_BOR_MED_FORELDRE
+                    )}
                 />
                 <Vilkår
                     datakilde={datakilder.SØKNAD}

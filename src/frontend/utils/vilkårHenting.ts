@@ -20,6 +20,9 @@ export const hentMedlResultatTekst = (behandlingsresultat: IBehandlingsresultat)
 };
 
 export const hentTilknytningTilUtlandTekst = (behandlingsresultat: IBehandlingsresultat) => {
-    const vilkårsresultat = hentVilkår(behandlingsresultat, VilkårType.UTLAND);
+    const vilkårsresultat = hentVilkår(
+        behandlingsresultat,
+        VilkårType.OPPGITT_TILKNYTNING_TIL_UTLAND
+    );
     return vilkårsresultat ? 'Nei' : 'Ja';
 };
