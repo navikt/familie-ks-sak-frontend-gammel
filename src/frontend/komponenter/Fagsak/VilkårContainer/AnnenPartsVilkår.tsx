@@ -24,11 +24,11 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
     const annenPartsAdresse: IPersonAdresse =
         behandling.personopplysninger.annenPart.personhistorikk.adresser[0];
 
-    const søkerFødselsnummer = behandling.personopplysninger.søker.personIdent;
-    const borMedSøker =
+    const barnetsFødselsnummer = behandling.personopplysninger.barna[0].personIdent;
+    const borMedBarn =
         behandling.personopplysninger.annenPart.relasjoner.find(
             (relasjon: IPersonRelasjon) =>
-                relasjon.tilPersonIdent === søkerFødselsnummer && relasjon.harSammeBosted
+                relasjon.tilPersonIdent === barnetsFødselsnummer && relasjon.harSammeBosted
         ) !== undefined;
 
     return (
@@ -56,7 +56,7 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
                     kortInfoKomponent={() => {
                         return (
                             <React.Fragment>
-                                <Element children={`Bor ${!borMedSøker ? 'ikke' : ''} med søker`} />
+                                <Element children={`Bor ${!borMedBarn ? 'ikke' : ''} med barn`} />
                                 <Element children={annenPartsAdresse.adresselinje1} />
                                 <Element
                                     children={`${annenPartsAdresse.postnummer} ${annenPartsAdresse.poststed}`}
