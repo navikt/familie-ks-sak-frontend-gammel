@@ -106,7 +106,7 @@
 				"personopplysninger": {
 					"søker": {
 						"bostedsadresse": {
-							"adresseType": "MIDLERTIDIG_POSTADRESSE_UTLAND",
+							"adresseType": "POSTADRESSE",
 							"adresselinje1": "TEST 1",
 							"adresselinje2": "TEST 2",
 							"adresselinje3": "TEST 3",
@@ -172,7 +172,7 @@
 					"barna": [
 						{
 							"bostedsadresse": {
-								"adresseType": "BOSTEDSADRESSE",
+								"adresseType": "POSTADRESSE",
 								"adresselinje1": "Sannergata 2",
 								"adresselinje2": null,
 								"adresselinje3": null,
@@ -238,7 +238,7 @@
 					],
 					"annenPart": {
 						"bostedsadresse": {
-							"adresseType": "BOSTEDSADRESSE",
+							"adresseType": "POSTADRESSE",
 							"adresselinje1": "Sannergata 2",
 							"adresselinje2": null,
 							"adresselinje3": null,

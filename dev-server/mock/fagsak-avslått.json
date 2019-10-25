@@ -159,7 +159,7 @@
 					"barna": [
 						{
 							"bostedsadresse": {
-								"adresseType": "BOSTEDSADRESSE",
+								"adresseType": "POSTADRESSE",
 								"adresselinje1": "Sannergata 2",
 								"adresselinje2": null,
 								"adresselinje3": null,
