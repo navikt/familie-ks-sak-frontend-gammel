@@ -77,7 +77,7 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
                 />
                 <Vilkår
                     datakilde={datakilder.FOLKEREGISTERET}
-                    kortInfo={behandling.personopplysninger.søker.statsborgerskap}
+                    kortInfo={behandling.personopplysninger.annenPart.statsborgerskap}
                     navn={'Statsborgerskap'}
                 />
 
