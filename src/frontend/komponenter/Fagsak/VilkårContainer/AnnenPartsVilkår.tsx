@@ -21,8 +21,8 @@ interface IProps {
 const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
     const [adressehistorikkModalÅpen, settAdressehistorikkModalÅpen] = React.useState(false);
 
-    const annenPartsAdresse: IPersonAdresse =
-        behandling.personopplysninger.annenPart.personhistorikk.adresser[0];
+    const annenPartsBostedsadresse: IPersonAdresse | undefined =
+        behandling.personopplysninger.annenPart.bostedsadresse;
 
     const barnetsFødselsnummer = behandling.personopplysninger.barna[0].personIdent;
     const borMedBarn =
@@ -57,10 +57,19 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
                         return (
                             <React.Fragment>
                                 <Element children={`Bor ${!borMedBarn ? 'ikke' : ''} med barn`} />
-                                <Element children={annenPartsAdresse.adresselinje1} />
-                                <Element
-                                    children={`${annenPartsAdresse.postnummer} ${annenPartsAdresse.poststed}`}
-                                />
+                                {annenPartsBostedsadresse &&
+                                annenPartsBostedsadresse.adresselinje1 ? (
+                                    <React.Fragment>
+                                        <Element
+                                            children={`${annenPartsBostedsadresse.adresselinje1}`}
+                                        />
+                                        <Element
+                                            children={`${annenPartsBostedsadresse.postnummer} ${annenPartsBostedsadresse.poststed}`}
+                                        />
+                                    </React.Fragment>
+                                ) : (
+                                    <Element children={'Ukjent bostedsadresse'} />
+                                )}
                             </React.Fragment>
                         );
                     }}

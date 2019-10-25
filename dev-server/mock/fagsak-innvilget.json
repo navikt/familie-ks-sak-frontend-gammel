@@ -105,6 +105,20 @@
 				},
 				"personopplysninger": {
 					"søker": {
+						"bostedsadresse": {
+							"adresseType": "MIDLERTIDIG_POSTADRESSE_UTLAND",
+							"adresselinje1": "TEST 1",
+							"adresselinje2": "TEST 2",
+							"adresselinje3": "TEST 3",
+							"adresselinje4": null,
+							"postnummer": null,
+							"poststed": null,
+							"land": "SWE",
+							"periode": {
+								"fomDato": null,
+								"tomDato": null
+							}
+						},
 						"personIdent": "00000000001",
 						"navn": "TEST TESTESEN",
 						"kjønn": "M",
@@ -140,7 +154,7 @@
 									"land": "SWE",
 									"periode": {
 										"fomDato": "2014-10-11",
-										"tomDato": "2019-10-11"
+										"tomDato": "9999-12-31"
 									}
 								}
 							],
@@ -157,6 +171,20 @@
 					},
 					"barna": [
 						{
+							"bostedsadresse": {
+								"adresseType": "BOSTEDSADRESSE",
+								"adresselinje1": "Sannergata 2",
+								"adresselinje2": null,
+								"adresselinje3": null,
+								"adresselinje4": null,
+								"postnummer": "0560",
+								"poststed": "UDEFINERT",
+								"land": "NOR",
+								"periode": {
+									"fomDato": null,
+									"tomDato": null
+								}
+							},
 							"personIdent": "00000000003",
 							"navn": "TEST TESTESEN",
 							"kjønn": "M",
@@ -209,6 +237,20 @@
 						}
 					],
 					"annenPart": {
+						"bostedsadresse": {
+							"adresseType": "BOSTEDSADRESSE",
+							"adresselinje1": "Sannergata 2",
+							"adresselinje2": null,
+							"adresselinje3": null,
+							"adresselinje4": null,
+							"postnummer": "0560",
+							"poststed": "UDEFINERT",
+							"land": "NOR",
+							"periode": {
+								"fomDato": null,
+								"tomDato": null
+							}
+						},
 						"personIdent": "00000000002",
 						"navn": "TEST TESTESEN",
 						"kjønn": "K",
@@ -220,20 +262,6 @@
 						"personhistorikk": {
 							"adresser": [
 								{
-									"adresseType": "BOSTEDSADRESSE",
-									"adresselinje1": "Sannergata 2",
-									"adresselinje2": null,
-									"adresselinje3": null,
-									"adresselinje4": null,
-									"postnummer": "0560",
-									"poststed": "UDEFINERT",
-									"land": "NOR",
-									"periode": {
-										"fomDato": "2014-10-11",
-										"tomDato": "2019-10-11"
-									}
-								},
-								{
 									"adresseType": "MIDLERTIDIG_POSTADRESSE_UTLAND",
 									"adresselinje1": "TEST 1",
 									"adresselinje2": "TEST 2",
@@ -243,8 +271,22 @@
 									"poststed": null,
 									"land": "SWE",
 									"periode": {
-									  "fomDato": "2014-10-11",
-										"tomDato": "2019-10-11"
+										"fomDato": "2012-10-11",
+										"tomDato": "2014-10-11"
+									}
+								},
+								{
+									"adresseType": "BOSTEDSADRESSE",
+									"adresselinje1": "Sannergata 2",
+									"adresselinje2": null,
+									"adresselinje3": null,
+									"adresselinje4": null,
+									"postnummer": "0560",
+									"poststed": "UDEFINERT",
+									"land": "NOR",
+									"periode": {
+										"fomDato": "2016-10-11",
+										"tomDato": "9999-12-31"
 									}
 								}
 							],

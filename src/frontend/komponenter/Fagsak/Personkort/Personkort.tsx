@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const Personkort: React.StatelessComponent<IProps> = ({ person }) => {
-    const adresse: IPersonAdresse = person.personhistorikk.adresser[0];
+    const bostedsadresse: IPersonAdresse | undefined = person.bostedsadresse;
     return (
         <div className={'personkort'}>
             <FamilieIkonVelger kjønn={person.kjønn} fødselsnummer={person.personIdent} />
@@ -18,12 +18,12 @@ const Personkort: React.StatelessComponent<IProps> = ({ person }) => {
             <div className={'vr'} />
             <Normaltekst children={`Fødsel- og personnummer: ${person.personIdent}`} />
             <div className={'vr'} />
-            {adresse.adresselinje1 ? (
+            {bostedsadresse && bostedsadresse.adresselinje1 ? (
                 <Normaltekst
-                    children={`Adresse: ${adresse.adresselinje1}, ${adresse.postnummer} ${adresse.poststed}`}
+                    children={`Adresse: ${bostedsadresse.adresselinje1}, ${bostedsadresse.postnummer} ${bostedsadresse.poststed}`}
                 />
             ) : (
-                <Normaltekst children={'Ukjent adresse'} />
+                <Normaltekst children={'Personen har ikke registrert bostedsadresse'} />
             )}
         </div>
     );
