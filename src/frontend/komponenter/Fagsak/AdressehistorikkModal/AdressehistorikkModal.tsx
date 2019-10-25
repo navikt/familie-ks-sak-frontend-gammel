@@ -32,7 +32,7 @@ const AdressehistorikkModal: React.StatelessComponent<IProps> = ({ person, sett√
 
             <Element
                 className={'adressehistorikkmodal__sammenlagtbotid'}
-                children={`Sammenlagt botid i Norge/trygdetid/medlemskap i folketrygden: ${hentSammenlagtBotid(
+                children={`Sammenlagt botid i Norge basert p√• adressehistorikk: ${hentSammenlagtBotid(
                     person.personhistorikk.adresser
                 )}`}
             />
