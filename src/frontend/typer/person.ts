@@ -25,6 +25,7 @@ export enum kjønnType {
 
 // Interface
 export interface IPerson {
+    bostedsadresse?: IPersonAdresse;
     fødselsdato: string;
     personIdent: string;
     kjønn: kjønnType;
