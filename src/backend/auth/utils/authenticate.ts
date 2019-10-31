@@ -3,20 +3,13 @@ import passport from 'passport';
 import { logError } from '../../customLoglevel';
 import { nodeConfig } from '../config/passportConfig';
 import { SessionRequest } from './session';
-
-const allowedRedirectRoutes = ['/', 'bank', 'postboks', 'sakslogg', 'transaksjoner', '404'];
+import { validateRefreshAndGetToken } from './token';
 
 export const authenticateAzure = (req: SessionRequest, res: Response, next: NextFunction) => {
     const regex: RegExpExecArray | null = /redirectUrl=(.*)/.exec(req.url);
     const redirectUrl = regex ? regex[1] : 'invalid';
-    const validRedirectRoute =
-        allowedRedirectRoutes.find(redirectRoute => redirectUrl.includes(redirectRoute)) !==
-        undefined;
 
-    const successRedirect = regex && validRedirectRoute ? redirectUrl : '/';
-    if (!validRedirectRoute) {
-        logError(req, `Ugyldig redirect path [${redirectUrl}], fallback '/'`);
-    }
+    const successRedirect = regex ? redirectUrl : '/';
 
     req.session.redirectUrl = successRedirect;
     try {
@@ -45,6 +38,7 @@ export const authenticateAzureCallback = () => {
 export const ensureAuthenticated = (sendUnauthorized: boolean) => {
     return async (req: SessionRequest, res: Response, next: NextFunction) => {
         if (req.isAuthenticated()) {
+            validateRefreshAndGetToken(req);
             return next();
         }
 

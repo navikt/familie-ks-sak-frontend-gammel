@@ -4,7 +4,7 @@ import proxy from 'http-proxy-middleware';
 import uuid from 'uuid';
 import { proxyUrl } from '../../Environment';
 import { SessionRequest } from './session';
-import { validateRefreshAndGetToken } from './token';
+import { validateRefreshAndGetOnBehalfOfToken } from './token';
 
 const restream = (proxyReq: ClientRequest, req: Request, res: Response) => {
     if (req.body) {
@@ -31,7 +31,7 @@ export const doProxy = () => {
 
 export const attachToken = () => {
     return async (req: SessionRequest, res: Response, next: NextFunction) => {
-        const accessToken = await validateRefreshAndGetToken(req);
+        const accessToken = await validateRefreshAndGetOnBehalfOfToken(req);
         req.headers['Nav-Call-Id'] = uuid.v1();
         req.headers.Authorization = `Bearer ${accessToken}`;
         return next();
