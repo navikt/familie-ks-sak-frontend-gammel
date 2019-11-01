@@ -18,6 +18,9 @@ interface IProps {
 }
 
 const AdressehistorikkModal: React.StatelessComponent<IProps> = ({ person, sett√Öpen, √•pen }) => {
+    const bostedsadresser: IPersonAdresse[] = person.personhistorikk.adresser.filter(
+        (adresse: IPersonAdresse) => AdresseType.BOSTEDSADRESSE === adresse.adresseType
+    );
     return (
         <Modal
             contentClass={'adressehistorikkmodal'}
@@ -33,10 +36,7 @@ const AdressehistorikkModal: React.StatelessComponent<IProps> = ({ person, sett√
             <Element
                 className={'adressehistorikkmodal__sammenlagtbotid'}
                 children={`Sammenlagt botid i Norge basert p√• adressehistorikk: ${hentSammenlagtBotid(
-                    person.personhistorikk.adresser.filter(
-                        (adresse: IPersonAdresse) =>
-                            AdresseType.BOSTEDSADRESSE === adresse.adresseType
-                    )
+                    bostedsadresser
                 )}`}
             />
 
@@ -49,11 +49,7 @@ const AdressehistorikkModal: React.StatelessComponent<IProps> = ({ person, sett√
                     </tr>
                 </thead>
                 <tbody>
-                    {person.personhistorikk.adresser
-                        .filter(
-                            (adresse: IPersonAdresse) =>
-                                AdresseType.BOSTEDSADRESSE === adresse.adresseType
-                        )
+                    {bostedsadresser
                         .sort((a, b) => moment(b.periode.tomDato).diff(moment(a.periode.tomDato)))
                         .map((adresse: IPersonAdresse, index: number) => {
                             return (
