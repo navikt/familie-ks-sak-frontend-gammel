@@ -3,7 +3,7 @@ import Modal from 'nav-frontend-modal';
 import 'nav-frontend-tabell-style';
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import * as React from 'react';
-import { IPerson, IPersonAdresse } from '../../../typer/person';
+import { AdresseType, IPerson, IPersonAdresse } from '../../../typer/person';
 import {
     formaterDato,
     formaterNavn,
@@ -33,7 +33,10 @@ const AdressehistorikkModal: React.StatelessComponent<IProps> = ({ person, sett√
             <Element
                 className={'adressehistorikkmodal__sammenlagtbotid'}
                 children={`Sammenlagt botid i Norge basert p√• adressehistorikk: ${hentSammenlagtBotid(
-                    person.personhistorikk.adresser
+                    person.personhistorikk.adresser.filter(
+                        (adresse: IPersonAdresse) =>
+                            AdresseType.BOSTEDSADRESSE === adresse.adresseType
+                    )
                 )}`}
             />
 
@@ -47,6 +50,10 @@ const AdressehistorikkModal: React.StatelessComponent<IProps> = ({ person, sett√
                 </thead>
                 <tbody>
                     {person.personhistorikk.adresser
+                        .filter(
+                            (adresse: IPersonAdresse) =>
+                                AdresseType.BOSTEDSADRESSE === adresse.adresseType
+                        )
                         .sort((a, b) => moment(b.periode.tomDato).diff(moment(a.periode.tomDato)))
                         .map((adresse: IPersonAdresse, index: number) => {
                             return (
