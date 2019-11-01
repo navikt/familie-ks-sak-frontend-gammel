@@ -1,11 +1,11 @@
 // Enum
 export enum AdresseType {
-    BOSTEDSADRESSE,
-    MIDLERTIDIG_POSTADRESSE_NORGE,
-    MIDLERTIDIG_POSTADRESSE_UTLAND,
-    POSTADRESSE,
-    POSTADRESSE_UTLAND,
-    UKJENT_ADRESSE,
+    BOSTEDSADRESSE = 'BOSTEDSADRESSE',
+    MIDLERTIDIG_POSTADRESSE_NORGE = 'MIDLERTIDIG_POSTADRESSE_NORGE',
+    MIDLERTIDIG_POSTADRESSE_UTLAND = 'MIDLERTIDIG_POSTADRESSE_UTLAND',
+    POSTADRESSE = 'POSTADRESSE',
+    POSTADRESSE_UTLAND = 'POSTADRESSE_UTLAND',
+    UKJENT_ADRESSE = 'UKJENT_ADRESSE',
 }
 
 export enum RelasjonsRolleType {
@@ -25,6 +25,7 @@ export enum kjønnType {
 
 // Interface
 export interface IPerson {
+    bostedsadresse?: IPersonAdresse;
     fødselsdato: string;
     personIdent: string;
     kjønn: kjønnType;

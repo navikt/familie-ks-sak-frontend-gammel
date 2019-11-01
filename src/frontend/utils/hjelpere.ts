@@ -19,10 +19,12 @@ export const formaterNavn = (navn: string): string => {
     return namecase(navn);
 };
 
-export const formaterDato = (isoString: string): string => {
+export const formaterDato = (isoString: string, fødselsdato: string): string => {
     const dato = moment(isoString);
     if (dato.isSame(TIDENES_ENDE)) {
         return 'd.d';
+    } else if (dato.isSame(TIDENES_BEGYNNELSE)) {
+        return moment(fødselsdato).format('DD.MM.YYYY');
     } else {
         return dato.format('DD.MM.YYYY');
     }

@@ -1,8 +1,9 @@
+import * as moment from 'moment';
 import Modal from 'nav-frontend-modal';
 import 'nav-frontend-tabell-style';
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import * as React from 'react';
-import { IPerson, IPersonAdresse } from '../../../typer/person';
+import { AdresseType, IPerson, IPersonAdresse } from '../../../typer/person';
 import {
     formaterDato,
     formaterNavn,
@@ -17,6 +18,9 @@ interface IProps {
 }
 
 const AdressehistorikkModal: React.StatelessComponent<IProps> = ({ person, sett√Öpen, √•pen }) => {
+    const bostedsadresser: IPersonAdresse[] = person.personhistorikk.adresser.filter(
+        (adresse: IPersonAdresse) => AdresseType.BOSTEDSADRESSE === adresse.adresseType
+    );
     return (
         <Modal
             contentClass={'adressehistorikkmodal'}
@@ -31,8 +35,8 @@ const AdressehistorikkModal: React.StatelessComponent<IProps> = ({ person, sett√
 
             <Element
                 className={'adressehistorikkmodal__sammenlagtbotid'}
-                children={`Sammenlagt botid i Norge/trygdetid/medlemskap i folketrygden: ${hentSammenlagtBotid(
-                    person.personhistorikk.adresser
+                children={`Sammenlagt botid i Norge basert p√• adressehistorikk: ${hentSammenlagtBotid(
+                    bostedsadresser
                 )}`}
             />
 
@@ -45,8 +49,9 @@ const AdressehistorikkModal: React.StatelessComponent<IProps> = ({ person, sett√
                     </tr>
                 </thead>
                 <tbody>
-                    {person.personhistorikk.adresser.map(
-                        (adresse: IPersonAdresse, index: number) => {
+                    {bostedsadresser
+                        .sort((a, b) => moment(b.periode.tomDato).diff(moment(a.periode.tomDato)))
+                        .map((adresse: IPersonAdresse, index: number) => {
                             return (
                                 <tr key={index}>
                                     <td>
@@ -67,8 +72,12 @@ const AdressehistorikkModal: React.StatelessComponent<IProps> = ({ person, sett√
                                     <td>
                                         <Normaltekst
                                             children={`${formaterDato(
-                                                adresse.periode.fomDato
-                                            )} - ${formaterDato(adresse.periode.tomDato)}`}
+                                                adresse.periode.fomDato,
+                                                person.f√∏dselsdato
+                                            )} - ${formaterDato(
+                                                adresse.periode.tomDato,
+                                                person.f√∏dselsdato
+                                            )}`}
                                         />
                                     </td>
                                     <td>
@@ -76,8 +85,7 @@ const AdressehistorikkModal: React.StatelessComponent<IProps> = ({ person, sett√
                                     </td>
                                 </tr>
                             );
-                        }
-                    )}
+                        })}
                 </tbody>
             </table>
         </Modal>
