@@ -36,7 +36,7 @@ const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                     navn={'Bosted'}
                     oppfylt={hentVilkår(
                         behandling.behandlingsresultat,
-                        VilkårType.MEDLEMSKAP_BOSTED
+                        VilkårType.MEDLEMSKAP_BOSTED_NÅ
                     )}
                 />
                 <Vilkår
