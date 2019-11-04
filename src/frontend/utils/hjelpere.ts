@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { IPeriode, IPersonAdresse } from '../typer/person';
+import { AdresseType, IPeriode, IPersonAdresse } from '../typer/person';
 moment.locale('nb');
 
 /* tslint:disable */
@@ -45,6 +45,7 @@ export const hentBotid = (periode: IPeriode) => {
 
 export const hentSammenlagtBotid = (adressehistorikk: IPersonAdresse[]) => {
     return adressehistorikk
+        .filter((adresse: IPersonAdresse) => AdresseType.BOSTEDSADRESSE === adresse.adresseType)
         .reduce((acc: moment.Duration, adresse: IPersonAdresse) => {
             return acc.add(hentDurationFraPeriode(adresse.periode));
         }, moment.duration())

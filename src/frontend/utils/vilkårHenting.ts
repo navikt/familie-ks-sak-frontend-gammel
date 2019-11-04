@@ -26,3 +26,11 @@ export const hentTilknytningTilUtlandTekst = (behandlingsresultat: IBehandlingsr
     );
     return vilkårsresultat ? 'Nei' : 'Ja';
 };
+
+export const hentBosattINorgeTekst = (behandlingsresultat: IBehandlingsresultat) => {
+    const vilkårsresultat = hentVilkår(
+        behandlingsresultat,
+        VilkårType.MEDLEMSKAP_BOSTED_NÅ
+    );
+    return `${!vilkårsresultat ? 'Ikke b' : 'B'}osatt i Norge`;
+};
