@@ -85,6 +85,10 @@
 							"utfall": "OPPFYLT"
 						},
 						{
+							"vilkårType": "MEDLEMSKAP_BOSTED_NÅ",
+							"utfall": "MANUELL_BEHANDLING"
+						},
+						{
 							"vilkårType": "MEDLEMSKAP_MEDL",
 							"utfall": "OPPFYLT"
 						},
