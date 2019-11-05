@@ -6,8 +6,9 @@ import {
     hentBosattINorgeTekst,
     hentMedlResultatTekst,
     hentOppholdINorge,
+    hentOppholdINorgeTekst,
     hentTilknytningTilUtlandTekst,
-    hentVilkår, oppholdINorgeTilTekst,
+    hentVilkår,
 } from '../../../utils/vilkårHenting';
 import PersonNavnOgIkon from '../../Felleskomponenter/PersonNavnOgIkon/PersonNavnOgIkon';
 import Vilkår from '../../Felleskomponenter/Vilkår/Vilkår';
@@ -43,7 +44,7 @@ const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                 />
                 <Vilkår
                     datakilde={datakilder.SØKNAD}
-                    kortInfo={oppholdINorgeTilTekst(behandling.søknad)}
+                    kortInfo={hentOppholdINorgeTekst(behandling.søknad)}
                     navn={'Opphold i Norge i de neste 12 mnd'}
                     oppfylt={hentOppholdINorge(behandling.søknad)}
                 />

@@ -13,7 +13,7 @@ export const hentOppholdINorge = (søknad: ISøknad) => {
     return søknad.erklæring.barnINorgeNeste12Måneder;
 };
 
-export const oppholdINorgeTilTekst = (søknad: ISøknad) => {
+export const hentOppholdINorgeTekst = (søknad: ISøknad) => {
     return hentOppholdINorge(søknad) ? 'Ja' : 'Nei';
 };
 

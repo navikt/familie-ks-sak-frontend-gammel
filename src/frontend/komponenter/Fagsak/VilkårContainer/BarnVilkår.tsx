@@ -3,7 +3,7 @@ import { IBehandling, VilkårType } from '../../../typer/fagsak';
 import { barnehageplassStatusTekster } from '../../../typer/søknad';
 import { datakilder } from '../../../typer/vilkår';
 import { hentAlderFraFnr } from '../../../utils/hjelpere';
-import { hentOppholdINorge, hentVilkår, oppholdINorgeTilTekst } from '../../../utils/vilkårHenting';
+import { hentOppholdINorge, hentOppholdINorgeTekst, hentVilkår, } from '../../../utils/vilkårHenting';
 import PersonNavnOgIkon from '../../Felleskomponenter/PersonNavnOgIkon/PersonNavnOgIkon';
 import Vilkår from '../../Felleskomponenter/Vilkår/Vilkår';
 import VilkårBolk from '../../Felleskomponenter/VilkårBolk/VilkårBolk';
@@ -49,7 +49,7 @@ const BarnVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                 />
                 <Vilkår
                     datakilde={datakilder.SØKNAD}
-                    kortInfo={oppholdINorgeTilTekst(behandling.søknad)}
+                    kortInfo={hentOppholdINorgeTekst(behandling.søknad)}
                     navn={'Opphold i Norge i de neste 12 mnd'}
                     oppfylt={hentOppholdINorge(behandling.søknad)}
                 />
