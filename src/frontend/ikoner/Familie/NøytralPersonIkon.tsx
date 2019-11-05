@@ -13,6 +13,7 @@ const NøytralPersonIkon: React.StatelessComponent<INøytralPersonIkon> = ({
 }) => {
     return (
         <svg
+            aria-labelledby={"nøytralPerson"}
             className={className}
             height={heigth}
             width={width}
@@ -20,6 +21,7 @@ const NøytralPersonIkon: React.StatelessComponent<INøytralPersonIkon> = ({
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
         >
+            <title id={"nøytralPerson"}>Nøytral person</title>
             <g fill="none" fillRule="evenodd">
                 <path
                     d="m16.07 31.961c-8.78 0-15.898-7.1177-15.898-15.898 0-8.7798 7.1177-15.897 15.898-15.897 8.78 0 15.897 7.1177 15.897 15.897 0 8.78-7.1175 15.898-15.897 15.898z"
