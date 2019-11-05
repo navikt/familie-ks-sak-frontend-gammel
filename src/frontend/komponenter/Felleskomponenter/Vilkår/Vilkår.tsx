@@ -1,6 +1,6 @@
 import * as classNames from 'classnames';
 import 'nav-frontend-lenker-style';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Element, EtikettLiten, Normaltekst } from 'nav-frontend-typografi';
 import * as React from 'react';
 import IkkeOppfylt from '../../../ikoner/IkkeOppfylt';
 import Oppfylt from '../../../ikoner/Oppfylt';
@@ -41,7 +41,7 @@ const Vilkår: React.StatelessComponent<IProps> = ({
                         ))}
                 </td>
                 <td className={'vilkår__datakilde'}>
-                    <Normaltekst children={datakilde} />
+                    <EtikettLiten children={datakilde} />
                 </td>
                 <td className={'vilkår__adressehistorikk'}>
                     {settAdressehistorikkModal && (
