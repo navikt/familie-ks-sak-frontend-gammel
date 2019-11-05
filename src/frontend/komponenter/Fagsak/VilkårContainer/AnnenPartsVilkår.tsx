@@ -8,7 +8,7 @@ import {
     hentMedlResultatTekst,
     hentOppholdINorge,
     hentTilknytningTilUtlandTekst,
-    hentVilkår,
+    hentVilkår, oppholdINorgeTilTekst,
 } from '../../../utils/vilkårHenting';
 import PersonNavnOgIkon from '../../Felleskomponenter/PersonNavnOgIkon/PersonNavnOgIkon';
 import Vilkår from '../../Felleskomponenter/Vilkår/Vilkår';
@@ -84,7 +84,7 @@ const AnnenPartsVilkår: React.StatelessComponent<IProps> = ({ behandling }) => 
 
                 <Vilkår
                     datakilde={datakilder.SØKNAD}
-                    kortInfo={hentOppholdINorge(behandling.søknad) ? 'Ja' : 'Nei'}
+                    kortInfo={oppholdINorgeTilTekst(behandling.søknad)}
                     navn={'Opphold i Norge i de neste 12 mnd'}
                     oppfylt={hentOppholdINorge(behandling.søknad)}
                 />

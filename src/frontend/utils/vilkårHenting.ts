@@ -13,6 +13,10 @@ export const hentOppholdINorge = (søknad: ISøknad) => {
     return søknad.erklæring.barnINorgeNeste12Måneder;
 };
 
+export const oppholdINorgeTilTekst = (søknad: ISøknad) => {
+    return hentOppholdINorge(søknad) ? 'Ja' : 'Nei';
+};
+
 // Vilkår til tekst
 export const hentMedlResultatTekst = (behandlingsresultat: IBehandlingsresultat) => {
     const vilkårsresultat = hentVilkår(behandlingsresultat, VilkårType.MEDLEMSKAP_MEDL);

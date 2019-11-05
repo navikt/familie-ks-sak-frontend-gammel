@@ -7,7 +7,7 @@ import {
     hentMedlResultatTekst,
     hentOppholdINorge,
     hentTilknytningTilUtlandTekst,
-    hentVilkår,
+    hentVilkår, oppholdINorgeTilTekst,
 } from '../../../utils/vilkårHenting';
 import PersonNavnOgIkon from '../../Felleskomponenter/PersonNavnOgIkon/PersonNavnOgIkon';
 import Vilkår from '../../Felleskomponenter/Vilkår/Vilkår';
@@ -20,7 +20,6 @@ interface IProps {
 
 const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
     const [adressehistorikkModalÅpen, settAdressehistorikkModalÅpen] = React.useState(false);
-    const oppholdINorge = hentOppholdINorge(behandling.søknad);
 
     return (
         <div className={'vilkårperson'}>
@@ -44,9 +43,9 @@ const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                 />
                 <Vilkår
                     datakilde={datakilder.SØKNAD}
-                    kortInfo={oppholdINorge ? 'Ja' : 'Nei'}
+                    kortInfo={oppholdINorgeTilTekst(behandling.søknad)}
                     navn={'Opphold i Norge i de neste 12 mnd'}
-                    oppfylt={oppholdINorge}
+                    oppfylt={hentOppholdINorge(behandling.søknad)}
                 />
                 <Vilkår
                     datakilde={datakilder.FOLKEREGISTERET}
