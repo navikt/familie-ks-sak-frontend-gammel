@@ -13,6 +13,10 @@ export const hentOppholdINorge = (søknad: ISøknad) => {
     return søknad.erklæring.barnINorgeNeste12Måneder;
 };
 
+export const hentOppholdINorgeTekst = (søknad: ISøknad) => {
+    return hentOppholdINorge(søknad) ? 'Ja' : 'Nei';
+};
+
 // Vilkår til tekst
 export const hentMedlResultatTekst = (behandlingsresultat: IBehandlingsresultat) => {
     const vilkårsresultat = hentVilkår(behandlingsresultat, VilkårType.MEDLEMSKAP_MEDL);
@@ -25,4 +29,12 @@ export const hentTilknytningTilUtlandTekst = (behandlingsresultat: IBehandlingsr
         VilkårType.OPPGITT_TILKNYTNING_TIL_UTLAND
     );
     return vilkårsresultat ? 'Nei' : 'Ja';
+};
+
+export const hentBosattINorgeTekst = (behandlingsresultat: IBehandlingsresultat) => {
+    const vilkårsresultat = hentVilkår(
+        behandlingsresultat,
+        VilkårType.MEDLEMSKAP_BOSTED_NÅ
+    );
+    return `${!vilkårsresultat ? 'Ikke b' : 'B'}osatt i Norge`;
 };

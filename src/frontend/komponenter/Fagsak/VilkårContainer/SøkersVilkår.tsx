@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { IBehandling, VilkårType } from '../../../typer/fagsak';
 import { datakilder } from '../../../typer/vilkår';
+import { hentSammenlagtBotid } from '../../../utils/hjelpere';
 import {
+    hentBosattINorgeTekst,
     hentMedlResultatTekst,
     hentOppholdINorge,
+    hentOppholdINorgeTekst,
     hentTilknytningTilUtlandTekst,
     hentVilkår,
 } from '../../../utils/vilkårHenting';
@@ -32,7 +35,7 @@ const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
             <VilkårBolk>
                 <Vilkår
                     datakilde={datakilder.FOLKEREGISTERET}
-                    kortInfo={'Bosatt i Norge'}
+                    kortInfo={hentBosattINorgeTekst(behandling.behandlingsresultat)}
                     navn={'Bosted'}
                     oppfylt={hentVilkår(
                         behandling.behandlingsresultat,
@@ -41,7 +44,7 @@ const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
                 />
                 <Vilkår
                     datakilde={datakilder.SØKNAD}
-                    kortInfo={'Ja'}
+                    kortInfo={hentOppholdINorgeTekst(behandling.søknad)}
                     navn={'Opphold i Norge i de neste 12 mnd'}
                     oppfylt={hentOppholdINorge(behandling.søknad)}
                 />
@@ -65,8 +68,8 @@ const SøkersVilkår: React.StatelessComponent<IProps> = ({ behandling }) => {
             <VilkårBolk tittel={'Medlemskap i Folketrygden'}>
                 <Vilkår
                     datakilde={datakilder.FOLKEREGISTERET}
-                    kortInfo={'Botid i Norge'}
-                    navn={'5 år'}
+                    kortInfo={hentSammenlagtBotid(behandling.personopplysninger.søker.personhistorikk.adresser)}
+                    navn={'Botid i Norge'}
                     oppfylt={hentVilkår(
                         behandling.behandlingsresultat,
                         VilkårType.MEDLEMSKAP_BOSTED
