@@ -82,7 +82,7 @@
 						},
 						{
 							"vilkårType": "MEDLEMSKAP_BOSTED",
-							"utfall": "OPPFYLT"
+							"utfall": "MANUELL_BEHANDLING"
 						},
 						{
 							"vilkårType": "MEDLEMSKAP_BOSTED_NÅ",

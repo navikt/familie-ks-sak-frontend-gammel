@@ -1,5 +1,5 @@
 import * as classNames from 'classnames';
-import { Innholdstittel, Systemtittel } from 'nav-frontend-typografi';
+import { Systemtittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { ISaksbehandler } from '../../../typer/saksbehandler';
 
@@ -17,7 +17,7 @@ const Dekoratør: React.StatelessComponent<IProps> = ({
     return (
         <div className={'dekoratør'}>
             <div className={'dekoratør__tittel'}>
-                <Innholdstittel className={'dekoratør__tittel--tekst'} children={tittel} />
+                <Systemtittel className={'dekoratør__tittel--tekst'} tag={'h1'} children={tittel} />
                 <div className={'dekoratør__skille'} />
             </div>
             <div className={'dekoratør__innloggetsaksbehandler'}>
