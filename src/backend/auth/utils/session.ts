@@ -34,7 +34,7 @@ export default (app: any, passport: PassportStatic) => {
         app.use(
             session({
                 cookie: { maxAge: SESSION_MAX_AGE_SECONDS, secure: true },
-                name: 'familie-ks-sak',
+                name: 'familie-ks-sak-v1',
                 resave: false,
                 saveUninitialized: true,
                 secret: [`${process.env.COOKIE_KEY1}`, `${process.env.COOKIE_KEY2}`],
@@ -44,7 +44,7 @@ export default (app: any, passport: PassportStatic) => {
     } else {
         app.use(
             session({
-                name: 'familie-ks-sak',
+                name: 'familie-ks-sak-v1',
                 resave: false,
                 saveUninitialized: true,
                 secret: 'local_secret',
