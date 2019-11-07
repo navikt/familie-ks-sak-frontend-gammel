@@ -52,9 +52,10 @@ export const ensureAuthenticated = (sendUnauthorized: boolean) => {
 };
 
 export const logout = (req: SessionRequest, res: Response) => {
-    req.session.destroy(error => {
-        logError(req, `error during logout: ${error}`);
-        res.status(500).send(error);
-    });
     res.redirect(nodeConfig.logoutUri);
+    req.session.destroy(error => {
+        if (error) {
+            logError(req, `error during logout: ${error}`);
+        }
+    });
 };
