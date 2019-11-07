@@ -5,11 +5,22 @@ interface IProps {
     tittel?: string;
 }
 
-const VilkårBolk: React.StatelessComponent<IProps> = ({ tittel, children }) => {
+const VilkårBolk: React.StatelessComponent<IProps> = ({tittel, children}) => {
     return (
         <div className={'vilkårbolk'}>
-            {tittel && <Element children={tittel} />}
-            <table>{children}</table>
+            {tittel && <Element children={tittel}/>}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Vilkår/Fakta</th>
+                        <th>Informasjon om bruker</th>
+                        <th>Resultat</th>
+                        <th>Kilde</th>
+                        <th>Adressehistorikk</th>
+                    </tr>
+                </thead>
+                {children}
+            </table>
         </div>
     );
 };
