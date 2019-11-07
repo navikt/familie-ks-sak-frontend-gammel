@@ -9,12 +9,14 @@ interface IOppfylt {
 const Oppfylt: React.StatelessComponent<IOppfylt> = ({ className, heigth, width }) => {
     return (
         <svg
+            aria-labelledby={'oppfylt'}
             className={className}
             height={heigth}
             width={width}
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
         >
+            <title id={'oppfylt'}>Oppfylt</title>
             <g fill="none" fillRule="nonzero">
                 <path
                     fill="#1C6937"

@@ -9,12 +9,14 @@ interface IEktefelleIkon {
 const EktefelleIkon: React.StatelessComponent<IEktefelleIkon> = ({ className, heigth, width }) => {
     return (
         <svg
+            aria-labelledby={'ektefelle'}
             className={className}
             height={heigth}
             width={width}
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
         >
+            <title id={'ektefelle'}>Ektefelle</title>
             <path
                 fill="#3E3832"
                 fillRule="evenodd"
