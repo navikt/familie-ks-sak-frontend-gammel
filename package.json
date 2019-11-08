@@ -93,7 +93,7 @@
   "devDependencies": {
     "@babel/preset-react": "^7.0.0",
     "@types/moment-timezone": "^0.5.12",
-    "@types/webpack": "^4.39.2",
+    "@types/webpack": "^4.39.8",
     "@types/webpack-dev-middleware": "^2.0.3",
     "@types/webpack-env": "^1.14.0",
     "@types/webpack-hot-middleware": "^2.16.5",
