@@ -113,8 +113,9 @@ const getAccessTokenUser = async (req: SessionRequest) => {
 
 // GET ON-BEHALF-OF ACCESSTOKEN
 const getOnBehalfOfToken = async (req: SessionRequest) => {
+    const accessToken = await validateRefreshAndGetToken(req);
     const data = {
-        assertion: req.session.accessToken,
+        assertion: accessToken,
         client_assertion_type: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
         client_id: nodeConfig.clientID,
         client_secret: nodeConfig.clientSecret,
