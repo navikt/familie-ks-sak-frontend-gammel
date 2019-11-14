@@ -88,7 +88,7 @@ const loggFeil = (
             `En feil har oppstått i vedtaksløsningen!${error ? `\n*Error*: ${error}` : ''}${
                 feilmelding ? `\n*Feilmelding:* ${feilmelding}` : ''
             }`,
-            slackKanaler.tilbakemelding
+            slackKanaler.alert
         );
     }
 };

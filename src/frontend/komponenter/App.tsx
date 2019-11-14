@@ -49,7 +49,7 @@ class App extends React.Component<{}, IState> {
 
             slackNotify(
                 `En feil har oppstått i vedtaksløsningen: \n*Error*: ${error}`,
-                slackKanaler.tilbakemelding
+                slackKanaler.alert
             );
             showReportDialog();
         }

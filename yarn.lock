@@ -3652,7 +3652,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.11.2, lodash@^4.17.10, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.5:
+lodash@^4.11.2, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.5:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -5522,7 +5522,7 @@ request-promise@^4.2.5:
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request@^2.51.0, request@^2.72.0, request@^2.83.0:
+request@^2.72.0, request@^2.83.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==
@@ -5829,13 +5829,12 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-slack-notify@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/slack-notify/-/slack-notify-0.1.7.tgz#46e5f4d2c4888e64d88c8e197c418fded42d5b83"
-  integrity sha512-eDWa4JTy77xbuOM8fZHqBFcEh+xDlol6gttnFxKFwNS0iNayzQ2G1cgbyHXSmBhk/55vooX15ar6W9DnEhw6yQ==
+slack@^11.0.2:
+  version "11.0.2"
+  resolved "https://registry.yarnpkg.com/slack/-/slack-11.0.2.tgz#30f68527c5d1712b7faa3141db7716f89ac6e911"
+  integrity sha512-rv842+S+AGyZCmMMd8xPtW5DvJ9LzWTAKfxi8Gw57oYlXgcKtFuHd4nqk6lTPpRKdUGn3tx/Drd0rjQR3dQPqw==
   dependencies:
-    lodash "^4.17.10"
-    request "^2.51.0"
+    tiny-json-http "^7.0.2"
 
 slash@^3.0.0:
   version "3.0.0"
@@ -6263,6 +6262,11 @@ tiny-invariant@^1.0.2:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.0.6.tgz#b3f9b38835e36a41c843a3b0907a5a7b3755de73"
   integrity sha512-FOyLWWVjG+aC0UqG76V53yAWdXfH8bO6FNmyZOuUrzDzK8DI3/JRY25UD7+g49JWM1LXwymsKERB+DzI0dTEQA==
+
+tiny-json-http@^7.0.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/tiny-json-http/-/tiny-json-http-7.1.2.tgz#620e189849bab08992ec23fada7b48c7c61637b4"
+  integrity sha512-XB9Bu+ohdQso6ziPFNVqK+pcTt0l8BSRkW/CCBq0pUVlLxcYDsorpo7ae5yPhu2CF1xYgJuKVLF7cfOGeLCTlA==
 
 tiny-warning@^1.0.0, tiny-warning@^1.0.2:
   version "1.0.3"
