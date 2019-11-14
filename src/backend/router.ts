@@ -9,6 +9,7 @@ import {
 import { SessionRequest } from './auth/utils/session';
 import { getUserProfile } from './auth/utils/user';
 import { buildPath } from './Environment';
+import { slackNotify } from './slack/slack';
 
 const router = express.Router();
 
@@ -37,6 +38,11 @@ export default (middleware: any, prometheus: any) => {
 
     // USER
     router.get('/user/profile', ensureAuthenticated(true), getUserProfile());
+
+    // SLACK
+    router.post('/slack/notify/:kanal', (req: SessionRequest, res: Response) => {
+        slackNotify(req, res, req.params.kanal);
+    });
 
     // APP
     if (process.env.NODE_ENV === 'development') {
