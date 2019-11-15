@@ -38,7 +38,7 @@ export const slackNotify = (req: SessionRequest, res: Response, kanal: string) =
         )
         .then((response: any) => {
             console.log(response);
-            res.status(200).send();
+            res.status(200).send(response);
         })
         .catch((error: Error) => {
             logError(req, `Sending av melding til slack feilet: ${error}`);
