@@ -6,16 +6,16 @@ import { logError, logInfo } from '../customLoglevel';
 import { namespace } from '../Environment';
 
 const agent =
-    process.env.NODE_ENV === 'production'
-        ? new HttpsProxyAgent('http://webproxy.nais:8088')
-        : undefined;
+    process.env.NODE_ENV !== 'development'
+        ? undefined
+        : new HttpsProxyAgent('http://webproxy.nais:8088');
 
 const token = process.env.SLACK_TOKEN;
 const slack = new WebClient(token, {
     agent,
     logLevel: LogLevel.DEBUG,
 });
-console.log(slack, agent);
+console.log(slack, agent, process.env.NODE_ENV);
 
 export const slackNotify = (req: SessionRequest, res: Response, kanal: string) => {
     const displayName = req.session.displayName ? req.session.displayName : 'System';
