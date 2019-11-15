@@ -6,13 +6,13 @@ import { logError, logInfo } from '../customLoglevel';
 import { namespace } from '../Environment';
 
 const agent =
-    process.env.NODE_ENV !== 'development'
-        ? new HttpsProxyAgent({
-              host: 'http://webproxy.nais',
-              port: 8088,
-              rejectUnauthorized: false,
-          })
+    process.env.NODE_ENV === 'development'
+        ? new HttpsProxyAgent('http://webproxy.nais:8088')
         : undefined;
+
+if (agent) {
+    agent.options.rejectUnauthorized = false;
+}
 
 const token = process.env.SLACK_TOKEN;
 const slack = new WebClient(token, {
