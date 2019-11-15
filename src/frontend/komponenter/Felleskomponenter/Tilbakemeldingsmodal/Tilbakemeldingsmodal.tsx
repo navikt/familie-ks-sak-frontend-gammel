@@ -14,6 +14,7 @@ interface IProps {
 const Tilbakemeldingsmodal: React.FunctionComponent<IProps> = ({ settÅpen, åpen }) => {
     const [melding, settMelding] = React.useState('');
     const [feil, settFeil] = React.useState('');
+    const [sender, settSender] = React.useState(false);
 
     return (
         <Modal
@@ -31,15 +32,18 @@ const Tilbakemeldingsmodal: React.FunctionComponent<IProps> = ({ settÅpen, åpe
 
             <form
                 onSubmit={event => {
+                    settSender(true);
                     slackNotify(
                         `Ny tilbakemelding fra saksbehandler!\n${melding}`,
                         slackKanaler.tilbakemelding
                     )
                         .then(() => {
+                            settSender(false);
                             settÅpen(false);
                             settMelding('');
                         })
                         .catch(error => {
+                            settSender(false);
                             settFeil('Klarte ikke å sende tilbakemelding, prøv igjen.');
                         });
 
@@ -57,7 +61,7 @@ const Tilbakemeldingsmodal: React.FunctionComponent<IProps> = ({ settÅpen, åpe
                 />
 
                 <br />
-                <Knapp className={'taskpanel__vislogg'} mini={true}>
+                <Knapp spinner={sender} className={'taskpanel__vislogg'} mini={true}>
                     Send tilbakemelding
                 </Knapp>
             </form>

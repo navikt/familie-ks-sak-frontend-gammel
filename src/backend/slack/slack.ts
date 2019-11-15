@@ -29,9 +29,17 @@ export const slackNotify = (req: SessionRequest, res: Response, kanal: string) =
                 channel: `#${kanal}`,
                 text: formatertMelding,
             },
-            { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json; charset=utf-8',
+                },
+            }
         )
-        .then(() => res.status(200).send())
+        .then((response: any) => {
+            console.log(response);
+            res.status(200).send();
+        })
         .catch((error: Error) => {
             logError(req, `Sending av melding til slack feilet: ${error}`);
             res.status(500).send(error);
