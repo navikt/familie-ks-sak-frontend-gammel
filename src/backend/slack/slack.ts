@@ -1,4 +1,3 @@
-import { LogLevel, WebClient } from '@slack/web-api';
 import axios from 'axios';
 import { Response } from 'express';
 import HttpsProxyAgent from 'https-proxy-agent';
@@ -37,8 +36,8 @@ export const slackNotify = (req: SessionRequest, res: Response, kanal: string) =
             }
         )
         .then((response: any) => {
-            console.log(response);
-            res.status(200).send(response);
+            logInfo(req, response.data);
+            res.status(200).send();
         })
         .catch((error: Error) => {
             logError(req, `Sending av melding til slack feilet: ${error}`);
