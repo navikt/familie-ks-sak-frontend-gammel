@@ -7,12 +7,12 @@ import { namespace } from '../Environment';
 
 const agent =
     process.env.NODE_ENV !== 'development'
-        ? undefined
-        : new HttpsProxyAgent({
+        ? new HttpsProxyAgent({
               host: 'http://webproxy.nais',
               port: 8088,
               rejectUnauthorized: false,
-          });
+          })
+        : undefined;
 
 const token = process.env.SLACK_TOKEN;
 const slack = new WebClient(token, {
