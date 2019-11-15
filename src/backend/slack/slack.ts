@@ -6,7 +6,7 @@ import { logError, logInfo } from '../customLoglevel';
 import { namespace } from '../Environment';
 
 const agent =
-    process.env.NODE_ENV !== 'production'
+    process.env.NODE_ENV === 'production'
         ? new HttpsProxyAgent('http://webproxy.nais:8088')
         : undefined;
 
