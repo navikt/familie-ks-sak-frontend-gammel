@@ -51,10 +51,14 @@ const Tilbakemeldingsmodal: React.FunctionComponent<IProps> = ({ settÅpen, åpe
                 }}
             >
                 <Normaltekst children={'Skriv beskjed til oss.'} />
+                <Normaltekst
+                    children={'Det kan være generelle henvendelser, tilbakemeldinger eller feil.'}
+                />
+                <Normaltekst children={'Obs. ikke skrive sensitive opplysninger.'} />
+
+                <br />
                 <Textarea
-                    label={
-                        'Det kan være feil eller generelle henvendelser. Obs. ikke skrive sensitive opplysninger.'
-                    }
+                    label={'Skriv beskjed (ditt navn blir synlig i beskjeden til oss):'}
                     textareaClass={'tilbakemelding__textarea'}
                     maxLength={500}
                     onChange={event => settMelding(event.target.value)}
