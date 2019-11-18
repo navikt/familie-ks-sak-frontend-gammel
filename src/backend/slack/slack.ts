@@ -1,18 +1,22 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Response } from 'express';
-import HttpsProxyAgent from 'https-proxy-agent';
 import { SessionRequest } from '../auth/utils/session';
 import { logError, logInfo } from '../customLoglevel';
 import { namespace } from '../Environment';
 
-const agent =
-    process.env.NODE_ENV !== 'development'
-        ? new HttpsProxyAgent('http://webproxy-nais.nav.no:8088')
-        : undefined;
-
-if (agent) {
+/*if (agent) {
     agent.options.rejectUnauthorized = false;
-}
+}*/
+
+const axiosGjennomProxy =
+    process.env.NODE_ENV !== 'development'
+        ? axios.create({
+              proxy: {
+                  host: 'webproxy-nais.nav.no',
+                  port: 8088,
+              },
+          })
+        : axios.create();
 
 const token = process.env.SLACK_TOKEN;
 
@@ -21,7 +25,7 @@ export const slackNotify = (req: SessionRequest, res: Response, kanal: string) =
     const formatertMelding: string = `*${displayName}, ${namespace}*\n ${req.body.melding}`;
 
     logInfo(req, `Poster slack melding til #${kanal}: ${formatertMelding}`);
-    axios
+    axiosGjennomProxy
         .post(
             'https://slack.com/api/chat.postMessage',
             {
@@ -35,9 +39,8 @@ export const slackNotify = (req: SessionRequest, res: Response, kanal: string) =
                 },
             }
         )
-        .then((response: any) => {
-            logInfo(req, response.data);
-            res.status(200).send();
+        .then((response: AxiosResponse) => {
+            res.status(200).send(response.data);
         })
         .catch((error: Error) => {
             logError(req, `Sending av melding til slack feilet: ${error}`);

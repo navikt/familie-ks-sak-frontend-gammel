@@ -35,7 +35,7 @@ const Tilbakemeldingsmodal: React.FunctionComponent<IProps> = ({ settÅpen, åpe
                     settSender(true);
                     slackNotify(
                         `Ny tilbakemelding fra saksbehandler!\n${melding}`,
-                        slackKanaler.tilbakemelding
+                        slackKanaler.test
                     )
                         .then(() => {
                             settSender(false);
