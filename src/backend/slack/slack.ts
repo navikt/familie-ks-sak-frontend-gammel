@@ -21,7 +21,7 @@ const axiosGjennomProxy =
 
 const token = process.env.SLACK_TOKEN;
 
-export const slackNotify = (req: SessionRequest, res: ExpressResponse, kanal: string) => {
+export const slackNotify = async (req: SessionRequest, res: ExpressResponse, kanal: string) => {
     const displayName = req.session.displayName ? req.session.displayName : 'System';
     const formatertMelding: string = `*${displayName}, ${namespace}*\n ${req.body.melding}`;
 
@@ -32,7 +32,7 @@ export const slackNotify = (req: SessionRequest, res: ExpressResponse, kanal: st
         text: formatertMelding,
     };
 
-    fetch('https://slack.com/api/api.test', {
+    const testResponse = await fetch('https://slack.com/api/api.test', {
         headers: {
             Accept: 'application/json',
             'Accept-Charset': 'utf-8',
@@ -41,13 +41,14 @@ export const slackNotify = (req: SessionRequest, res: ExpressResponse, kanal: st
         method: 'POST',
     })
         .then((response: Response) => {
-            console.log('test response: ', response.json());
+            return response.json();
         })
         .catch((error: any) => {
             console.log('test error: ', error);
         });
+    console.log('test: ', testResponse);
 
-    fetch('https://slack.com/api/auth.test', {
+    const authResponse = await fetch('https://slack.com/api/auth.test', {
         headers: {
             Accept: 'application/json',
             'Accept-Charset': 'utf-8',
@@ -57,30 +58,32 @@ export const slackNotify = (req: SessionRequest, res: ExpressResponse, kanal: st
         method: 'POST',
     })
         .then((response: Response) => {
-            console.log('auth response: ', response.json());
+            return response.json();
         })
         .catch((error: any) => {
             console.log('auth error: ', error);
         });
+    console.log('auth: ', testResponse);
 
-    fetch('https://slack.com/api/chat.postMessage', {
+    const postResponse = await fetch('https://slack.com/api/chat.postMessage', {
         body: JSON.stringify(data),
         headers: {
             Accept: 'application/json',
-            'Accept-Charset': 'utf-8',
             Authorization: `Bearer ${token}`,
-            'Content-type': 'application/json',
+            'Content-type': 'application/json; charset=utf-8',
         },
         method: 'POST',
     })
         .then((response: Response) => {
-            res.status(response.status).send(response.json());
+            return response.json();
         })
         .catch((error: any) => {
             console.log(error);
             logError(req, `Sending av melding til slack feilet: ${error.stack}`);
             res.status(error.response.status).send(error);
         });
+    console.log('post: ', postResponse);
+    res.status(200).send(postResponse);
 
     /*axiosGjennomProxy
         .post('https://slack.com/api/chat.postMessage', data, {
