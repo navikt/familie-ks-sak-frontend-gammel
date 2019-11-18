@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse, AxiosError } from 'axios';
 import { Response } from 'express';
 import { SessionRequest } from '../auth/utils/session';
 import { logError, logInfo } from '../customLoglevel';
@@ -42,8 +42,8 @@ export const slackNotify = (req: SessionRequest, res: Response, kanal: string) =
         .then((response: AxiosResponse) => {
             res.status(200).send(response.data);
         })
-        .catch((error: Error) => {
-            logError(req, `Sending av melding til slack feilet: ${error}`);
-            res.status(500).send(error);
+        .catch((error: AxiosError) => {
+            logError(req, `Sending av melding til slack feilet: ${error.stack}`);
+            res.status(error.response.status).send(error);
         });
 };
