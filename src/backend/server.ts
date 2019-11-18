@@ -18,10 +18,9 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import setupPassportConfig from './auth/config/passport';
 import { ensureAuthenticated } from './auth/utils/authenticate';
 import { attachToken, doProxy } from './auth/utils/proxy';
-import setupSession, { SessionRequest } from './auth/utils/session';
+import setupSession from './auth/utils/session';
 import { getLogTimestamp } from './customLoglevel';
 import setupRouter from './router';
-import { slackNotify } from './slack/slack';
 
 /* tslint:disable */
 const config = require('../build_n_deploy/webpack/webpack.dev');
@@ -93,18 +92,6 @@ if (process.env.NODE_ENV === 'development') {
 setupSession(app, passport);
 
 app.use('/familie-ks-sak/api', ensureAuthenticated(true), attachToken(), doProxy());
-
-// Slack
-app.post('/slack/notify/:kanal', (req: any, res: Response) => {
-    let data = '';
-    req.on('data', (chunk: any) => {
-        data += chunk;
-    });
-    req.on('end', () => {
-        req.body = JSON.parse(data);
-        slackNotify(req, res, req.params.kanal);
-    });
-});
 
 // Sett opp bodyParser og router etter proxy. Spesielt viktig med tanke på større payloads som blir parset av bodyParser
 app.use(bodyParser.json({ limit: '200mb' }));

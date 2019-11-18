@@ -39,6 +39,11 @@ export default (middleware: any, prometheus: any) => {
     // USER
     router.get('/user/profile', ensureAuthenticated(true), getUserProfile());
 
+    // SLACK
+    router.post('/slack/notify/:kanal', (req: any, res: Response) => {
+        slackNotify(req, res, req.params.kanal);
+    });
+
     // APP
     if (process.env.NODE_ENV === 'development') {
         router.get('*', ensureAuthenticated(false), (req: SessionRequest, res: Response) => {

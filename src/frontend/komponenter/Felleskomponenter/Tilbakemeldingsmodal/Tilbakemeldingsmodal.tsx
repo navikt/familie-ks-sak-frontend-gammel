@@ -1,7 +1,7 @@
 import { Knapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
 import { Textarea } from 'nav-frontend-skjema';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import * as React from 'react';
 import { slackNotify } from '../../../api/axios';
 import { slackKanaler } from '../../../typer/slack';
@@ -35,7 +35,7 @@ const Tilbakemeldingsmodal: React.FunctionComponent<IProps> = ({ settÅpen, åpe
                     settSender(true);
                     slackNotify(
                         `Ny tilbakemelding fra saksbehandler!\n${melding}`,
-                        slackKanaler.test
+                        slackKanaler.tilbakemelding
                     )
                         .then(() => {
                             settSender(false);
@@ -50,8 +50,11 @@ const Tilbakemeldingsmodal: React.FunctionComponent<IProps> = ({ settÅpen, åpe
                     event.preventDefault();
                 }}
             >
+                <Normaltekst children={'Skriv beskjed til oss.'} />
                 <Textarea
-                    label={'Legg til beskjed til teamet'}
+                    label={
+                        'Det kan være feil eller generelle henvendelser. Obs. ikke skrive sensitive opplysninger.'
+                    }
                     textareaClass={'tilbakemelding__textarea'}
                     maxLength={500}
                     onChange={event => settMelding(event.target.value)}
