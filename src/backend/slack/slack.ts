@@ -27,50 +27,12 @@ export const slackNotify = async (req: SessionRequest, res: ExpressResponse, kan
 
     logInfo(req, `Poster slack melding til #${kanal}: ${formatertMelding}`);
 
-    const data = {
-        channel: `#${kanal}`,
-        parse: 'full',
-        text: formatertMelding,
-    };
-
-    const testResponse = await fetch('https://slack.com/api/api.test', {
+    const postResponse = await fetch(process.env.SLACK_SENTRY_WEBHOOK, {
+        body: JSON.stringify({
+            text: formatertMelding,
+        }),
         headers: {
             Accept: 'application/json',
-            'Accept-Charset': 'utf-8',
-            'Content-type': 'application/json',
-        },
-        method: 'POST',
-    })
-        .then((response: Response) => {
-            return response.json();
-        })
-        .catch((error: any) => {
-            console.log('test error: ', error);
-        });
-    console.log('test: ', testResponse);
-
-    const authResponse = await fetch('https://slack.com/api/auth.test', {
-        headers: {
-            Accept: 'application/json',
-            'Accept-Charset': 'utf-8',
-            Authorization: `Bearer ${token}`,
-            'Content-type': 'application/json',
-        },
-        method: 'POST',
-    })
-        .then((response: Response) => {
-            return response.json();
-        })
-        .catch((error: any) => {
-            console.log('auth error: ', error);
-        });
-    console.log('auth: ', testResponse);
-
-    const postResponse = await fetch('https://slack.com/api/chat.postMessage', {
-        body: JSON.stringify(data),
-        headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${token}`,
             'Content-type': 'application/json; charset=utf-8',
         },
         method: 'POST',
