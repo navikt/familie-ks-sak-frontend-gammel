@@ -7,6 +7,10 @@ import { namespace } from '../Environment';
 
 const token = process.env.SLACK_TOKEN;
 
+/**
+ * Funksjon som kaller slack sitt postMessage api.
+ * Bruker node-fetch da axios ikke bryr seg om proxy agent som sendes inn.
+ */
 export const slackNotify = (req: SessionRequest, res: ExpressResponse, kanal: string) => {
     const displayName = req.session.displayName ? req.session.displayName : 'System';
     const formatertMelding: string = `*${displayName}, ${namespace}*\n ${req.body.melding}`;
@@ -15,7 +19,12 @@ export const slackNotify = (req: SessionRequest, res: ExpressResponse, kanal: st
     fetch('https://slack.com/api/chat.postMessage', {
         agent:
             process.env.NODE_ENV !== 'development'
-                ? new HttpsProxyAgent('http://webproxy.nais:8088')
+                ? new HttpsProxyAgent({
+                      host: 'webproxy.nais',
+                      https: true,
+                      port: 8088,
+                      rejectUnauthorized: false,
+                  })
                 : undefined,
         body: JSON.stringify({
             channel: `#${kanal}`,
@@ -32,7 +41,7 @@ export const slackNotify = (req: SessionRequest, res: ExpressResponse, kanal: st
             res.status(200).send();
         })
         .catch((error: any) => {
-            logError(req, `Sending av melding til slack feilet: ${error.stack}`);
-            res.status(error.response.status).send(error);
+            logError(req, `Sending av melding til slack feilet: ${error.message}`);
+            res.status(error.code).send(error);
         });
 };
