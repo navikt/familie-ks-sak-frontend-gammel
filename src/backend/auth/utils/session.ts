@@ -16,6 +16,7 @@ export type SessionRequest = Request & {
 
 // Set max age of cookie to 12 hours.
 const SESSION_MAX_AGE_MILLISECONDS = 12 * 60 * 60 * 1000;
+const SESSION_MAX_AGE_SECONDS = SESSION_MAX_AGE_MILLISECONDS / 1000;
 
 export default (app: any, passport: PassportStatic) => {
     app.use(cookieParser(process.env.SESSION_SECRET));
@@ -37,7 +38,7 @@ export default (app: any, passport: PassportStatic) => {
                 resave: false,
                 saveUninitialized: true,
                 secret: [`${process.env.COOKIE_KEY1}`, `${process.env.COOKIE_KEY2}`],
-                store: new RedisStore({ client }),
+                store: new RedisStore({ client, ttl: SESSION_MAX_AGE_SECONDS, disableTouch: true }),
             })
         );
     } else {
