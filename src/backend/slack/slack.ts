@@ -32,6 +32,37 @@ export const slackNotify = (req: SessionRequest, res: ExpressResponse, kanal: st
         text: formatertMelding,
     };
 
+    fetch('https://slack.com/api/api.test', {
+        headers: {
+            Accept: 'application/json',
+            'Accept-Charset': 'utf-8',
+            'Content-type': 'application/json',
+        },
+        method: 'POST',
+    })
+        .then((response: Response) => {
+            console.log('test response: ', response.json());
+        })
+        .catch((error: any) => {
+            console.log('test error: ', error);
+        });
+
+    fetch('https://slack.com/api/auth.test', {
+        headers: {
+            Accept: 'application/json',
+            'Accept-Charset': 'utf-8',
+            Authorization: `Bearer ${token}`,
+            'Content-type': 'application/json',
+        },
+        method: 'POST',
+    })
+        .then((response: Response) => {
+            console.log('auth response: ', response.json());
+        })
+        .catch((error: any) => {
+            console.log('auth error: ', error);
+        });
+
     fetch('https://slack.com/api/chat.postMessage', {
         body: JSON.stringify(data),
         headers: {
@@ -43,7 +74,7 @@ export const slackNotify = (req: SessionRequest, res: ExpressResponse, kanal: st
         method: 'POST',
     })
         .then((response: Response) => {
-            res.status(response.status).send(response);
+            res.status(response.status).send(response.json());
         })
         .catch((error: any) => {
             console.log(error);
