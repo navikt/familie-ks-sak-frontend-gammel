@@ -35,8 +35,13 @@ loglevel.setDefaultLevel(loglevel.levels.INFO);
 const port = 8000;
 const app = express();
 
+import https from 'https';
+const agent = new https.Agent({
+    rejectUnauthorized: false,
+});
 const testSlack = async () => {
     const testResponse = await fetch('https://slack.com/api/api.test', {
+        agent,
         headers: {
             Accept: 'application/json',
             'Accept-Charset': 'utf-8',
@@ -49,6 +54,7 @@ const testSlack = async () => {
         })
         .catch((error: any) => {
             console.log('test error: ', error);
+            return error;
         });
     console.log('test fetch: ', testResponse);
 };

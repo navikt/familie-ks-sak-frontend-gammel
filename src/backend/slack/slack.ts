@@ -29,6 +29,7 @@ export const slackNotify = async (req: SessionRequest, res: ExpressResponse, kan
 
     const data = {
         channel: `#${kanal}`,
+        parse: 'full',
         text: formatertMelding,
     };
 
