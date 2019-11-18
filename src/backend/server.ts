@@ -31,6 +31,7 @@ loglevel.setDefaultLevel(loglevel.levels.INFO);
 
 const port = 8000;
 const app = express();
+
 app.use(helmet());
 app.get('/isAlive', (req: Request, res: Response) => res.status(200).end());
 app.get('/isReady', (req: Request, res: Response) => res.status(200).end());

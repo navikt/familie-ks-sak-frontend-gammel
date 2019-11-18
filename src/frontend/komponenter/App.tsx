@@ -2,8 +2,10 @@ import { captureException, configureScope, showReportDialog, withScope } from '@
 import Modal from 'nav-frontend-modal';
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { slackNotify } from '../api/axios';
 import { hentInnloggetBruker } from '../api/saksbehandler';
 import { ISaksbehandler } from '../typer/saksbehandler';
+import { slackKanaler } from '../typer/slack';
 import Fagsak from './Fagsak/Fagsak';
 import { FagsakProvider } from './FagsakProvider';
 import Dekoratør from './Felleskomponenter/Dekoratør/Dekoratør';
@@ -44,6 +46,11 @@ class App extends React.Component<{}, IState> {
                     captureException(error);
                 });
             });
+
+            slackNotify(
+                `En feil har oppstått i vedtaksløsningen: \n*Error*: ${error}`,
+                slackKanaler.alert
+            );
             showReportDialog();
         }
     }

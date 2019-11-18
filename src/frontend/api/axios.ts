@@ -2,6 +2,7 @@ import { captureException, configureScope, withScope } from '@sentry/core';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { byggFeiletRessurs, Ressurs, RessursStatus } from '../typer/ressurs';
 import { ISaksbehandler } from '../typer/saksbehandler';
+import { slackKanaler } from '../typer/slack';
 
 axios.defaults.baseURL = window.location.origin;
 export const preferredAxios = axios;
@@ -34,7 +35,7 @@ export const axiosRequest = async <T>(
                     };
                     break;
                 case RessursStatus.FEILET:
-                    loggFeil(undefined, innloggetSaksbehandler, responsRessurs.errorMelding);
+                    loggFeil(undefined, innloggetSaksbehandler, responsRessurs.melding);
                     typetRessurs = {
                         errorMelding: responsRessurs.errorMelding,
                         melding: responsRessurs.melding,
@@ -82,5 +83,18 @@ const loggFeil = (
                 captureException(error);
             });
         }
+
+        slackNotify(
+            `En feil har oppstått i vedtaksløsningen!${error ? `\n*Error*: ${error}` : ''}${
+                feilmelding ? `\n*Feilmelding:* ${feilmelding}` : ''
+            }`,
+            slackKanaler.alert
+        );
     }
+};
+
+export const slackNotify = (melding: string, kanal: string) => {
+    return preferredAxios.post(`/slack/notify/${kanal}`, {
+        melding,
+    });
 };
