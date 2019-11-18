@@ -24,7 +24,6 @@
   "dependencies": {
     "@sentry/browser": "^5.7.1",
     "@sentry/core": "^5.7.1",
-    "@slack/web-api": "^5.5.0",
     "@types/classnames": "^2.2.9",
     "@types/cookie-parser": "^1.4.2",
     "@types/dotenv": "^8.2.0",
