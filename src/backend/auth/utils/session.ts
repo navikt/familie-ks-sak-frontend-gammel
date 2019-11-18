@@ -16,7 +16,6 @@ export type SessionRequest = Request & {
 
 // Set max age of cookie to 12 hours.
 const SESSION_MAX_AGE_MILLISECONDS = 12 * 60 * 60 * 1000;
-const SESSION_MAX_AGE_SECONDS = SESSION_MAX_AGE_MILLISECONDS / 1000;
 
 export default (app: any, passport: PassportStatic) => {
     app.use(cookieParser(process.env.SESSION_SECRET));
@@ -33,7 +32,7 @@ export default (app: any, passport: PassportStatic) => {
 
         app.use(
             session({
-                cookie: { maxAge: SESSION_MAX_AGE_SECONDS, secure: true },
+                cookie: { maxAge: SESSION_MAX_AGE_MILLISECONDS, secure: true },
                 name: 'familie-ks-sak-v1',
                 resave: false,
                 saveUninitialized: true,
