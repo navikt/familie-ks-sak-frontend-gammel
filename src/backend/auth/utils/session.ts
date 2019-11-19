@@ -33,12 +33,12 @@ export default (app: any, passport: PassportStatic) => {
 
         app.use(
             session({
-                cookie: { maxAge: SESSION_MAX_AGE_SECONDS, secure: true },
+                cookie: { maxAge: SESSION_MAX_AGE_MILLISECONDS, secure: true },
                 name: 'familie-ks-sak-v1',
                 resave: false,
                 saveUninitialized: true,
                 secret: [`${process.env.COOKIE_KEY1}`, `${process.env.COOKIE_KEY2}`],
-                store: new RedisStore({ client }),
+                store: new RedisStore({ client, ttl: SESSION_MAX_AGE_SECONDS, disableTouch: true }),
             })
         );
     } else {
