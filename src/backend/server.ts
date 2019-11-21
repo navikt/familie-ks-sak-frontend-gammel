@@ -1,46 +1,28 @@
-import dotenv from 'dotenv';
-if (process.env.NODE_ENV === 'production') {
-    dotenv.config({ path: '/var/run/secrets/nais.io/vault/.env' });
-} else {
-    dotenv.config();
-}
-
+import Backend from '@navikt/familie-backend';
 import bodyParser from 'body-parser';
-import express, { Request, Response } from 'express';
-import helmet from 'helmet';
+import express, { Request } from 'express';
 import loglevel from 'loglevel';
-import passport from 'passport';
 import path from 'path';
 import prom_client from 'prom-client';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import setupPassportConfig from './auth/config/passport';
-import { ensureAuthenticated } from './auth/utils/authenticate';
-import { attachToken, doProxy } from './auth/utils/proxy';
-import setupSession from './auth/utils/session';
-import { getLogTimestamp } from './customLoglevel';
+import { passportConfig, saksbehandlerTokenConfig, sessionConfig } from './config';
+import { attachToken, doProxy } from './proxy';
 import setupRouter from './router';
 
 /* tslint:disable */
 const config = require('../build_n_deploy/webpack/webpack.dev');
 /* tslint:enable */
 
-setupPassportConfig(passport);
 loglevel.setDefaultLevel(loglevel.levels.INFO);
+const backend = new Backend(passportConfig, sessionConfig, saksbehandlerTokenConfig);
 
 const port = 8000;
-const app = express();
-
-app.use(helmet());
-app.get('/isAlive', (req: Request, res: Response) => res.status(200).end());
-app.get('/isReady', (req: Request, res: Response) => res.status(200).end());
 
 // Metrics
 const setupMetrics = () => {
-    const collectDefaultMetrics = prom_client.collectDefaultMetrics;
-    const Registry = prom_client.Registry;
-    const register = new Registry();
+    const register = backend.getPrometheusRegistry();
 
     const Counter = prom_client.Counter;
     const appLoad = new Counter({
@@ -65,12 +47,11 @@ const setupMetrics = () => {
     register.registerMetric(errorPageLoad);
     register.registerMetric(loginPageRequest);
 
-    collectDefaultMetrics({ register });
     return register;
 };
 const prometheus = setupMetrics();
 
-app.get('/metrics', (req: Request, res) => {
+backend.getApp().get('/metrics', (req: Request, res) => {
     res.set('Content-Type', prometheus.contentType);
     res.end(prometheus.metrics());
 });
@@ -83,27 +64,34 @@ if (process.env.NODE_ENV === 'development') {
         publicPath: config.output.publicPath,
     });
 
-    app.use(middleware);
-    app.use(webpackHotMiddleware(compiler));
+    backend.getApp().use(middleware);
+    backend.getApp().use(webpackHotMiddleware(compiler));
 } else {
-    app.use('/assets', express.static(path.join(__dirname, '..', 'frontend_production')));
+    backend
+        .getApp()
+        .use('/assets', express.static(path.join(__dirname, '..', 'frontend_production')));
 }
 
-setupSession(app, passport);
-
-app.use('/familie-ks-sak/api', ensureAuthenticated(true), attachToken(), doProxy());
+backend
+    .getApp()
+    .use(
+        '/familie-ks-sak/api',
+        backend.ensureAuthenticated(true, saksbehandlerTokenConfig),
+        attachToken(backend),
+        doProxy()
+    );
 
 // Sett opp bodyParser og router etter proxy. Spesielt viktig med tanke på større payloads som blir parset av bodyParser
-app.use(bodyParser.json({ limit: '200mb' }));
-app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
-app.use('/', setupRouter(middleware, prometheus));
+backend.getApp().use(bodyParser.json({ limit: '200mb' }));
+backend.getApp().use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
+backend.getApp().use('/', setupRouter(backend, middleware, prometheus));
 
-app.listen(port, '0.0.0.0', (err: Error) => {
+backend.getApp().listen(port, '0.0.0.0', (err: Error) => {
     if (err) {
-        loglevel.error(`${getLogTimestamp()}: server startup failed - ${err}`);
+        loglevel.error(`${backend.getLogTimestamp()}: server startup failed - ${err}`);
     }
     loglevel.info(
-        `${getLogTimestamp()}: server startet på port ${port}. Build version: ${
+        `${backend.getLogTimestamp()}: server startet på port ${port}. Build version: ${
             process.env.APP_VERSION
         }.`
     );

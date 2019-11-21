@@ -1,4 +1,8 @@
-import { IOIDCStrategyOptionWithRequest } from 'passport-azure-ad';
+import {
+    IOIDCStrategyOptionWithRequest,
+    ISessionKonfigurasjon,
+    ITokenRequest,
+} from '@navikt/familie-backend/lib/typer';
 
 interface IConfig {
     allowHttpForRedirectUrl: boolean;
@@ -65,7 +69,61 @@ const hentPassportConfig = () => {
     };
 };
 
+const Environment = () => {
+    if (process.env.ENV === 'local') {
+        return {
+            buildPath: '../frontend_development',
+            namespace: 'local',
+            proxyUrl: 'http://localhost:8083',
+            redisUrl: 'localhost',
+            unleashUrl: 'https://unleash.herokuapp.com/api/',
+        };
+    } else if (process.env.ENV === 'preprod') {
+        return {
+            buildPath: '../frontend_production',
+            namespace: 'preprod',
+            proxyUrl: 'http://familie-ks-sak',
+            redisUrl: 'familie-ks-sak-frontend-redis.default.svc.nais.local',
+            unleashUrl: 'http://unleashproxy-fss.default.svc.nais.local/api/',
+        };
+    }
+
+    return {
+        buildPath: '../frontend_production',
+        namespace: 'production',
+        proxyUrl: 'http://familie-ks-sak',
+        redisUrl: 'familie-ks-sak-frontend-redis.default.svc.nais.local',
+        unleashUrl: 'http://unleash.default.svc.nais.local/api/',
+    };
+};
+const env = Environment();
+
+// Sett opp config mot felles backend skall
 export const nodeConfig = hentPassportConfig();
+export const sessionConfig: ISessionKonfigurasjon = {
+    cookieSecret: [`${process.env.COOKIE_KEY1}`, `${process.env.COOKIE_KEY2}`],
+    navn: 'familie-ks-sak-v1',
+    redisPassord: process.env.REDIS_PASSWORD,
+    redisUrl: env.redisUrl,
+    sessionMaxAgeSekunder: 12 * 60 * 60 * 1000,
+    sessionSecret: process.env.SESSION_SECRET,
+};
+
+export const saksbehandlerTokenConfig: ITokenRequest = {
+    clientId: nodeConfig.clientID,
+    clientSecret: nodeConfig.clientSecret,
+    redirectUrl: nodeConfig.redirectUrl,
+    scope: `${nodeConfig.clientID}/.default`,
+    tokenUri: nodeConfig.tokenURI,
+};
+
+export const oboTokenConfig: ITokenRequest = {
+    clientId: nodeConfig.clientID,
+    clientSecret: nodeConfig.clientSecret,
+    redirectUrl: nodeConfig.redirectUrl,
+    scope: process.env.KS_MOTTAK_SCOPE,
+    tokenUri: nodeConfig.tokenURI,
+};
 
 export const passportConfig: IOIDCStrategyOptionWithRequest = {
     allowHttpForRedirectUrl: nodeConfig.allowHttpForRedirectUrl,
@@ -82,3 +140,8 @@ export const passportConfig: IOIDCStrategyOptionWithRequest = {
     useCookieInsteadOfSession: false,
     validateIssuer: true,
 };
+
+export const buildPath = env.buildPath;
+export const proxyUrl = env.proxyUrl;
+export const namespace = env.namespace;
+export const unleashUrl = env.unleashUrl;
