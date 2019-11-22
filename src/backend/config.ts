@@ -76,7 +76,6 @@ const Environment = () => {
             namespace: 'local',
             proxyUrl: 'http://localhost:8083',
             redisUrl: 'localhost',
-            unleashUrl: 'https://unleash.herokuapp.com/api/',
         };
     } else if (process.env.ENV === 'preprod') {
         return {
@@ -84,7 +83,6 @@ const Environment = () => {
             namespace: 'preprod',
             proxyUrl: 'http://familie-ks-sak',
             redisUrl: 'familie-ks-sak-frontend-redis.default.svc.nais.local',
-            unleashUrl: 'http://unleashproxy-fss.default.svc.nais.local/api/',
         };
     }
 
@@ -93,7 +91,6 @@ const Environment = () => {
         namespace: 'production',
         proxyUrl: 'http://familie-ks-sak',
         redisUrl: 'familie-ks-sak-frontend-redis.default.svc.nais.local',
-        unleashUrl: 'http://unleash.default.svc.nais.local/api/',
     };
 };
 const env = Environment();
@@ -144,4 +141,3 @@ export const passportConfig: IOIDCStrategyOptionWithRequest = {
 export const buildPath = env.buildPath;
 export const proxyUrl = env.proxyUrl;
 export const namespace = env.namespace;
-export const unleashUrl = env.unleashUrl;
