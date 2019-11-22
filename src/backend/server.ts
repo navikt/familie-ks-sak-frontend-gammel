@@ -1,6 +1,7 @@
 import Backend from '@navikt/familie-backend';
 import bodyParser from 'body-parser';
 import express, { Request } from 'express';
+import helmet from 'helmet';
 import loglevel from 'loglevel';
 import path from 'path';
 import prom_client from 'prom-client';
@@ -17,6 +18,7 @@ const config = require('../build_n_deploy/webpack/webpack.dev');
 
 loglevel.setDefaultLevel(loglevel.levels.INFO);
 const backend = new Backend(passportConfig, sessionConfig, saksbehandlerTokenConfig);
+backend.getApp().use(helmet());
 
 const port = 8000;
 
