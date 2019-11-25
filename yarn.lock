@@ -97,10 +97,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@navikt/familie-backend@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@navikt/familie-backend/-/familie-backend-1.2.3.tgz#7c9bf135d23caa5723b08ea93a134931c233b7c3"
-  integrity sha512-5sm8JKladLpTVVgpnBFMggAhXyXMLRzsERoak98VsCoaoS906jk0myV2VgOFTVSwryrU8H7FftK5iI5IfqT9jQ==
+"@navikt/familie-backend@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@navikt/familie-backend/-/familie-backend-1.3.1.tgz#995962a07c3d0bf0429a8f6e4f23371e52e1805d"
+  integrity sha512-zJxjAZ+9MA6eP29H7Epz0fAH+ewCJcT7mBPnrUTaodTVS46UX7d/A9ETs/nnKgN/mzuZmc/vOYNuT5+RpiTcNg==
   dependencies:
     "@types/cookie-parser" "^1.4.2"
     "@types/dotenv" "^8.2.0"

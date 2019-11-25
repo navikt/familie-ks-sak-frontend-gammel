@@ -68,14 +68,13 @@ const hentPassportConfig = () => {
         tokenURI: `https://login.microsoftonline.com/${config.tenant}/oauth2/v2.0/token`,
     };
 };
-
 const Environment = () => {
     if (process.env.ENV === 'local') {
         return {
             buildPath: '../frontend_development',
             namespace: 'local',
             proxyUrl: 'http://localhost:8083',
-            redisUrl: 'localhost',
+            redisUrl: '127.0.0.1',
         };
     } else if (process.env.ENV === 'preprod') {
         return {
@@ -102,7 +101,7 @@ export const sessionConfig: ISessionKonfigurasjon = {
     navn: 'familie-ks-sak-v1',
     redisPassord: process.env.REDIS_PASSWORD,
     redisUrl: env.redisUrl,
-    sessionMaxAgeSekunder: 12 * 60 * 60 * 1000,
+    sessionMaxAgeSekunder: 12 * 60 * 60,
     sessionSecret: process.env.SESSION_SECRET,
 };
 
