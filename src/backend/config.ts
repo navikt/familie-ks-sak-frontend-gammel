@@ -2,7 +2,7 @@ import {
     IOIDCStrategyOptionWithRequest,
     ISessionKonfigurasjon,
     ITokenRequest,
-} from '@navikt/familie-backend/lib/typer';
+} from '@navikt/familie-backend/dist/typer';
 
 interface IConfig {
     allowHttpForRedirectUrl: boolean;
@@ -63,7 +63,10 @@ const hentPassportConfig = () => {
         ...config,
         clientID: process.env.CLIENT_ID ? process.env.CLIENT_ID : 'invalid',
         clientSecret: process.env.CLIENT_SECRET ? process.env.CLIENT_SECRET : '',
-        cookieEncryptionKeys: [{ key: key1, iv: key3 }, { key: key2, iv: key4 }],
+        cookieEncryptionKeys: [
+            { key: key1, iv: key3 },
+            { key: key2, iv: key4 },
+        ],
         identityMetadata: `https://login.microsoftonline.com/${config.tenant}/v2.0/.well-known/openid-configuration`,
         tokenURI: `https://login.microsoftonline.com/${config.tenant}/oauth2/v2.0/token`,
     };
@@ -98,9 +101,10 @@ const env = Environment();
 export const nodeConfig = hentPassportConfig();
 export const sessionConfig: ISessionKonfigurasjon = {
     cookieSecret: [`${process.env.COOKIE_KEY1}`, `${process.env.COOKIE_KEY2}`],
-    navn: 'familie-ks-sak-v1',
+    navn: 'familie-ks-sak-v2',
     redisPassord: process.env.REDIS_PASSWORD,
     redisUrl: env.redisUrl,
+    secureCookie: process.env.ENV === 'local' ? false : true,
     sessionMaxAgeSekunder: 12 * 60 * 60,
     sessionSecret: process.env.SESSION_SECRET,
 };
@@ -130,7 +134,7 @@ export const passportConfig: IOIDCStrategyOptionWithRequest = {
     loggingLevel: 'warn',
     passReqToCallback: true,
     redirectUrl: nodeConfig.redirectUrl,
-    responseMode: 'form_post',
+    responseMode: 'query',
     responseType: 'code',
     scope: 'profile offline_access',
     useCookieInsteadOfSession: false,

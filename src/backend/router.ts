@@ -1,6 +1,5 @@
 import Backend from '@navikt/familie-backend';
-import { SessionRequest } from '@navikt/familie-backend/lib/typer';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import path from 'path';
 import { buildPath, saksbehandlerTokenConfig } from './config';
 import { prometheusTellere } from './metrikker';
@@ -33,7 +32,7 @@ export default (backend: Backend, middleware: any) => {
             .get(
                 '*',
                 backend.ensureAuthenticated(false, saksbehandlerTokenConfig),
-                (req: SessionRequest, res: Response) => {
+                (req: Request, res: Response) => {
                     prometheusTellere.app_load.inc();
 
                     res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -51,7 +50,7 @@ export default (backend: Backend, middleware: any) => {
             .get(
                 '*',
                 backend.ensureAuthenticated(false, saksbehandlerTokenConfig),
-                (req: SessionRequest, res: Response) => {
+                (req: Request, res: Response) => {
                     prometheusTellere.app_load.inc();
 
                     res.sendFile('index.html', { root: path.join(__dirname, buildPath) });

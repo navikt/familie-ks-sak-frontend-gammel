@@ -1,5 +1,4 @@
 import Backend from '@navikt/familie-backend';
-import { SessionRequest } from '@navikt/familie-backend/lib/typer';
 import { NextFunction, Request, Response } from 'express';
 import { ClientRequest } from 'http';
 import proxy from 'http-proxy-middleware';
@@ -30,7 +29,7 @@ export const doProxy = () => {
 };
 
 export const attachToken = (backend: Backend) => {
-    return async (req: SessionRequest, res: Response, next: NextFunction) => {
+    return async (req: Request, res: Response, next: NextFunction) => {
         const accessToken = await backend.validerEllerOppdaterOnBehalfOfToken(
             req,
             saksbehandlerTokenConfig,
