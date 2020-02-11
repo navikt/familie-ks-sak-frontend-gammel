@@ -1,6 +1,5 @@
 import Backend from '@navikt/familie-backend';
-import { SessionRequest } from '@navikt/familie-backend/lib/typer';
-import { Response as ExpressResponse } from 'express';
+import { Request, Response as ExpressResponse } from 'express';
 import HttpsProxyAgent from 'https-proxy-agent';
 import fetch, { Response } from 'node-fetch';
 import { namespace } from '../config';
@@ -13,7 +12,7 @@ const token = process.env.SLACK_TOKEN;
  */
 export const slackNotify = (
     backend: Backend,
-    req: SessionRequest,
+    req: Request,
     res: ExpressResponse,
     kanal: string
 ) => {
