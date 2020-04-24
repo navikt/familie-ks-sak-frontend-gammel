@@ -25,7 +25,6 @@ spec:
   istio:
     enabled: false
   ingresses:
-    - https://familie-ks-sak-frontend.nais.adeo.no
     - https://kontantstotte.nais.adeo.no
   vault:
     enabled: true
