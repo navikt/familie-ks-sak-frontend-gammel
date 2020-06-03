@@ -22,7 +22,7 @@
     }
   },
   "dependencies": {
-    "@navikt/familie-backend": "^4.1.3",
+    "@navikt/familie-backend": "^4.1.9",
     "@sentry/browser": "^5.7.1",
     "@sentry/core": "^5.7.1",
     "@types/classnames": "^2.2.9",
