@@ -14,7 +14,8 @@
     "build:prod": "tsc & webpack --config ./build_n_deploy/webpack/webpack.prod.js",
     "snyk-protect": "snyk protect",
     "test:ci": "./ci-tests/scripts.sh test",
-    "test:ci-capture": "./ci-tests/scripts.sh capture"
+    "test:ci-capture": "./ci-tests/scripts.sh capture",
+    "prepare": "yarn run snyk-protect"
   },
   "husky": {
     "hooks": {
@@ -83,7 +84,8 @@
     "react-router-dom": "^5.1.2",
     "redis": "^2.8.0",
     "request-promise": "^4.2.5",
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    "snyk": "^1.339.1"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.7.0",
@@ -116,5 +118,6 @@
     "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^4.2.2"
-  }
+  },
+  "snyk": true
 }
