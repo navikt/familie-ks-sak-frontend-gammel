@@ -84,7 +84,7 @@ const Environment = () => {
             buildPath: '../frontend_production',
             namespace: 'preprod',
             proxyUrl: 'http://familie-ks-sak',
-            redisUrl: 'familie-ks-sak-frontend-redis.default.svc.nais.local',
+            redisUrl: 'familie-ks-sak-frontend-redis.teamfamilie',
         };
     }
 
@@ -92,7 +92,7 @@ const Environment = () => {
         buildPath: '../frontend_production',
         namespace: 'production',
         proxyUrl: 'http://familie-ks-sak',
-        redisUrl: 'familie-ks-sak-frontend-redis.default.svc.nais.local',
+        redisUrl: 'familie-ks-sak-frontend-redis.teamfamilie',
     };
 };
 const env = Environment();
