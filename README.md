@@ -1,7 +1,6 @@
-# familie-ks-sak-frontend
-====================
-
-Frontend app for kontantstøtte mottak
+# familie-ks-sak-frontend-gammel
+================================
+Applikasjonen er ikke i bruk, arkiveres etterhvert.
 
 # Kom i gang med utvikling
 
